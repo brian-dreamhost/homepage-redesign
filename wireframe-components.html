@@ -244,11 +244,11 @@
       border-radius: 4px;
     }
     .wf-logo {
-      height: 26px;
-      width: auto;
+      width: 194px;
+      height: auto;
       display: block;
     }
-    .wf-logo--lg { height: 32px; }
+    .wf-logo--lg { width: 220px; }
 
     /* ── Typography ── */
     .wf-h1 { font-size: clamp(36px, 4.5vw, 52px); font-weight: 700; line-height: 1.1; color: var(--wf-text); letter-spacing: -0.02em; }
@@ -665,11 +665,19 @@
 
     /* ── Promo Bar ── */
     .wf-promo-bar {
-      background: var(--wf-dark);
-      color: rgba(255,255,255,0.8);
-      padding: 8px 32px;
-      font-size: 12px;
+      background: #0073EC;
+      color: rgba(255,255,255,0.9);
+      padding: 8px 16px;
+      font-size: 14px;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-promo-bar__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -685,8 +693,8 @@
       gap: 16px;
     }
     .wf-promo-bar__right a {
-      font-size: 12px;
-      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
       transition: color 0.15s;
     }
@@ -709,37 +717,64 @@
     /* ── Main Nav ── */
     .wf-nav {
       background: var(--wf-white);
-      border-bottom: 1px solid var(--wf-border);
-      padding: 0 32px;
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+    }
+    .wf-nav__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
     .wf-nav__left {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 16px;
     }
     .wf-nav__links {
       display: flex;
-      gap: 4px;
+      gap: 0;
     }
     .wf-nav__link {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       color: var(--wf-text-body);
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: var(--wf-radius-sm);
-      transition: all 0.15s;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: all 0.2s;
+      line-height: 1;
     }
-    .wf-nav__link:hover { color: var(--wf-text); background: var(--wf-surface); }
+    .wf-nav__link:hover { color: var(--wf-text); background: rgba(0,0,0,0.04); }
     .wf-nav__right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
+    .wf-nav__cta {
+      background: #0073EC;
+      color: var(--wf-white);
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 6px 24px 0px rgba(38,45,118,0.08);
+      font-family: var(--wf-font);
+    }
+    .wf-nav__cta:hover { background: #1687FF; transform: scale(1.03); }
+    .wf-nav__logo-link { display: flex; align-items: center; text-decoration: none; }
 
     /* ── Hero ── */
     .wf-hero {
@@ -1925,16 +1960,18 @@
 
         <div class="preview preview--flush">
           <div class="wf-promo-bar">
-            <div class="wf-promo-bar__left">
-              <span>Meet Remixer: Build a site with your words, not code. Starting at $1.99/mo</span>
-              <a href="#">Talk to It. Watch It Build. →</a>
-            </div>
-            <div class="wf-promo-bar__right">
-              <a href="#">Knowledge Base</a>
-              <a href="#">News</a>
-              <a href="#">Support</a>
-              <a href="#">English</a>
-              <a href="#">$ USD</a>
+            <div class="wf-promo-bar__inner">
+              <div class="wf-promo-bar__left">
+                <span>Meet Remixer: Build a site with your words, not code. Starting at $1.99/mo</span>
+                <a href="#">Talk to It. Watch It Build. →</a>
+              </div>
+              <div class="wf-promo-bar__right">
+                <a href="#">Knowledge Base</a>
+                <a href="#">News</a>
+                <a href="#">Support</a>
+                <a href="#">English</a>
+                <a href="#">$ USD</a>
+              </div>
             </div>
           </div>
         </div>
@@ -1948,24 +1985,39 @@
         <div class="lib-section__title">Main Nav</div>
 
         <div class="component-group">
+          <div class="component-label">Landing page (logo only)</div>
+          <div class="preview preview--flush">
+            <nav class="wf-nav">
+              <div class="wf-nav__inner">
+                <a href="https://www.dreamhost.com" class="wf-nav__logo-link">
+                  <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+
+        <div class="component-group">
           <div class="component-label">Standard</div>
           <div class="preview preview--flush">
             <nav class="wf-nav">
-              <div class="wf-nav__left">
-                <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
-                <div class="wf-nav__links">
-                  <a class="wf-nav__link" href="#">Remixer</a>
-                  <a class="wf-nav__link" href="#">WordPress</a>
-                  <a class="wf-nav__link" href="#">Hosting</a>
-                  <a class="wf-nav__link" href="#">Domains</a>
-                  <a class="wf-nav__link" href="#">Email</a>
-                  <a class="wf-nav__link" href="#">Pro Services</a>
-                  <a class="wf-nav__link" href="#">Pricing</a>
+              <div class="wf-nav__inner">
+                <div class="wf-nav__left">
+                  <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
+                  <div class="wf-nav__links">
+                    <a class="wf-nav__link" href="#">Remixer</a>
+                    <a class="wf-nav__link" href="#">WordPress</a>
+                    <a class="wf-nav__link" href="#">Hosting</a>
+                    <a class="wf-nav__link" href="#">Domains</a>
+                    <a class="wf-nav__link" href="#">Email</a>
+                    <a class="wf-nav__link" href="#">Pro Services</a>
+                    <a class="wf-nav__link" href="#">Pricing</a>
+                  </div>
                 </div>
-              </div>
-              <div class="wf-nav__right">
-                <a class="wf-nav__link" href="#">Login</a>
-                <button class="wf-btn wf-btn--pill wf-btn--sm">Get Started</button>
+                <div class="wf-nav__right">
+                  <a class="wf-nav__link" href="#">Login</a>
+                  <a class="wf-nav__cta" href="#">Get Started</a>
+                </div>
               </div>
             </nav>
           </div>
@@ -1975,34 +2027,38 @@
           <div class="component-label">With promo bar</div>
           <div class="preview preview--flush">
             <div class="wf-promo-bar">
-              <div class="wf-promo-bar__left">
-                <span>Meet Remixer: Build a site with your words, not code. Starting at $1.99/mo</span>
-                <a href="#">Talk to It. Watch It Build. →</a>
-              </div>
-              <div class="wf-promo-bar__right">
-                <a href="#">Knowledge Base</a>
-                <a href="#">News</a>
-                <a href="#">Support</a>
-                <a href="#">English</a>
-                <a href="#">$ USD</a>
+              <div class="wf-promo-bar__inner">
+                <div class="wf-promo-bar__left">
+                  <span>Meet Remixer: Build a site with your words, not code. Starting at $1.99/mo</span>
+                  <a href="#">Talk to It. Watch It Build. →</a>
+                </div>
+                <div class="wf-promo-bar__right">
+                  <a href="#">Knowledge Base</a>
+                  <a href="#">News</a>
+                  <a href="#">Support</a>
+                  <a href="#">English</a>
+                  <a href="#">$ USD</a>
+                </div>
               </div>
             </div>
             <nav class="wf-nav">
-              <div class="wf-nav__left">
-                <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
-                <div class="wf-nav__links">
-                  <a class="wf-nav__link" href="#">Remixer</a>
-                  <a class="wf-nav__link" href="#">WordPress</a>
-                  <a class="wf-nav__link" href="#">Hosting</a>
-                  <a class="wf-nav__link" href="#">Domains</a>
-                  <a class="wf-nav__link" href="#">Email</a>
-                  <a class="wf-nav__link" href="#">Pro Services</a>
-                  <a class="wf-nav__link" href="#">Pricing</a>
+              <div class="wf-nav__inner">
+                <div class="wf-nav__left">
+                  <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
+                  <div class="wf-nav__links">
+                    <a class="wf-nav__link" href="#">Remixer</a>
+                    <a class="wf-nav__link" href="#">WordPress</a>
+                    <a class="wf-nav__link" href="#">Hosting</a>
+                    <a class="wf-nav__link" href="#">Domains</a>
+                    <a class="wf-nav__link" href="#">Email</a>
+                    <a class="wf-nav__link" href="#">Pro Services</a>
+                    <a class="wf-nav__link" href="#">Pricing</a>
+                  </div>
                 </div>
-              </div>
-              <div class="wf-nav__right">
-                <a class="wf-nav__link" href="#">Login</a>
-                <button class="wf-btn wf-btn--pill wf-btn--sm">Get Started</button>
+                <div class="wf-nav__right">
+                  <a class="wf-nav__link" href="#">Login</a>
+                  <a class="wf-nav__cta" href="#">Get Started</a>
+                </div>
               </div>
             </nav>
           </div>
