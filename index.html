@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Competitive Homepage Intelligence — DreamHost</title>
+  <style>
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+
+    :root {
+      --font: 'Gilroy', system-ui, -apple-system, sans-serif;
+      --bg: #FFFFFF;
+      --bg-alt: #F7F8FA;
+      --text: #1A1A2E;
+      --text-secondary: #5A6270;
+      --border: #E4E7EB;
+      --hostinger: #674CC4;
+      --bluehost: #1260CE;
+      --siteground: #00856F;
+      --godaddy: #00A4A6;
+      --dreamhost: #0073EC;
+      --amber: #92400E;
+      --amber-bg: #FFFBEB;
+      --amber-border: #FDE68A;
+      --blue-bg: #EFF6FF;
+      --blue-border: #BFDBFE;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: 880px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── Project Nav (shared across all pages) ── */
+    .project-nav {
+      background: #1A1A2E;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .project-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .project-nav__logo { height: 32px; width: auto; }
+    .project-nav__divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.15);
+    }
+    .project-nav__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .project-nav__links {
+      display: flex;
+      gap: 4px;
+    }
+    .project-nav__links a {
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+    .project-nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .project-nav__links a.active { color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Hero ── */
+    .hero { padding: 80px 0 48px; }
+    .hero__eyebrow {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dreamhost);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+      max-width: 720px;
+    }
+    .hero__sub {
+      font-size: 21px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.55;
+    }
+
+    /* ── Executive Summary ── */
+    .exec-summary {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin: 0 0 80px;
+    }
+    .exec-summary__label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dreamhost);
+      margin-bottom: 16px;
+    }
+    .exec-summary__lead {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 24px;
+    }
+    .exec-summary ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .exec-summary li {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--text);
+      padding-left: 28px;
+      position: relative;
+    }
+    .exec-summary li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--dreamhost);
+    }
+
+    /* ── Section ── */
+    .section { padding: 80px 0; border-top: 1px solid var(--border); }
+    .section__label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .section__title {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+
+    /* ── Competitor Portrait ── */
+    .portrait {
+      margin-bottom: 48px;
+      padding: 48px 44px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      border-top: 4px solid var(--border);
+    }
+    .portrait:last-child { margin-bottom: 0; }
+
+    .portrait__header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .portrait__dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .portrait__name {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .portrait__positioning {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      padding-left: 26px;
+    }
+
+    .pullquote {
+      font-size: clamp(28px, 3.5vw, 38px);
+      font-weight: 800;
+      line-height: 1.18;
+      color: var(--text);
+      padding: 0 0 0 28px;
+      border-left: 4px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .portrait__narrative {
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    /* ── Stat Bar ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 600px) { .stats { grid-template-columns: 1fr 1fr; } }
+    .stat {
+      background: var(--bg-alt);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .stat__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .stat__value {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── Page Flow ── */
+    .flow { margin-bottom: 32px; }
+    .flow__title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .flow ol {
+      list-style: none;
+      counter-reset: flow;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .flow li {
+      counter-increment: flow;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 10px 16px 10px 44px;
+      background: var(--bg-alt);
+      border-radius: 8px;
+      position: relative;
+    }
+    .flow li::before {
+      content: counter(flow);
+      position: absolute;
+      left: 14px;
+      top: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    /* ── Standout Bullets ── */
+    .standouts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .standouts li {
+      font-size: 18px;
+      line-height: 1.6;
+      padding-left: 24px;
+      position: relative;
+    }
+    .standouts li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin: 40px 0;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .callout--warning {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+    }
+    .callout__label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      color: var(--amber);
+    }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin: 32px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 17px;
+    }
+    th {
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 14px 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    td:first-child { font-weight: 600; white-space: nowrap; }
+    tr:last-child td { border-bottom: none; }
+
+
+    /* ── Footer ── */
+    .page-footer {
+      padding: 40px 0;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="project-nav">
+    <div class="project-nav__brand">
+      <img src="logo-dark.svg" alt="DreamHost" class="project-nav__logo" />
+      <div class="project-nav__divider"></div>
+      <span class="project-nav__label">Homepage Redesign</span>
+    </div>
+    <div class="project-nav__links">
+      <a href="index.html" class="active">Research</a>
+      <a href="wireframe-components.html">Component Library</a>
+      <a href="concepts.html">Concepts</a>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero wrap">
+    <div class="hero__eyebrow">DreamHost Homepage Redesign</div>
+    <h1>What Hostinger, BlueHost, SiteGround, and GoDaddy put on their homepage</h1>
+    <p class="hero__sub">And what it means for DreamHost's redesign.</p>
+  </section>
+
+  <!-- ══ EXECUTIVE SUMMARY ══ -->
+  <div class="wrap">
+    <div class="exec-summary">
+      <div class="exec-summary__label">Executive Summary</div>
+      <div class="exec-summary__lead">All four competitors have converged on the same playbook — price or AI — and their homepage strategies reveal clear patterns in how each approaches conversion.</div>
+      <ul>
+        <li><strong>Pricing is a race to the bottom.</strong> Hostinger and BlueHost both advertise $1.99/mo. GoDaddy leads with $4.99/mo for domain + Airo AI. Hostinger requires a 48-month commitment that renews at 5.5x the intro rate. SiteGround shows no pricing at all.</li>
+        <li><strong>AI is everywhere but owned by no one.</strong> GoDaddy has gone all-in on "Airo" as a branded AI product line. Hostinger has 13+ AI products, SiteGround aggregates ChatGPT/Claude/Gemini into AI Studio, BlueHost badges everything "AI built in." No competitor has made AI a defensible differentiator — though GoDaddy is betting the hardest with Airo branding across every section.</li>
+        <li><strong>Trust strategies diverge sharply.</strong> Hostinger leads with press logos and volume stats (4M clients). BlueHost publishes speed benchmarks (247ms) and stacks WordPress.org credibility. SiteGround puts Trustpilot 4.9 directly in the hero. GoDaddy plays the scale card — "millions of customers" and "20+ million trust us" — leaning on sheer volume over quality signals.</li>
+        <li><strong>Ownership goes unmentioned.</strong> BlueHost is PE-owned (Newfold Digital). Hostinger is VC-backed. SiteGround was acquired. GoDaddy is publicly traded (NYSE: GDDY). None of them talk about it — but the ownership structures shape every pricing, support, and product decision on these pages.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- COMPETITOR PORTRAITS                  -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__label">Competitor Portraits</div>
+      <h2 class="section__title">Four homepages, four strategies</h2>
+
+      <!-- ── HOSTINGER ── -->
+      <div class="portrait" style="border-top-color:var(--hostinger)">
+        <div class="portrait__header">
+          <div class="portrait__dot" style="background:var(--hostinger)"></div>
+          <div class="portrait__name" style="color:var(--hostinger)">Hostinger</div>
+        </div>
+        <div class="portrait__positioning">Price-first, AI-everywhere</div>
+
+        <div class="pullquote" style="border-color:var(--hostinger)">"Launch your website today with 85% off"</div>
+
+        <p class="portrait__narrative">Hostinger's homepage is a conversion machine built around a single number: <strong>$1.99.</strong> The hero doesn't mention AI, WordPress, or any specific product — it sells a price point and creates urgency with a countdown timer. Product education comes later. AI products (Horizons, Kodee, AI Website Builder) are positioned mid-page under the balanced headline "Human-led, AI-powered" — acknowledging AI skepticism while still claiming capability. The page is dense: 12 sections covering everything from email marketing to a customer website gallery. Pricing requires a 48-month commitment and renews at $10.99-$25.99/mo (a 5.5x increase over introductory pricing).</p>
+
+        <div class="stats">
+          <div class="stat"><div class="stat__label">Hero CTA</div><div class="stat__value">Claim deal</div></div>
+          <div class="stat"><div class="stat__label">Lowest price</div><div class="stat__value">$1.99/mo</div></div>
+          <div class="stat"><div class="stat__label">Trustpilot</div><div class="stat__value">4.7 / 64K reviews</div></div>
+          <div class="stat"><div class="stat__label">Sections</div><div class="stat__value">~12</div></div>
+        </div>
+
+        <div class="flow">
+          <div class="flow__title">Page flow</div>
+          <ol>
+            <li>Promo banner with countdown timer</li>
+            <li>Hero: "$1.99/mo + 85% off" + "Claim deal" CTA</li>
+            <li>Plans &amp; prices card / Domain search card</li>
+            <li>"They succeeded online" — 3 testimonials + Trustpilot 64K + press logos (techradar, Wirecutter, WIRED, CNET, Forbes)</li>
+            <li>"From idea to online" — Website Builder → WordPress → Horizons (AI)</li>
+            <li>"More power &amp; control" — n8n hosting, cloud, agencies</li>
+            <li>Stats: 4M+ clients · 150+ countries · 20+ years · 10M+ websites</li>
+            <li>"Human-led, AI-powered" — Kodee, Backstage AI, AI tools</li>
+            <li>"Email your audience with confidence" — business email + Reach (AI marketing)</li>
+            <li>"Made with Hostinger" — customer website gallery</li>
+            <li>Pricing table: Premium $1.99 / Business $2.99 / Cloud Startup $6.99</li>
+            <li>"Not sure which plan to choose?" → Ask Kodee (AI agent)</li>
+          </ol>
+        </div>
+
+        <ul class="standouts">
+          <li><strong>Press logo bar</strong> — techradar, Wirecutter, WIRED, CNET, Forbes shown above the fold. Only competitor to do this.</li>
+          <li><strong>Renewal pricing is visible.</strong> $10.99-$25.99/mo shown in small print under each plan. Most hosts hide this entirely.</li>
+          <li><strong>"1-Click OpenClaw"</strong> in main nav — a new product featured at the navigation level, suggesting aggressive product expansion.</li>
+        </ul>
+      </div>
+
+      <!-- ── BLUEHOST ── -->
+      <div class="portrait" style="border-top-color:var(--bluehost)">
+        <div class="portrait__header">
+          <div class="portrait__dot" style="background:var(--bluehost)"></div>
+          <div class="portrait__name" style="color:var(--bluehost)">BlueHost</div>
+        </div>
+        <div class="portrait__positioning">WordPress identity, trust stacking</div>
+
+        <div class="pullquote" style="border-color:var(--bluehost)">"Grow Online with Confidence"</div>
+
+        <p class="portrait__narrative">BlueHost's homepage stacks trust signals like a closing argument. The hero leads with credibility: WordPress.org recommendation, 30-day guarantee, "5 million WordPress users." There's a phone number in the top bar — unique among the three — signaling a consultation-first sales model. Every product, feature, and CTA ties back to WordPress. The page's most distinctive asset is a <strong>speed benchmark section</strong> showing BlueHost's 247ms US load time compared to competitors in a bar chart. Pricing is buried in section 8 of 10, after extensive trust-building. The page ends with a FAQ section (strong for SEO) and a "Request a consultation" lead gen form.</p>
+
+        <div class="stats">
+          <div class="stat"><div class="stat__label">Hero CTA</div><div class="stat__value">Get Started</div></div>
+          <div class="stat"><div class="stat__label">Lowest price</div><div class="stat__value">$3.99/mo</div></div>
+          <div class="stat"><div class="stat__label">Trust claim</div><div class="stat__value">5M WP users</div></div>
+          <div class="stat"><div class="stat__label">Sections</div><div class="stat__value">~10</div></div>
+        </div>
+
+        <div class="flow">
+          <div class="flow__title">Page flow</div>
+          <ol>
+            <li>Top bar with phone: "Talk to an expert at 1-888-401-4678"</li>
+            <li>Hero: "Grow Online with Confidence" + trust badge stack + WordPress.org badge</li>
+            <li>4 product cards: WordPress Hosting, VPS, Managed WP, Professional Services</li>
+            <li>"Why Bluehost is right for you" — 5 benefit sections (scalability, security, one-click installs, auto-updates, pro tools)</li>
+            <li>Video testimonial: "Bluehost is at the heart of Kamala Adventures"</li>
+            <li>"Trusted by over 5 million WordPress users" + 3 Trustpilot reviews</li>
+            <li>"Bluehost delivers speed" — 247ms US load time comparison chart</li>
+            <li>Pricing: Basic $3.99 / Business $6.99 / eCommerce Starter $14.99</li>
+            <li>"Request a consultation" + 24/7 support banner</li>
+            <li>FAQ section (6+ questions)</li>
+          </ol>
+        </div>
+
+        <ul class="standouts">
+          <li><strong>Speed benchmarks with data.</strong> The only competitor publishing a specific load time (247ms) with a visual comparison chart. Real numbers beat "fast" claims.</li>
+          <li><strong>Phone number in the header.</strong> No other competitor does this. Signals "we're real humans and we want to talk to you."</li>
+          <li><strong>FAQ section on homepage.</strong> "What is web hosting?", "Is Bluehost recommended by WordPress?" — SEO play for informational queries.</li>
+        </ul>
+      </div>
+
+      <!-- ── SITEGROUND ── -->
+      <div class="portrait" style="border-top-color:var(--siteground)">
+        <div class="portrait__header">
+          <div class="portrait__dot" style="background:var(--siteground)"></div>
+          <div class="portrait__name" style="color:var(--siteground)">SiteGround</div>
+        </div>
+        <div class="portrait__positioning">Premium platform, no price on the page</div>
+
+        <div class="pullquote" style="border-color:var(--siteground)">"Build, host, grow your online presence"</div>
+
+        <p class="portrait__narrative">SiteGround's homepage is the leanest and most confident of the three. No pricing, no urgency, no discounts. The hero puts Trustpilot's 4.9/5 stars directly in the hero — letting the rating do the selling. Below, six product cards are shown with <strong>equal visual weight</strong> (WordPress, Website Builder, Online Store, Web Hosting, Email Marketing, Coderick AI) — a deliberate "platform" statement. The most distinctive move: <strong>AI Studio</strong>, included in all plans, which aggregates ChatGPT, Claude, Google, and Gemini into one dashboard. Instead of building proprietary AI, SiteGround gives you access to everyone else's. The support section — "Real support, real humans 24/7" with 98% satisfaction for 10+ years — is the sharpest counter-positioning against the AI-everything trend.</p>
+
+        <div class="stats">
+          <div class="stat"><div class="stat__label">Hero CTA</div><div class="stat__value">Explore Services</div></div>
+          <div class="stat"><div class="stat__label">Pricing</div><div class="stat__value">Not shown</div></div>
+          <div class="stat"><div class="stat__label">Trustpilot</div><div class="stat__value">4.9 / 3M domains</div></div>
+          <div class="stat"><div class="stat__label">Sections</div><div class="stat__value">~9</div></div>
+        </div>
+
+        <div class="flow">
+          <div class="flow__title">Page flow</div>
+          <ol>
+            <li>Hero: "Build, host, grow" + Trustpilot 4.9 in hero + floating UI elements</li>
+            <li>"Fast, secure, smarter AI-powered website services" — 6 equal product cards</li>
+            <li>"Powerful AI Studio" — aggregates ChatGPT, Claude, Google, Gemini (included in all plans)</li>
+            <li>Domain search with AI suggestions</li>
+            <li>"Real support, real humans 24/7" — 98% satisfaction, multiple awards</li>
+            <li>Customer success stories carousel</li>
+            <li>Footer with blog integration</li>
+          </ol>
+        </div>
+
+        <ul class="standouts">
+          <li><strong>Trustpilot 4.9 in the hero.</strong> Highest placement of any competitor. The rating IS the headline's proof.</li>
+          <li><strong>AI Studio with multi-model access.</strong> Instead of building their own AI, they give you ChatGPT + Claude + Gemini in one place. Smart — the value is curation, not creation.</li>
+          <li><strong>"Real humans" as an explicit counter-position.</strong> In an industry rushing toward AI support, SiteGround leans into human expertise with 98% satisfaction over 10 years.</li>
+        </ul>
+      </div>
+
+      <!-- ── GODADDY ── -->
+      <div class="portrait" style="border-top-color:var(--godaddy)">
+        <div class="portrait__header">
+          <div class="portrait__dot" style="background:var(--godaddy)"></div>
+          <div class="portrait__name" style="color:var(--godaddy)">GoDaddy</div>
+        </div>
+        <div class="portrait__positioning">Domain-first, AI brand play with Airo</div>
+
+        <div class="pullquote" style="border-color:var(--godaddy)">"Get started for just $4.99"</div>
+
+        <p class="portrait__narrative">GoDaddy's homepage is built around a single brand bet: <strong>Airo.</strong> The hero leads with a domain search bar bundled with "includes Airo™" — the AI product line that touches every section of the page. Below the hero, a tabbed product navigator ("Domains", "Websites", "Create a Logo", "Security & Hosting", "Email & Microsoft 365", "Names over tea") lets users self-select into product paths. The page then builds a case for GoDaddy AI across three major sections: AI-powered tools (logo, site builder, social), a "powerful website builder" showcase, and an "Airo every day, all the way" testimonial section with a customer video and feature checklist. The "Everyone works with GoDaddy" section plays the scale card — multiple audience types, "20+ million trust us for domains." The page closes with another video case study, a "We love to help. Seriously." support section with phone number and FAQ, and a dense bottom nav. The FAQ section is notably long (8+ questions) — a clear SEO play.</p>
+
+        <div class="stats">
+          <div class="stat"><div class="stat__label">Hero CTA</div><div class="stat__value">Search domain</div></div>
+          <div class="stat"><div class="stat__label">Lowest price</div><div class="stat__value">$4.99/mo</div></div>
+          <div class="stat"><div class="stat__label">Trust claim</div><div class="stat__value">20M+ domains</div></div>
+          <div class="stat"><div class="stat__label">Sections</div><div class="stat__value">~11</div></div>
+        </div>
+
+        <div class="flow">
+          <div class="flow__title">Page flow</div>
+          <ol>
+            <li>Hero: Domain search bar + "$4.99 — includes Airo™" + Trustpilot snippet</li>
+            <li>Product tab navigator: Domains / Websites / Logo / Security / Email / Names over tea</li>
+            <li>"Power your future with GoDaddy AI" — 3 cards (logo, site builder, social)</li>
+            <li>"A powerful website builder at your fingertips" — template showcase + "Start for free &amp; upgrade later"</li>
+            <li>"Airo every day, all the way" — customer testimonial video + feature checklist (Domain, Website, Logo, Email, Social, Store, Payments)</li>
+            <li>"Everyone works with GoDaddy" — audience cards (portfolios, side hustles, small biz) + "20+ million trust us" + phone support</li>
+            <li>"Watch how GoDaddy got Goggins gogglin'" — video case study</li>
+            <li>"We love to help. Seriously." — support section with 1-480-366-3546 phone number</li>
+            <li>"Millions of customers rely on our domains" — FAQ section (8+ questions)</li>
+            <li>Scrolling text ticker: "Why Choose GoDaddy?" + "Entrepreneur Advice" + "Social Media Center"</li>
+            <li>Dense footer with product links</li>
+          </ol>
+        </div>
+
+        <ul class="standouts">
+          <li><strong>Airo as a unified AI brand.</strong> Unlike competitors who scatter AI features across unrelated products, GoDaddy wraps everything under one name. Every section reinforces "Airo" — logo, site, social, email. The branding is aggressive and consistent.</li>
+          <li><strong>Domain search IS the hero CTA.</strong> The only competitor whose primary action is a search bar, not a button. Signals domain-first identity and captures high-intent visitors immediately.</li>
+          <li><strong>Product tab navigator.</strong> A unique pattern — 6 tabs below the hero let users self-select. Reduces bounce by showing breadth without requiring scrolling. No other competitor has this.</li>
+          <li><strong>Phone number in the support section.</strong> Like BlueHost, GoDaddy shows a real phone number (1-480-366-3546), reinforcing "real humans" in the support pitch.</li>
+          <li><strong>8+ FAQ questions on homepage.</strong> The longest FAQ of any competitor — a deliberate SEO content play for informational queries like "Why do I need a website?" and "What makes GoDaddy Web Hosting the world leader?"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════ -->
+  <!-- SIDE-BY-SIDE COMPARISON               -->
+  <!-- ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section__label">Side-by-Side</div>
+      <h2 class="section__title">Pricing &amp; trust at a glance</h2>
+
+      <h3 style="font-size:26px;font-weight:800;margin-bottom:24px;">Pricing</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Aspect</th><th>Hostinger</th><th>BlueHost</th><th>SiteGround</th><th>GoDaddy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Lowest price</td><td>$1.99/mo</td><td>$3.99/mo</td><td>Not shown</td><td>$4.99/mo</td></tr>
+            <tr><td>Commitment</td><td>48 months</td><td>Unclear</td><td>N/A</td><td>Unclear</td></tr>
+            <tr><td>Renewal</td><td>$10.99-$25.99</td><td>Not visible</td><td>N/A</td><td>Not visible</td></tr>
+            <tr><td>Placement</td><td>Hero + section 11</td><td>Section 8 of 10</td><td>Not on homepage</td><td>Hero subtitle</td></tr>
+            <tr><td>Guarantee</td><td>30 days</td><td>30 days</td><td>Not shown</td><td>Not shown</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--warning">
+        <div class="callout__label">Note on pricing</div>
+        Hostinger's $1.99/mo requires a <strong>4-year commitment ($95.52 upfront)</strong> and renews at $10.99/mo — a 5.5x increase. BlueHost's hero claims "as low as $1.99" but the pricing table starts at $3.99. GoDaddy's $4.99 bundles a .com domain with Airo AI — the highest intro price but potentially the most included value.
+      </div>
+
+      <h3 style="font-size:26px;font-weight:800;margin:56px 0 24px;">Trust signals</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Signal</th><th>Hostinger</th><th>BlueHost</th><th>SiteGround</th><th>GoDaddy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Trustpilot</td><td>4.7 / 64K reviews</td><td>Shown, score unclear</td><td>4.9 / in hero</td><td>Shown in hero, score unclear</td></tr>
+            <tr><td>WordPress.org</td><td>Not in hero</td><td>Hero badge</td><td>Not prominent</td><td>FAQ mention only</td></tr>
+            <tr><td>User count</td><td>4M clients, 10M sites</td><td>5M WP users</td><td>3M domains</td><td>20M+ domains, "millions"</td></tr>
+            <tr><td>Press logos</td><td>6 logos above fold</td><td>None visible</td><td>None visible</td><td>None visible</td></tr>
+            <tr><td>Speed data</td><td>None</td><td>247ms benchmark</td><td>None</td><td>None</td></tr>
+            <tr><td>Support</td><td>Kodee AI agent</td><td>Phone + consultation</td><td>98% human satisfaction</td><td>Phone (1-480-366-3546)</td></tr>
+            <tr><td>Guarantee</td><td>30 days</td><td>30 days</td><td>Not shown</td><td>Not shown</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="wrap">Source: Full-page homepage screenshots captured March 11, 2026</div>
+  </footer>
+
+</body>
+</html>
