@@ -902,9 +902,14 @@
       max-width: none;
       color: rgba(255,255,255,0.7);
     }
+    .wf-section--dark .wf-h1,
     .wf-section--dark .wf-h2,
     .wf-section--dark .wf-h3,
     .wf-section--dark .wf-h4 { color: var(--wf-white); }
+    .wf-section--dark .wf-body,
+    .wf-section--dark .wf-body-sm { color: rgba(255,255,255,0.65); }
+    .wf-section--dark .wf-caption { color: rgba(255,255,255,0.5); }
+    .wf-section--dark .wf-eyebrow { color: rgba(255,255,255,0.5); }
     .wf-section--alt {
       background: var(--wf-surface);
       max-width: none;
@@ -1681,8 +1686,12 @@
       border-radius: var(--wf-radius-lg);
     }
     .wf-hero--dark .wf-h1,
-    .wf-hero--dark .wf-h2 { color: var(--wf-white); }
+    .wf-hero--dark .wf-h2,
+    .wf-hero--dark .wf-h3,
+    .wf-hero--dark .wf-h4 { color: var(--wf-white); }
     .wf-hero--dark .wf-body { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-body-sm { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-caption { color: rgba(255,255,255,0.5); }
     .wf-hero--dark .wf-eyebrow { color: var(--wf-placeholder-dark); border-color: var(--wf-dark-surface); }
     .wf-hero--dark .wf-hero__trust { color: var(--wf-placeholder-dark); }
 
@@ -2524,6 +2533,113 @@
       overflow: hidden;
     }
 
+    /* ── Dark-on-dark contrast fixes for lib-demo ── */
+    /* Typography overrides: default text classes use dark colors meant for light backgrounds.
+       When rendered inside .lib-demo (dark bg), they need light colors. */
+    .lib-demo .wf-h1,
+    .lib-demo .wf-h2,
+    .lib-demo .wf-h3,
+    .lib-demo .wf-h4 { color: var(--wf-white); }
+    .lib-demo .wf-body,
+    .lib-demo .wf-body-sm { color: rgba(255,255,255,0.65); }
+    .lib-demo .wf-caption { color: rgba(255,255,255,0.5); }
+    .lib-demo .wf-eyebrow { color: rgba(255,255,255,0.5); }
+
+    /* Hero trust text and stat rows inside lib-demo */
+    .lib-demo .wf-hero__trust { color: rgba(255,255,255,0.5); }
+    .lib-demo .wf-hero__stat-row dt { color: var(--wf-white); }
+    .lib-demo .wf-hero__stat-row dd { color: rgba(255,255,255,0.5); }
+
+    /* Price callout inside lib-demo */
+    .lib-demo .wf-price-callout__amount { color: var(--wf-white); }
+    .lib-demo .wf-price-callout__period { color: rgba(255,255,255,0.5); }
+
+    /* Domain search inside lib-demo */
+    .lib-demo .wf-hero__domain-search { border-color: var(--wf-dark-surface); }
+    .lib-demo .wf-hero__domain-search input { color: var(--wf-white); }
+    .lib-demo .wf-hero__domain-search button { background: var(--wf-white); color: var(--wf-dark); }
+
+    /* Buttons inside lib-demo: primary dark bg on dark bg is invisible, flip it */
+    .lib-demo .wf-btn--primary { background: var(--wf-white); color: var(--wf-dark); }
+    .lib-demo .wf-btn--primary:hover { background: #e8e8ec; }
+    /* Secondary needs light border/text */
+    .lib-demo .wf-btn--secondary { color: var(--wf-white); border-color: rgba(255,255,255,0.3); }
+    .lib-demo .wf-btn--secondary:hover { border-color: var(--wf-white); }
+    /* Ghost button needs light text */
+    .lib-demo .wf-btn--ghost { color: rgba(255,255,255,0.8); }
+    .lib-demo .wf-btn--ghost:hover { background: rgba(255,255,255,0.08); }
+
+    /* Plan hero inside lib-demo */
+    .lib-demo .wf-planhero__title { color: var(--wf-white); }
+    .lib-demo .wf-planhero__sub { color: rgba(255,255,255,0.65); }
+    .lib-demo .wf-planhero__feature { color: var(--wf-white); }
+    .lib-demo .wf-planhero__feature-icon { background: rgba(255,255,255,0.1); }
+    .lib-demo .wf-trustpilot { color: rgba(255,255,255,0.7); }
+    .lib-demo .wf-trustpilot__label { color: rgba(255,255,255,0.6); }
+    .lib-demo .wf-trustpilot__rating { color: var(--wf-white); }
+    .lib-demo .wf-trustpilot__meta { color: rgba(255,255,255,0.5); }
+    .lib-demo .wf-trustpilot__meta a { color: rgba(255,255,255,0.7); }
+    .lib-demo .wf-term-label { color: var(--wf-white); }
+    .lib-demo .wf-tier-toggle { border-color: var(--wf-white); }
+    .lib-demo .wf-tier-toggle__opt { color: var(--wf-white); }
+    .lib-demo .wf-tier-toggle__opt small { color: rgba(255,255,255,0.5); }
+    .lib-demo .wf-tier-toggle__opt--active { background: var(--wf-white); color: var(--wf-dark); }
+    .lib-demo .wf-tier-toggle__opt--active small { color: var(--wf-text-muted); }
+
+    /* Performance table inside lib-demo */
+    .lib-demo .wf-perf-table th { color: var(--wf-white); border-bottom-color: rgba(255,255,255,0.15); }
+    .lib-demo .wf-perf-table td { color: rgba(255,255,255,0.65); border-bottom-color: rgba(255,255,255,0.08); }
+    .lib-demo .wf-perf-table tr.wf-perf-highlight { background: rgba(255,255,255,0.06); }
+    .lib-demo .wf-perf-table tr.wf-perf-highlight td { color: var(--wf-white); }
+
+    /* Speed bars inside lib-demo */
+    .lib-demo .wf-speed-bar__label { color: var(--wf-white); }
+    .lib-demo .wf-speed-bar__value { color: var(--wf-white); }
+    .lib-demo .wf-speed-bar__track { background: rgba(255,255,255,0.1); }
+    .lib-demo .wf-speed-bar__fill--before { background: rgba(255,255,255,0.25); }
+    .lib-demo .wf-speed-bar__fill--after { background: var(--wf-white); }
+
+    /* Reliability grid inside lib-demo: competitor cards have light bg, so their text is fine.
+       But surrounding text (section heading/body) needs light colors. */
+    .lib-demo .wf-reliability__card--competitor { background: var(--wf-dark-surface); }
+    .lib-demo .wf-reliability__card--competitor .wf-reliability__name { color: var(--wf-white); }
+    .lib-demo .wf-reliability__card--competitor .wf-reliability__label { color: rgba(255,255,255,0.5); }
+    .lib-demo .wf-reliability__card--competitor .wf-reliability__detail { color: rgba(255,255,255,0.4); }
+
+    /* Restore correct colors for elements inside white-background children of lib-demo
+       (pricing cards, bridge cards, etc.) */
+    .lib-demo .wf-pricing-card .wf-h1,
+    .lib-demo .wf-pricing-card .wf-h2,
+    .lib-demo .wf-pricing-card .wf-h3,
+    .lib-demo .wf-pricing-card .wf-h4,
+    .lib-demo .wf-pricing-card__name,
+    .lib-demo .wf-pricing-card__amount { color: var(--wf-text); }
+    .lib-demo .wf-pricing-card .wf-body,
+    .lib-demo .wf-pricing-card .wf-body-sm,
+    .lib-demo .wf-pricing-card__desc,
+    .lib-demo .wf-pricing-card__first-year,
+    .lib-demo .wf-pricing-card__renewal { color: var(--wf-text-body); }
+    .lib-demo .wf-pricing-card .wf-caption { color: var(--wf-text-muted); }
+    .lib-demo .wf-pricing-card__period { color: var(--wf-text-muted); }
+    .lib-demo .wf-pricing-card__save { color: var(--wf-text); }
+    .lib-demo .wf-pricing-card__features li { color: var(--wf-text-body); }
+    .lib-demo .wf-pricing-card__view-more { color: var(--wf-text); }
+    .lib-demo .wf-pricing-card__more { color: var(--wf-text-muted); }
+    .lib-demo .wf-pricing-card__cta--outline { color: var(--wf-text); border-color: var(--wf-text); background: var(--wf-white); }
+    .lib-demo .wf-pricing-card__cta--filled { background: #0073EC; color: var(--wf-white); border-color: #0073EC; }
+    .lib-demo .wf-pricing-card__badge-wrap { color: var(--wf-text); }
+    .lib-demo .wf-pricing-card .wf-btn--primary { background: var(--wf-dark); color: var(--wf-white); }
+    .lib-demo .wf-pricing-card .wf-btn--secondary { color: var(--wf-text); border-color: var(--wf-border); }
+
+    /* Bridge cards sit on white bg inside lib-demo */
+    .lib-demo .wf-bridge-card .wf-h4 { color: var(--wf-text); }
+    .lib-demo .wf-bridge-card .wf-body-sm { color: var(--wf-text-muted); }
+    .lib-demo .wf-bridge-card .wf-btn--primary { background: var(--wf-dark); color: var(--wf-white); }
+    .lib-demo .wf-bridge-card .wf-btn--secondary { color: var(--wf-text); border-color: var(--wf-border); }
+
+    /* Term dropdown (white bg control) inside lib-demo */
+    .lib-demo .wf-term-dropdown__selected { color: var(--wf-text); }
+
     /* ── Bridge Cards ── */
     .wf-bridge-cards {
       position: relative;
@@ -2727,6 +2843,9 @@
       margin-bottom: 8px;
       color: var(--wf-text);
     }
+    .wf-review-carousel--dark .wf-review-carousel__rating-text {
+      color: var(--wf-white);
+    }
     .wf-review-carousel--dark .wf-review-carousel__stars {
       color: var(--wf-white);
     }
@@ -2797,8 +2916,14 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .wf-review-carousel--dark .wf-review-card__title {
+      color: var(--wf-white);
+    }
     .wf-review-carousel--dark .wf-review-card__excerpt {
       color: rgba(255,255,255,0.55);
+    }
+    .wf-review-carousel--dark .wf-review-card__author {
+      color: var(--wf-white);
     }
     .wf-review-card__author {
       font-size: 13px;
@@ -3377,7 +3502,7 @@
               <span class="wf-price-callout__amount">$1.99</span>
               <span class="wf-price-callout__period">/mo</span>
             </div>
-            <p style="font-size:13px; color:var(--wf-text-faint); margin-bottom:8px;">Billed annually. Renews at $7.99/mo.</p>
+            <p style="font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:8px;">Billed annually. Renews at $7.99/mo.</p>
             <div class="wf-hero__actions">
               <button class="wf-btn wf-btn--primary wf-btn--lg">Start Building →</button>
             </div>
@@ -5209,7 +5334,7 @@
         <div class="lib-demo" style="padding: 32px;">
           <div style="max-width: var(--wf-max-w); margin: 0 auto;">
             <div class="wf-h3 mb-8">How We Stack Up Under Pressure</div>
-            <div class="wf-body-sm mb-24" style="color: var(--wf-text-muted);">K6 load testing — 30 min sustained traffic, 20 global locations (Aug 2025, ReviewSignals methodology)</div>
+            <div class="wf-body-sm mb-24">K6 load testing — 30 min sustained traffic, 20 global locations (Aug 2025, ReviewSignals methodology)</div>
             <table class="wf-perf-table">
               <thead>
                 <tr>
@@ -5313,37 +5438,37 @@
         <div class="lib-demo" style="padding: 40px;">
           <div style="max-width: var(--wf-max-w); margin: 0 auto;">
             <div class="wf-h3 mb-8">TTFB Before &amp; After Datacenter Expansion</div>
-            <div class="wf-body-sm mb-32" style="color: var(--wf-text-muted);">Time to First Byte from key cities — lower is better</div>
+            <div class="wf-body-sm mb-32">Time to First Byte from key cities — lower is better</div>
             <div class="wf-speed-bars">
               <div style="display: grid; grid-template-columns: 100px 1fr 1fr 60px; gap: 16px; align-items: center; margin-bottom: 8px;">
                 <span></span>
-                <span style="font-size: 12px; font-weight: 600; color: var(--wf-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Before (PDX1 only)</span>
-                <span style="font-size: 12px; font-weight: 600; color: var(--wf-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">After (Local DC)</span>
-                <span style="font-size: 12px; font-weight: 600; color: var(--wf-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Gain</span>
+                <span style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px;">Before (PDX1 only)</span>
+                <span style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px;">After (Local DC)</span>
+                <span style="font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px;">Gain</span>
               </div>
               <div style="display: grid; grid-template-columns: 100px 1fr 1fr 60px; gap: 16px; align-items: center;">
-                <div style="font-size: 14px; font-weight: 600; color: var(--wf-text); text-align: right;">Frankfurt</div>
+                <div style="font-size: 14px; font-weight: 600; color: #fff; text-align: right;">Frankfurt</div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--before" style="width: 90%;">270ms</div></div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--after" style="width: 7%;">19ms</div></div>
-                <div style="font-size: 14px; font-weight: 700; color: var(--wf-text);">93%</div>
+                <div style="font-size: 14px; font-weight: 700; color: #fff;">93%</div>
               </div>
               <div style="display: grid; grid-template-columns: 100px 1fr 1fr 60px; gap: 16px; align-items: center;">
-                <div style="font-size: 14px; font-weight: 600; color: var(--wf-text); text-align: right;">London</div>
+                <div style="font-size: 14px; font-weight: 600; color: #fff; text-align: right;">London</div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--before" style="width: 80%;">240ms</div></div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--after" style="width: 7%;">22ms</div></div>
-                <div style="font-size: 14px; font-weight: 700; color: var(--wf-text);">91%</div>
+                <div style="font-size: 14px; font-weight: 700; color: #fff;">91%</div>
               </div>
               <div style="display: grid; grid-template-columns: 100px 1fr 1fr 60px; gap: 16px; align-items: center;">
-                <div style="font-size: 14px; font-weight: 600; color: var(--wf-text); text-align: right;">Singapore</div>
+                <div style="font-size: 14px; font-weight: 600; color: #fff; text-align: right;">Singapore</div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--before" style="width: 70%;">210ms</div></div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--after" style="width: 3%;">9ms</div></div>
-                <div style="font-size: 14px; font-weight: 700; color: var(--wf-text);">96%</div>
+                <div style="font-size: 14px; font-weight: 700; color: #fff;">96%</div>
               </div>
               <div style="display: grid; grid-template-columns: 100px 1fr 1fr 60px; gap: 16px; align-items: center;">
-                <div style="font-size: 14px; font-weight: 600; color: var(--wf-text); text-align: right;">Stockholm</div>
+                <div style="font-size: 14px; font-weight: 600; color: #fff; text-align: right;">Stockholm</div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--before" style="width: 100%;">300ms</div></div>
                 <div class="wf-speed-bar__track"><div class="wf-speed-bar__fill wf-speed-bar__fill--after" style="width: 12%;">36ms</div></div>
-                <div style="font-size: 14px; font-weight: 700; color: var(--wf-text);">88%</div>
+                <div style="font-size: 14px; font-weight: 700; color: #fff;">88%</div>
               </div>
             </div>
           </div>
@@ -5360,7 +5485,7 @@
         <div class="lib-demo" style="padding: 40px;">
           <div style="max-width: var(--wf-max-w); margin: 0 auto;">
             <div class="wf-h3 mb-8 text-center">Zero Failures. Every Time.</div>
-            <div class="wf-body-sm mb-32 text-center" style="color: var(--wf-text-muted);">K6 load testing — 30 min sustained traffic, Aug 2025 (ReviewSignals methodology)</div>
+            <div class="wf-body-sm mb-32 text-center">K6 load testing — 30 min sustained traffic, Aug 2025 (ReviewSignals methodology)</div>
             <div class="wf-reliability">
               <div class="wf-reliability__card wf-reliability__card--hero">
                 <div>
