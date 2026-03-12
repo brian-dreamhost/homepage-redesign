@@ -77,6 +77,7 @@
       top: 105px;
       height: calc(100vh - 105px);
       overflow-y: auto;
+      overscroll-behavior: contain;
       border-right: 1px solid var(--wf-border);
       padding: 20px 0;
       background: var(--wf-white);
@@ -138,7 +139,7 @@
       font-size: 11px;
       line-height: 1;
       height: calc(100vh - 105px);
-      transition: background 0.15s;
+      transition: background 0.15s, width 0.2s ease, padding 0.2s ease, border 0.2s ease;
     }
     .lib-sidebar-toggle:hover {
       background: var(--wf-surface-2);
@@ -149,8 +150,44 @@
       height: 16px;
       transition: transform 0.2s;
     }
+    .lib-sidebar-toggle--collapsed {
+      width: 0;
+      padding: 0;
+      overflow: hidden;
+      border-right: none;
+    }
     .lib-sidebar-toggle--collapsed svg {
       transform: rotate(180deg);
+    }
+    /* Floating reopen button */
+    .lib-sidebar-reopen {
+      position: fixed;
+      top: 114px;
+      left: 8px;
+      z-index: 300;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      box-shadow: var(--wf-shadow-md);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--wf-text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+    .lib-sidebar-reopen:hover {
+      background: var(--wf-surface);
+      color: var(--wf-text);
+    }
+    .lib-sidebar-reopen svg {
+      width: 14px;
+      height: 14px;
+    }
+    .lib-sidebar-reopen--visible {
+      display: flex;
     }
 
     .lib-main {
@@ -1928,6 +1965,876 @@
     .wf-reliability__name { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--wf-text); }
     .wf-reliability__label { font-size: 13px; color: var(--wf-text-muted); margin-top: 4px; }
     .wf-reliability__detail { font-size: 12px; color: var(--wf-text-faint); margin-top: 6px; }
+
+    /* ── Two-Card Product Entry ── */
+    .wf-two-card-entry {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .wf-two-card-entry__card {
+      border-radius: var(--wf-radius-lg);
+      padding: 36px 32px;
+    }
+    .wf-two-card-entry__card--dark {
+      background: var(--wf-dark);
+      color: rgba(255,255,255,0.7);
+    }
+    .wf-two-card-entry__card--dark .wf-h3 { color: var(--wf-white); }
+    .wf-two-card-entry__card--dark .wf-body-sm { color: rgba(255,255,255,0.6); }
+    .wf-two-card-entry__card--light {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+    }
+    .wf-two-card-entry__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--wf-radius);
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-two-card-entry__card--light .wf-two-card-entry__icon {
+      background: var(--wf-surface-2);
+    }
+    .wf-two-card-entry__price {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-white);
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .wf-two-card-entry__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-white);
+      text-decoration: none;
+    }
+    .wf-two-card-entry__link:hover { text-decoration: underline; }
+    .wf-two-card-entry__card--light .wf-two-card-entry__link {
+      color: var(--wf-text);
+    }
+
+    /* ── Press/Award Logo Bar (Dark) ── */
+    .wf-logo-bar-dark {
+      background: var(--wf-dark);
+      padding: 40px 48px;
+      border-radius: var(--wf-radius-lg);
+      text-align: center;
+    }
+    .wf-logo-bar-dark__eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .wf-logo-bar-dark__row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .wf-logo-bar-dark__badge {
+      width: 100px;
+      height: 36px;
+      border-radius: var(--wf-radius-sm);
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── Product Card Grid (Equal-Weight) ── */
+    .wf-product-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .wf-product-card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .wf-product-card:hover {
+      box-shadow: var(--wf-shadow-md);
+      border-color: var(--wf-text-muted);
+    }
+    .wf-product-card__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      margin-bottom: 16px;
+    }
+    .wf-product-card .wf-h4 { margin-bottom: 6px; }
+    .wf-product-card .wf-body-sm { margin-bottom: 16px; flex: 1; }
+    .wf-product-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      text-decoration: none;
+    }
+    .wf-product-card__link:hover { text-decoration: underline; }
+
+    /* ── Competitor Benchmark Chart ── */
+    .wf-benchmark {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 40px;
+    }
+    .wf-benchmark__row {
+      display: grid;
+      grid-template-columns: 120px 1fr 80px;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .wf-benchmark__row:last-child { border-bottom: none; }
+    .wf-benchmark__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      text-align: right;
+    }
+    .wf-benchmark__row--hero .wf-benchmark__name {
+      color: var(--wf-white);
+      font-weight: 700;
+    }
+    .wf-benchmark__bar {
+      height: 28px;
+      border-radius: var(--wf-radius-sm);
+      background: rgba(255,255,255,0.2);
+    }
+    .wf-benchmark__row--hero .wf-benchmark__bar {
+      background: var(--wf-white);
+    }
+    .wf-benchmark__value {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+    }
+    .wf-benchmark__row--hero .wf-benchmark__value {
+      color: var(--wf-white);
+    }
+    .wf-benchmark__note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 16px;
+    }
+
+    /* ── Video Testimonial ── */
+    .wf-video-testimonial {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .wf-video-testimonial__quote {
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--wf-text);
+      margin-bottom: 24px;
+    }
+    .wf-video-testimonial__author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .wf-video-testimonial__name { font-size: 15px; font-weight: 600; color: var(--wf-text); }
+    .wf-video-testimonial__role { font-size: 13px; color: var(--wf-text-muted); }
+    .wf-video-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--wf-surface);
+      border-radius: var(--wf-radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .wf-video-placeholder__play {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--wf-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-video-testimonial__stat {
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 800;
+      color: var(--wf-text);
+    }
+
+    /* ── Audience/Persona Cards ── */
+    .wf-audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-audience-card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .wf-audience-card:hover {
+      box-shadow: var(--wf-shadow-md);
+      transform: translateY(-2px);
+    }
+    .wf-audience-card__img {
+      aspect-ratio: 4/3;
+      background: var(--wf-surface);
+    }
+    .wf-audience-card__body {
+      padding: 28px;
+    }
+    .wf-audience-card__body .wf-h4 { margin-bottom: 8px; }
+    .wf-audience-card__body .wf-body-sm { margin-bottom: 16px; }
+    .wf-audience-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      text-decoration: none;
+    }
+    .wf-audience-card__link:hover { text-decoration: underline; }
+
+    /* ── Stacked Product Showcase ── */
+    .wf-showcase-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .wf-showcase-block:last-child { border-bottom: none; }
+    .wf-showcase-block--reverse { direction: rtl; }
+    .wf-showcase-block--reverse > * { direction: ltr; }
+    .wf-showcase-block__text .wf-eyebrow { margin-bottom: 12px; }
+    .wf-showcase-block__text .wf-h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 16px;
+    }
+    .wf-showcase-block__text .wf-body { margin-bottom: 24px; }
+    .wf-showcase-block__text .wf-caption { margin-top: 12px; }
+    .wf-showcase-block__media {
+      height: 360px;
+      background: var(--wf-surface);
+      border-radius: var(--wf-radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Product Accordion ── */
+    .wf-product-accordion {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 56px 48px;
+    }
+    .wf-product-accordion .wf-h2 { color: var(--wf-white); margin-bottom: 12px; }
+    .wf-product-accordion .wf-body { color: rgba(255,255,255,0.6); }
+    .wf-product-accordion__list {
+      display: flex;
+      flex-direction: column;
+    }
+    .wf-product-accordion__item {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .wf-product-accordion__trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--wf-font);
+    }
+    .wf-product-accordion__trigger-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--wf-radius-sm);
+      background: rgba(255,255,255,0.08);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-product-accordion__trigger-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--wf-white);
+      flex: 1;
+    }
+    .wf-product-accordion__chevron {
+      font-size: 20px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 300;
+      transition: transform 0.2s;
+    }
+    .wf-product-accordion__item--open .wf-product-accordion__chevron {
+      transform: rotate(45deg);
+    }
+    .wf-product-accordion__body {
+      display: none;
+      padding: 0 0 20px 56px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+    .wf-product-accordion__item--open .wf-product-accordion__body {
+      display: block;
+    }
+    .wf-product-accordion__body a {
+      color: var(--wf-white);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 12px;
+    }
+    .wf-product-accordion__body a:hover { text-decoration: underline; }
+
+    /* ── Two-Column Testimonial Layout ── */
+    .wf-testimonial-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .wf-testimonial-split__featured {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .wf-testimonial-split__featured-quote {
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-testimonial-split__featured-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-testimonial-split__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .wf-testimonial-split__card {
+      background: var(--wf-dark-surface);
+      border-radius: var(--wf-radius);
+      padding: 20px;
+    }
+    .wf-testimonial-split__card-quote {
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .wf-testimonial-split__card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__card-role {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── Stats + Content Section ── */
+    .wf-stats-content {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 56px 48px;
+    }
+    .wf-stats-content__stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .wf-stats-content__stat-num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--wf-white);
+      line-height: 1.1;
+    }
+    .wf-stats-content__stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+    .wf-stats-content__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .wf-stats-content__body .wf-h2 { color: var(--wf-white); margin-bottom: 16px; }
+    .wf-stats-content__body .wf-body { color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+    .wf-stats-content__checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .wf-stats-content__checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+    .wf-stats-content__check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--wf-white);
+      margin-top: 1px;
+    }
+
+    /* ── Centered Section with Search ── */
+    .wf-search-section {
+      background: var(--wf-surface);
+      padding: 72px 48px;
+      text-align: center;
+      border-radius: var(--wf-radius-lg);
+    }
+    .wf-search-section .wf-eyebrow { margin-bottom: 12px; }
+    .wf-search-section .wf-h2 { margin-bottom: 12px; }
+    .wf-search-section .wf-body { max-width: 480px; margin: 0 auto 28px; }
+    .wf-search-section__input-group {
+      display: flex;
+      max-width: 520px;
+      margin: 0 auto 20px;
+      border: 2px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      overflow: hidden;
+      background: var(--wf-white);
+    }
+    .wf-search-section__input-group input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      font-family: var(--wf-font);
+      font-size: 15px;
+      outline: none;
+      background: transparent;
+      color: var(--wf-text);
+    }
+    .wf-search-section__input-group input::placeholder { color: var(--wf-text-faint); }
+    .wf-search-section__input-group button {
+      padding: 14px 28px;
+      border: none;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-family: var(--wf-font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .wf-search-section__hints {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Side-by-Side Service Cards ── */
+    .wf-service-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .wf-service-card {
+      background: var(--wf-surface);
+      border-radius: var(--wf-radius-lg);
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .wf-service-card .wf-eyebrow { margin-bottom: 12px; }
+    .wf-service-card .wf-h3 { margin-bottom: 12px; }
+    .wf-service-card .wf-body { flex: 1; margin-bottom: 24px; }
+
+    /* ── Two-Column FAQ ── */
+    .wf-faq-split {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .wf-faq-split__left {
+      position: sticky;
+      top: 160px;
+    }
+    .wf-faq-split__left .wf-h2 { margin-bottom: 16px; }
+
+    /* ── lib-demo (dark background preview container) ── */
+    .lib-demo {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+    }
+
+    /* ── Bridge Cards ── */
+    .wf-bridge-cards {
+      position: relative;
+    }
+    .wf-bridge-cards__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: var(--wf-dark);
+    }
+    .wf-bridge-cards__bg--bottom {
+      top: 50%;
+      height: 50%;
+      background: var(--wf-white);
+    }
+    .wf-bridge-cards__grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      transform: translateY(0);
+    }
+    .wf-bridge-card {
+      background: var(--wf-white);
+      border-radius: var(--wf-radius-lg);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 40px 32px;
+      text-align: center;
+      transform: translateY(-50px);
+    }
+    .wf-bridge-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-bridge-card .wf-h4 { margin-bottom: 12px; }
+    .wf-bridge-card .wf-body-sm {
+      color: var(--wf-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .wf-bridge-card .wf-btn--secondary {
+      font-size: 13px;
+      padding: 10px 24px;
+    }
+
+    /* ── Hybrid Content + Card Grid ── */
+    .wf-hybrid-section {
+      background: var(--wf-surface);
+      padding: 72px 48px;
+    }
+    .wf-hybrid-section__header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+    .wf-hybrid-section__header .wf-h2 { margin-bottom: 0; }
+    .wf-hybrid-section__header .wf-body {
+      color: var(--wf-muted);
+      line-height: 1.7;
+    }
+    .wf-hybrid-section__cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .wf-hybrid-card {
+      background: var(--wf-white);
+      border-radius: var(--wf-radius-lg);
+      border: 1px solid var(--wf-border);
+      overflow: hidden;
+    }
+    .wf-hybrid-card__img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--wf-placeholder);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-hybrid-card__body {
+      padding: 20px;
+    }
+    .wf-hybrid-card__badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-pill);
+      background: var(--wf-surface-2);
+      color: var(--wf-muted);
+      margin-bottom: 12px;
+    }
+    .wf-hybrid-card__body .wf-h4 { margin-bottom: 8px; }
+    .wf-hybrid-card__body .wf-body-sm {
+      color: var(--wf-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .wf-hybrid-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      text-decoration: none;
+    }
+    .wf-hybrid-card__link:hover { text-decoration: underline; }
+
+    /* ── Stats Card Dark ── */
+    .wf-stats-dark {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 64px 48px;
+      color: var(--wf-white);
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .wf-stats-dark .wf-h2 {
+      color: var(--wf-white);
+      margin-bottom: 48px;
+    }
+    .wf-stats-dark__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .wf-stats-dark__item {
+      text-align: center;
+    }
+    .wf-stats-dark__number {
+      font-family: var(--wf-font);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--wf-white);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .wf-stats-dark__label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 6px 16px;
+      border: 1.5px solid var(--wf-dark-surface);
+      border-radius: var(--wf-radius-pill);
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 16px;
+    }
+    .wf-stats-dark__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ── Review Carousel ── */
+    .wf-review-carousel {
+      padding: 64px 48px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .wf-review-carousel--light {
+      background: var(--wf-surface);
+    }
+    .wf-review-carousel--dark {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+    }
+    .wf-review-carousel__summary {
+      flex-shrink: 0;
+      width: 240px;
+      padding-top: 8px;
+    }
+    .wf-review-carousel__rating-text {
+      font-family: var(--wf-font);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .wf-review-carousel__stars {
+      font-size: 24px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      color: var(--wf-text);
+    }
+    .wf-review-carousel--dark .wf-review-carousel__stars {
+      color: var(--wf-white);
+    }
+    .wf-review-carousel__count {
+      font-size: 13px;
+      color: var(--wf-muted);
+      margin-bottom: 16px;
+    }
+    .wf-review-carousel--dark .wf-review-carousel__count {
+      color: rgba(255,255,255,0.55);
+    }
+    .wf-review-carousel__tp-logo {
+      width: 100px;
+      height: 24px;
+      background: var(--wf-placeholder);
+      border-radius: 4px;
+    }
+    .wf-review-carousel__track-wrapper {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+    }
+    .wf-review-carousel__track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .wf-review-carousel__track::-webkit-scrollbar { display: none; }
+    .wf-review-card {
+      flex-shrink: 0;
+      width: 280px;
+      padding: 24px;
+      border-radius: var(--wf-radius-lg);
+      scroll-snap-align: start;
+    }
+    .wf-review-carousel--light .wf-review-card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+    }
+    .wf-review-carousel--dark .wf-review-card {
+      background: var(--wf-dark-surface);
+    }
+    .wf-review-card__stars {
+      font-size: 16px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: var(--wf-text);
+    }
+    .wf-review-carousel--dark .wf-review-card__stars {
+      color: var(--wf-white);
+    }
+    .wf-review-card__title {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .wf-review-card__excerpt {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--wf-muted);
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .wf-review-carousel--dark .wf-review-card__excerpt {
+      color: rgba(255,255,255,0.55);
+    }
+    .wf-review-card__author {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .wf-review-card__time {
+      font-size: 12px;
+      color: var(--wf-muted);
+      margin-top: 2px;
+    }
+    .wf-review-carousel--dark .wf-review-card__time {
+      color: rgba(255,255,255,0.45);
+    }
+    .wf-review-carousel__nav {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 18px;
+      color: var(--wf-text);
+    }
+    .wf-review-carousel--dark .wf-review-carousel__nav {
+      background: var(--wf-dark-surface);
+      border-color: transparent;
+      color: var(--wf-white);
+    }
   </style>
 </head>
 <body>
@@ -1951,6 +2858,9 @@
   </header>
 
   <div class="lib-layout">
+
+    <!-- ══ FLOATING REOPEN BUTTON ══ -->
+    <button class="lib-sidebar-reopen" id="sidebarReopen" aria-label="Open sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
 
     <!-- ══ SIDEBAR TOGGLE ══ -->
     <button class="lib-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -1990,21 +2900,38 @@
       <a href="#feature-split">Feature Split Layout</a>
       <a href="#filter-pills">Category Filter Pills</a>
       <a href="#addon-cards">Add-on Cards</a>
+      <a href="#two-card-entry">Two-Card Product Entry</a>
+      <a href="#product-cards">Product Card Grid</a>
+      <a href="#audience-cards">Audience/Persona Cards</a>
+      <a href="#product-accordion">Product Accordion</a>
+      <a href="#search-section">Search Section</a>
+      <a href="#service-cards">Side-by-Side Service Cards</a>
       <div class="lib-sidebar__group">Social Proof</div>
       <a href="#testimonials">Testimonial Cards</a>
       <a href="#testimonial-big">Large Testimonial</a>
       <a href="#logo-bar">Logo Bar</a>
+      <a href="#logo-bar-dark">Press Logo Bar (Dark)</a>
+      <a href="#video-testimonial">Video Testimonial</a>
+      <a href="#testimonial-split">Two-Column Testimonial</a>
+      <a href="#stats-dark">Stats Card (Dark)</a>
+      <a href="#review-carousel">Review Carousel</a>
       <div class="lib-sidebar__group">Actions</div>
       <a href="#cta-banner">CTA Banner</a>
       <a href="#faq">FAQ Accordion</a>
+      <a href="#faq-split">Two-Column FAQ</a>
       <a href="#support-cards">Support Cards</a>
       <div class="lib-sidebar__group">Performance</div>
       <a href="#perf-table">Comparison Table</a>
       <a href="#dc-map">Datacenter Map</a>
       <a href="#speed-bars">Speed Improvement</a>
       <a href="#reliability">Reliability Grid</a>
+      <a href="#benchmark-chart">Benchmark Chart</a>
       <div class="lib-sidebar__group">Layout</div>
       <a href="#gallery">Gallery Grid</a>
+      <a href="#product-showcase">Product Showcase</a>
+      <a href="#stats-content">Stats + Content</a>
+      <a href="#bridge-cards">Bridge Cards</a>
+      <a href="#hybrid-section">Hybrid Content + Cards</a>
       <a href="#footer">Footer</a>
     </nav>
 
@@ -3951,6 +4878,796 @@
       </section>
 
       <!-- ═══════════════════════ -->
+      <!-- TWO-CARD PRODUCT ENTRY  -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="two-card-entry">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Two-Card Product Entry</h2>
+        <p class="lib-section__desc">Side-by-side entry points: one dark (pricing), one light (domain search). Used as a secondary CTA zone below the fold.</p>
+        <div class="preview preview--padded">
+          <div class="wf-two-card-entry">
+            <div class="wf-two-card-entry__card wf-two-card-entry__card--dark">
+              <div class="wf-two-card-entry__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.6"><path d="M12 2v20m5-17H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H7"/></svg>
+              </div>
+              <div class="wf-h3 mb-8">Plans and Pricing</div>
+              <div class="wf-body-sm mb-16">Explore packages full of built-in tools, services, and bonus features.</div>
+              <div class="wf-two-card-entry__price">From $1.99/month</div>
+              <a href="#" class="wf-two-card-entry__link">View All Plans →</a>
+            </div>
+            <div class="wf-two-card-entry__card wf-two-card-entry__card--light">
+              <div class="wf-two-card-entry__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </div>
+              <div class="wf-h3 mb-8">Find a Domain</div>
+              <div class="wf-body-sm mb-16">A first impression lasts forever. Make yours count.</div>
+              <div class="wf-input-group" style="max-width:100%;">
+                <input class="wf-input" type="text" placeholder="yoursite.com" />
+                <button class="wf-btn wf-btn--primary">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- PRODUCT CARD GRID       -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="product-cards">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Product Card Grid (Equal-Weight)</h2>
+        <p class="lib-section__desc">3x2 grid of minimal navigation cards linking to product pages. All cards are identical size with hover feedback.</p>
+        <div class="preview preview--padded">
+          <div class="wf-product-card-grid">
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">WordPress Hosting</div>
+              <div class="wf-body-sm">Managed hosting optimized for WordPress sites.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">Remixer Website Builder</div>
+              <div class="wf-body-sm">AI-powered site builder — just describe what you want.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">Online Store</div>
+              <div class="wf-body-sm">WooCommerce hosting with everything you need to sell.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">Web Hosting</div>
+              <div class="wf-body-sm">Shared hosting with unlimited bandwidth and storage.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">Email Hosting</div>
+              <div class="wf-body-sm">Professional email that matches your domain.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+            <div class="wf-product-card">
+              <div class="wf-product-card__icon"></div>
+              <div class="wf-h4">AI Tools</div>
+              <div class="wf-body-sm">AI content, design, and SEO tools built into your dashboard.</div>
+              <a href="#" class="wf-product-card__link">Learn More →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- AUDIENCE/PERSONA CARDS  -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="audience-cards">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Audience/Persona Cards</h2>
+        <p class="lib-section__desc">Three large cards targeting user types with image placeholders, audience labels, and CTAs.</p>
+        <div class="preview preview--padded">
+          <div class="wf-section__header mb-48">
+            <div class="wf-eyebrow mb-12">Built For You</div>
+            <div class="wf-h2">Who Uses DreamHost?</div>
+          </div>
+          <div class="wf-audience-grid">
+            <div class="wf-audience-card">
+              <div class="wf-audience-card__img"></div>
+              <div class="wf-audience-card__body">
+                <div class="wf-h4">Creatives &amp; Portfolios</div>
+                <div class="wf-body-sm">Photographers, designers, and artists who need a beautiful online presence without the complexity.</div>
+                <a href="#" class="wf-audience-card__link">Learn More →</a>
+              </div>
+            </div>
+            <div class="wf-audience-card">
+              <div class="wf-audience-card__img"></div>
+              <div class="wf-audience-card__body">
+                <div class="wf-h4">Side Hustles &amp; Startups</div>
+                <div class="wf-body-sm">Entrepreneurs launching their first product, blog, or service with an affordable and scalable platform.</div>
+                <a href="#" class="wf-audience-card__link">Learn More →</a>
+              </div>
+            </div>
+            <div class="wf-audience-card">
+              <div class="wf-audience-card__img"></div>
+              <div class="wf-audience-card__body">
+                <div class="wf-h4">Small Businesses</div>
+                <div class="wf-body-sm">Local shops, agencies, and service providers who need reliable hosting, email, and a domain that matches their brand.</div>
+                <a href="#" class="wf-audience-card__link">Learn More →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- PRODUCT ACCORDION       -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="product-accordion">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Product Accordion</h2>
+        <p class="lib-section__desc">Two-column layout on dark background. Left: heading + description. Right: expandable accordion list with icon, name, and details.</p>
+        <div class="lib-demo" style="padding: 40px;">
+          <div class="wf-product-accordion">
+            <div>
+              <div class="wf-h2">Solutions That Scale</div>
+              <div class="wf-body">From managed WordPress to cloud infrastructure, we have the right plan for every stage of your growth.</div>
+            </div>
+            <div class="wf-product-accordion__list">
+              <div class="wf-product-accordion__item wf-product-accordion__item--open">
+                <button class="wf-product-accordion__trigger">
+                  <div class="wf-product-accordion__trigger-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <span class="wf-product-accordion__trigger-name">DreamPress Pro</span>
+                  <span class="wf-product-accordion__chevron">+</span>
+                </button>
+                <div class="wf-product-accordion__body">
+                  Fully managed WordPress hosting with built-in caching, daily backups, and staging environments. Optimized for speed and reliability.
+                  <a href="#">Explore DreamPress →</a>
+                </div>
+              </div>
+              <div class="wf-product-accordion__item">
+                <button class="wf-product-accordion__trigger">
+                  <div class="wf-product-accordion__trigger-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.5"><path d="M2 20h20M5 20V8l7-5 7 5v12"/></svg>
+                  </div>
+                  <span class="wf-product-accordion__trigger-name">Cloud Hosting</span>
+                  <span class="wf-product-accordion__chevron">+</span>
+                </button>
+                <div class="wf-product-accordion__body">
+                  Scalable cloud servers with SSD storage, root access, and hourly billing. Perfect for developers and growing applications.
+                  <a href="#">View Cloud Plans →</a>
+                </div>
+              </div>
+              <div class="wf-product-accordion__item">
+                <button class="wf-product-accordion__trigger">
+                  <div class="wf-product-accordion__trigger-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4m4 0h4"/></svg>
+                  </div>
+                  <span class="wf-product-accordion__trigger-name">Scalable Infrastructure</span>
+                  <span class="wf-product-accordion__chevron">+</span>
+                </button>
+                <div class="wf-product-accordion__body">
+                  Dedicated servers and VPS hosting for high-traffic sites that need guaranteed resources and maximum performance.
+                  <a href="#">See Infrastructure Options →</a>
+                </div>
+              </div>
+              <div class="wf-product-accordion__item">
+                <button class="wf-product-accordion__trigger">
+                  <div class="wf-product-accordion__trigger-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                  </div>
+                  <span class="wf-product-accordion__trigger-name">Agency Solutions</span>
+                  <span class="wf-product-accordion__chevron">+</span>
+                </button>
+                <div class="wf-product-accordion__body">
+                  White-label hosting, bulk management, and priority support designed for web agencies managing multiple client sites.
+                  <a href="#">Learn About Agency Plans →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- SEARCH SECTION          -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="search-section">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Centered Section with Search</h2>
+        <p class="lib-section__desc">Light alt background with centered heading, search bar, and trust hints. Ideal for domain search CTAs.</p>
+        <div class="preview preview--padded">
+          <div class="wf-search-section">
+            <div class="wf-eyebrow">Domains</div>
+            <div class="wf-h2">Find Your Perfect Domain</div>
+            <div class="wf-body">Your domain is your first impression. Claim the perfect one before someone else does.</div>
+            <div class="wf-search-section__input-group">
+              <input type="text" placeholder="Search for a domain name..." />
+              <button>Search</button>
+            </div>
+            <div class="wf-search-section__hints">.com .net .org .io and 400+ TLDs · Free with annual plans · Free transfers</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- SIDE-BY-SIDE SERVICE    -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="service-cards">
+        <div class="lib-section__label">Content</div>
+        <h2 class="lib-section__title">Side-by-Side Service Cards</h2>
+        <p class="lib-section__desc">Two cards on light background with eyebrow, heading, description, and CTA. Buttons align at bottom regardless of content length.</p>
+        <div class="preview preview--padded">
+          <div class="wf-service-cards">
+            <div class="wf-service-card">
+              <div class="wf-eyebrow">Email</div>
+              <div class="wf-h3">Professional Email</div>
+              <div class="wf-body">Email that matches your domain. Looks professional, works everywhere, and includes calendar, contacts, and storage.</div>
+              <button class="wf-btn wf-btn--primary wf-btn--sm">Get Email Hosting →</button>
+            </div>
+            <div class="wf-service-card">
+              <div class="wf-eyebrow">Expert Help</div>
+              <div class="wf-h3">Pro Services</div>
+              <div class="wf-body">Let our experts build it for you. Custom design, development, SEO setup, and migrations handled by our team.</div>
+              <button class="wf-btn wf-btn--primary wf-btn--sm">Explore Pro Services →</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- PRESS LOGO BAR (DARK)   -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="logo-bar-dark">
+        <div class="lib-section__label">Social Proof</div>
+        <h2 class="lib-section__title">Press/Award Logo Bar (Dark)</h2>
+        <p class="lib-section__desc">Dark background section with centered row of named placeholder badges for press mentions and awards.</p>
+        <div class="lib-demo" style="padding: 40px;">
+          <div class="wf-logo-bar-dark">
+            <div class="wf-logo-bar-dark__eyebrow">As Featured In</div>
+            <div class="wf-logo-bar-dark__row">
+              <div class="wf-logo-bar-dark__badge">TechRadar</div>
+              <div class="wf-logo-bar-dark__badge">PCMag</div>
+              <div class="wf-logo-bar-dark__badge">WIRED</div>
+              <div class="wf-logo-bar-dark__badge">CNET</div>
+              <div class="wf-logo-bar-dark__badge">Forbes</div>
+              <div class="wf-logo-bar-dark__badge">WPBeginner</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- VIDEO TESTIMONIAL       -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="video-testimonial">
+        <div class="lib-section__label">Social Proof</div>
+        <h2 class="lib-section__title">Video Testimonial</h2>
+        <p class="lib-section__desc">Centered quote + author with a 16:9 video placeholder and a bold trust stat below.</p>
+        <div class="preview preview--padded">
+          <div class="wf-video-testimonial">
+            <div class="wf-video-testimonial__quote">"Switching to DreamHost was the best decision we made. Our site is faster, our support tickets are answered in minutes, and we're saving $200 a month."</div>
+            <div class="wf-video-testimonial__author">
+              <div class="wf-avatar"></div>
+              <div>
+                <div class="wf-video-testimonial__name">Sarah Chen</div>
+                <div class="wf-video-testimonial__role">Founder, Bright Studio</div>
+              </div>
+            </div>
+            <div class="wf-video-placeholder">
+              <div class="wf-video-placeholder__play">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--wf-text)" stroke="none"><polygon points="8,5 20,12 8,19"/></svg>
+              </div>
+            </div>
+            <div class="wf-video-testimonial__stat">Trusted by 1.5 Million Website Owners</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- TWO-COLUMN TESTIMONIAL  -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="testimonial-split">
+        <div class="lib-section__label">Social Proof</div>
+        <h2 class="lib-section__title">Two-Column Testimonial Layout</h2>
+        <p class="lib-section__desc">Featured quote on left with Trustpilot stars, 2x2 grid of small testimonial cards on right. All on dark background.</p>
+        <div class="lib-demo" style="padding: 40px; background: var(--wf-dark); border-radius: var(--wf-radius-lg);">
+          <div class="wf-testimonial-split">
+            <div class="wf-testimonial-split__featured">
+              <div class="wf-testimonial-split__featured-quote">"We moved 47 client sites to DreamHost last year. Zero downtime during migration, and our clients' PageSpeed scores went up across the board."</div>
+              <div class="wf-testimonial-split__featured-author">
+                <div class="wf-avatar" style="background:var(--wf-dark-surface);"></div>
+                <div>
+                  <div class="wf-testimonial-split__featured-name">Marcus Rivera</div>
+                  <div class="wf-testimonial-split__featured-role">Director, Pixel & Code Agency</div>
+                </div>
+              </div>
+              <div class="wf-trustpilot" style="justify-content:flex-start;">
+                <div class="wf-trustpilot__stars">
+                  <div class="wf-trustpilot__star"></div>
+                  <div class="wf-trustpilot__star"></div>
+                  <div class="wf-trustpilot__star"></div>
+                  <div class="wf-trustpilot__star"></div>
+                  <div class="wf-trustpilot__star"></div>
+                </div>
+                <span style="color:rgba(255,255,255,0.5); font-size:13px;">4.7 on Trustpilot · 64,048 reviews</span>
+              </div>
+            </div>
+            <div class="wf-testimonial-split__grid">
+              <div class="wf-testimonial-split__card">
+                <div class="wf-stars mb-8"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
+                <div class="wf-testimonial-split__card-quote">"Support responded in under 5 minutes. Unheard of at this price point."</div>
+                <div class="wf-testimonial-split__card-name">Alex T.</div>
+                <div class="wf-testimonial-split__card-role">Freelance Developer</div>
+              </div>
+              <div class="wf-testimonial-split__card">
+                <div class="wf-stars mb-8"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
+                <div class="wf-testimonial-split__card-quote">"Remixer built my portfolio in 10 minutes. I'm not exaggerating."</div>
+                <div class="wf-testimonial-split__card-name">Priya M.</div>
+                <div class="wf-testimonial-split__card-role">Photographer</div>
+              </div>
+              <div class="wf-testimonial-split__card">
+                <div class="wf-stars mb-8"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
+                <div class="wf-testimonial-split__card-quote">"Been with DreamHost 12 years. Never had a reason to leave."</div>
+                <div class="wf-testimonial-split__card-name">David K.</div>
+                <div class="wf-testimonial-split__card-role">Small Business Owner</div>
+              </div>
+              <div class="wf-testimonial-split__card">
+                <div class="wf-stars mb-8"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
+                <div class="wf-testimonial-split__card-quote">"Migrated from GoDaddy — night and day difference in speed."</div>
+                <div class="wf-testimonial-split__card-name">Lisa W.</div>
+                <div class="wf-testimonial-split__card-role">eCommerce Store Owner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- TWO-COLUMN FAQ          -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="faq-split">
+        <div class="lib-section__label">Actions</div>
+        <h2 class="lib-section__title">Two-Column FAQ</h2>
+        <p class="lib-section__desc">Heading + description on left (sticky), accordion on right. Reuses existing FAQ toggle pattern.</p>
+        <div class="preview preview--padded">
+          <div class="wf-faq-split">
+            <div class="wf-faq-split__left">
+              <div class="wf-h2">Got Questions?</div>
+              <div class="wf-body">Everything you need to know about hosting, domains, and getting your site online with DreamHost.</div>
+            </div>
+            <div class="wf-faq" style="max-width:none;">
+              <div class="wf-faq-item wf-faq-item--open">
+                <button class="wf-faq-trigger">
+                  <span>What types of hosting does DreamHost offer?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">We offer Shared Hosting, Managed WordPress (DreamPress), VPS, Dedicated Servers, and Cloud hosting. Each plan is designed for different needs — from personal blogs to high-traffic applications.</div>
+              </div>
+              <div class="wf-faq-item">
+                <button class="wf-faq-trigger">
+                  <span>Can I use WordPress with DreamHost?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">Absolutely. WordPress comes pre-installed on all hosting plans, and our DreamPress plans offer fully managed WordPress hosting with built-in caching and staging environments.</div>
+              </div>
+              <div class="wf-faq-item">
+                <button class="wf-faq-trigger">
+                  <span>What is Remixer and how does it work?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">Remixer is our AI website builder. Just describe what you want in plain language, and it builds a custom site for you — design, copy, images, and all. No coding or templates required.</div>
+              </div>
+              <div class="wf-faq-item">
+                <button class="wf-faq-trigger">
+                  <span>Do hosting plans include a free domain?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">Yes! All annual hosting plans include a free domain registration for the first year, plus free WHOIS privacy to protect your personal information.</div>
+              </div>
+              <div class="wf-faq-item">
+                <button class="wf-faq-trigger">
+                  <span>What kind of support do you offer?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">We provide 24/7 support via live chat and email. Our team is made up of in-house experts — not outsourced call centers. We also have an extensive knowledge base with hundreds of guides.</div>
+              </div>
+              <div class="wf-faq-item">
+                <button class="wf-faq-trigger">
+                  <span>How does DreamHost pricing work?</span>
+                  <span class="wf-faq-trigger__icon">+</span>
+                </button>
+                <div class="wf-faq-body">Plans start at $1.99/month when billed annually. We offer transparent pricing with no hidden fees. All plans come with a 30-day money-back guarantee so you can try risk-free.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- BENCHMARK CHART         -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="benchmark-chart">
+        <div class="lib-section__label">Performance</div>
+        <h2 class="lib-section__title">Competitor Benchmark Chart</h2>
+        <p class="lib-section__desc">Horizontal bar chart comparing DreamHost vs 3 competitors on response time. DreamHost bar is visually emphasized.</p>
+        <div class="lib-demo" style="padding: 40px;">
+          <div class="wf-benchmark">
+            <div class="wf-h3 mb-8" style="color:var(--wf-white);">Average Response Time (TTFB)</div>
+            <div class="wf-body-sm mb-32" style="color:rgba(255,255,255,0.5);">Lower is better. Measured via K6 load testing, Aug 2025.</div>
+            <div>
+              <div class="wf-benchmark__row wf-benchmark__row--hero">
+                <div class="wf-benchmark__name">DreamHost</div>
+                <div class="wf-benchmark__bar" style="width: 12%;"></div>
+                <div class="wf-benchmark__value">48ms</div>
+              </div>
+              <div class="wf-benchmark__row">
+                <div class="wf-benchmark__name">WPEngine</div>
+                <div class="wf-benchmark__bar" style="width: 60%;"></div>
+                <div class="wf-benchmark__value">247ms</div>
+              </div>
+              <div class="wf-benchmark__row">
+                <div class="wf-benchmark__name">SiteGround</div>
+                <div class="wf-benchmark__bar" style="width: 77%;"></div>
+                <div class="wf-benchmark__value">318ms</div>
+              </div>
+              <div class="wf-benchmark__row">
+                <div class="wf-benchmark__name">Kinsta</div>
+                <div class="wf-benchmark__bar" style="width: 100%;"></div>
+                <div class="wf-benchmark__value">412ms</div>
+              </div>
+            </div>
+            <div class="wf-benchmark__note">Methodology: K6 load testing with 500 concurrent virtual users over 30 minutes. ReviewSignals independent benchmark, Aug 2025.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- STACKED PRODUCT SHOWCASE -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="product-showcase">
+        <div class="lib-section__label">Layout</div>
+        <h2 class="lib-section__title">Stacked Product Showcase</h2>
+        <p class="lib-section__desc">Three stacked 2-column blocks with alternating text/image positions. Each block showcases a product with eyebrow, heading, body, CTA, and image placeholder.</p>
+        <div class="preview preview--padded">
+          <div>
+            <div class="wf-showcase-block">
+              <div class="wf-showcase-block__text">
+                <div class="wf-eyebrow">AI Website Builder</div>
+                <div class="wf-h2">Remixer AI</div>
+                <div class="wf-body">Describe your dream site in plain language. Remixer builds it with custom design, copy, and images — no templates, no coding, no drag-and-drop.</div>
+                <button class="wf-btn wf-btn--primary">Try Remixer Free →</button>
+                <div class="wf-caption">Included with all hosting plans</div>
+              </div>
+              <div class="wf-showcase-block__media">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.25"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+            </div>
+            <div class="wf-showcase-block wf-showcase-block--reverse">
+              <div class="wf-showcase-block__text">
+                <div class="wf-eyebrow">Managed WordPress</div>
+                <div class="wf-h2">WordPress &amp; DreamPress</div>
+                <div class="wf-body">Pre-installed WordPress with built-in caching, daily backups, staging environments, and automatic updates. Optimized for speed at every level.</div>
+                <button class="wf-btn wf-btn--primary">See DreamPress Plans →</button>
+                <div class="wf-caption">Starting at $2.95/month</div>
+              </div>
+              <div class="wf-showcase-block__media">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.25"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+            </div>
+            <div class="wf-showcase-block" style="border-bottom:none;">
+              <div class="wf-showcase-block__text">
+                <div class="wf-eyebrow">Cloud &amp; Dedicated</div>
+                <div class="wf-h2">VPS &amp; Cloud</div>
+                <div class="wf-body">Scalable infrastructure with SSD storage, root access, and guaranteed resources. From developer projects to enterprise-grade applications.</div>
+                <button class="wf-btn wf-btn--primary">Explore VPS Plans →</button>
+                <div class="wf-caption">Starting at $10/month</div>
+              </div>
+              <div class="wf-showcase-block__media">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.25"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- STATS + CONTENT         -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="stats-content">
+        <div class="lib-section__label">Layout</div>
+        <h2 class="lib-section__title">Stats + Content Section</h2>
+        <p class="lib-section__desc">Dark card with stats row on top, then 2-column content below: heading + CTA on left, checklist on right.</p>
+        <div class="lib-demo" style="padding: 40px;">
+          <div class="wf-stats-content">
+            <div class="wf-stats-content__stats">
+              <div>
+                <div class="wf-stats-content__stat-num">1.5M+</div>
+                <div class="wf-stats-content__stat-label">Websites</div>
+              </div>
+              <div>
+                <div class="wf-stats-content__stat-num">27+</div>
+                <div class="wf-stats-content__stat-label">Years</div>
+              </div>
+              <div>
+                <div class="wf-stats-content__stat-num">400K+</div>
+                <div class="wf-stats-content__stat-label">Domains</div>
+              </div>
+              <div>
+                <div class="wf-stats-content__stat-num">100%</div>
+                <div class="wf-stats-content__stat-label">Uptime SLA</div>
+              </div>
+            </div>
+            <div class="wf-stats-content__body">
+              <div>
+                <div class="wf-h2">Why DreamHost?</div>
+                <div class="wf-body">We've been independently hosting websites since 1997. No private equity. No corner-cutting. Just great hosting backed by people who care.</div>
+                <button class="wf-btn wf-btn--primary" style="background:var(--wf-white);color:var(--wf-dark);">Get Started →</button>
+              </div>
+              <ul class="wf-stats-content__checklist">
+                <li><span class="wf-stats-content__check">✓</span> Free domain with annual plans</li>
+                <li><span class="wf-stats-content__check">✓</span> Free SSL certificates on every site</li>
+                <li><span class="wf-stats-content__check">✓</span> Unlimited bandwidth and storage</li>
+                <li><span class="wf-stats-content__check">✓</span> 24/7 in-house expert support</li>
+                <li><span class="wf-stats-content__check">✓</span> 30-day money-back guarantee</li>
+                <li><span class="wf-stats-content__check">✓</span> 100% carbon neutral hosting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- BRIDGE CARDS             -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="bridge-cards">
+        <div class="lib-section__label">Layout</div>
+        <h2 class="lib-section__title">Bridge Cards</h2>
+        <p class="lib-section__desc">Three cards that visually bridge a dark section and a light section, overlapping the boundary. Useful for feature highlights or value props between hero and content.</p>
+
+        <div class="component-group">
+          <div class="component-label">Default (Dark-to-Light Bridge)</div>
+          <div class="lib-demo" style="padding:0;">
+            <div class="wf-bridge-cards">
+              <div class="wf-bridge-cards__bg"></div>
+              <div class="wf-bridge-cards__bg wf-bridge-cards__bg--bottom"></div>
+              <div class="wf-bridge-cards__grid">
+                <div class="wf-bridge-card">
+                  <div class="wf-bridge-card__icon"></div>
+                  <div class="wf-h4">Build Fast</div>
+                  <div class="wf-body-sm">Go from idea to live site in minutes with AI-powered tools and one-click installs.</div>
+                  <button class="wf-btn wf-btn--secondary wf-btn--sm">Learn More →</button>
+                </div>
+                <div class="wf-bridge-card">
+                  <div class="wf-bridge-card__icon"></div>
+                  <div class="wf-h4">Stay Secure</div>
+                  <div class="wf-body-sm">Free SSL, automated backups, and built-in malware protection on every plan.</div>
+                  <button class="wf-btn wf-btn--secondary wf-btn--sm">Learn More →</button>
+                </div>
+                <div class="wf-bridge-card">
+                  <div class="wf-bridge-card__icon"></div>
+                  <div class="wf-h4">Grow Easily</div>
+                  <div class="wf-body-sm">Unlimited bandwidth, scalable resources, and expert support when you need it.</div>
+                  <button class="wf-btn wf-btn--secondary wf-btn--sm">Learn More →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- HYBRID CONTENT + CARDS  -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="hybrid-section">
+        <div class="lib-section__label">Layout</div>
+        <h2 class="lib-section__title">Hybrid Content + Card Grid</h2>
+        <p class="lib-section__desc">Two-column header (heading left, description right) above a flexible card grid. Works with 2, 3, or 4 cards.</p>
+
+        <div class="component-group">
+          <div class="component-label">4-Card Variant</div>
+          <div class="preview" style="padding:0;">
+            <div class="wf-hybrid-section">
+              <div class="wf-hybrid-section__header">
+                <div>
+                  <div class="wf-h2">Everything you need to succeed online</div>
+                </div>
+                <div>
+                  <div class="wf-body">From website building to email hosting, DreamHost gives you the tools and support to launch, manage, and grow your online presence — all in one place.</div>
+                </div>
+              </div>
+              <div class="wf-hybrid-section__cards">
+                <div class="wf-hybrid-card">
+                  <div class="wf-hybrid-card__img">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+                  </div>
+                  <div class="wf-hybrid-card__body">
+                    <div class="wf-hybrid-card__badge">Website</div>
+                    <div class="wf-h4">Website Builder</div>
+                    <div class="wf-body-sm">Drag-and-drop your dream site with AI-powered design suggestions.</div>
+                    <a href="#" class="wf-hybrid-card__link">Explore Builder →</a>
+                  </div>
+                </div>
+                <div class="wf-hybrid-card">
+                  <div class="wf-hybrid-card__img">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  </div>
+                  <div class="wf-hybrid-card__body">
+                    <div class="wf-hybrid-card__badge">Hosting</div>
+                    <div class="wf-h4">Shared Hosting</div>
+                    <div class="wf-body-sm">Fast, reliable hosting with unlimited traffic and a free domain included.</div>
+                    <a href="#" class="wf-hybrid-card__link">View Plans →</a>
+                  </div>
+                </div>
+                <div class="wf-hybrid-card">
+                  <div class="wf-hybrid-card__img">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  </div>
+                  <div class="wf-hybrid-card__body">
+                    <div class="wf-hybrid-card__badge">Email</div>
+                    <div class="wf-h4">Professional Email</div>
+                    <div class="wf-body-sm">Custom email addresses that match your domain, powered by Google or our own platform.</div>
+                    <a href="#" class="wf-hybrid-card__link">Get Email →</a>
+                  </div>
+                </div>
+                <div class="wf-hybrid-card">
+                  <div class="wf-hybrid-card__img">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  </div>
+                  <div class="wf-hybrid-card__body">
+                    <div class="wf-hybrid-card__badge">Domain</div>
+                    <div class="wf-h4">Domain Names</div>
+                    <div class="wf-body-sm">Search, register, and manage your perfect domain with free WHOIS privacy.</div>
+                    <a href="#" class="wf-hybrid-card__link">Find a Domain →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- STATS CARD DARK         -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="stats-dark">
+        <div class="lib-section__label">Social Proof</div>
+        <h2 class="lib-section__title">Stats Card (Dark)</h2>
+        <p class="lib-section__desc">Dark rounded card with centered heading and 3-column stats, each featuring a large number, pill label, and description. "Numbers Don't Lie" pattern.</p>
+
+        <div class="component-group">
+          <div class="component-label">Default</div>
+          <div class="lib-demo" style="padding: 40px;">
+            <div class="wf-stats-dark">
+              <div class="wf-h2">The numbers don't lie</div>
+              <div class="wf-stats-dark__grid">
+                <div class="wf-stats-dark__item">
+                  <div class="wf-stats-dark__number">1.5M+</div>
+                  <div class="wf-stats-dark__label">Websites Hosted</div>
+                  <div class="wf-stats-dark__desc">Trusted by individuals, small businesses, and enterprises around the world since 1997.</div>
+                </div>
+                <div class="wf-stats-dark__item">
+                  <div class="wf-stats-dark__number">100%</div>
+                  <div class="wf-stats-dark__label">Uptime Commitment</div>
+                  <div class="wf-stats-dark__desc">Our infrastructure is built for reliability, with redundant systems across three global datacenters.</div>
+                </div>
+                <div class="wf-stats-dark__item">
+                  <div class="wf-stats-dark__number">400K+</div>
+                  <div class="wf-stats-dark__label">Happy Customers</div>
+                  <div class="wf-stats-dark__desc">Employee-owned and independently operated. No private equity. No corner-cutting.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
+      <!-- REVIEW CAROUSEL         -->
+      <!-- ═══════════════════════ -->
+      <section class="lib-section" id="review-carousel">
+        <div class="lib-section__label">Social Proof</div>
+        <h2 class="lib-section__title">Review Carousel</h2>
+        <p class="lib-section__desc">Trustpilot-style review carousel with summary block on the left and horizontally scrollable review cards on the right. Available in light and dark variants.</p>
+
+        <div class="component-group">
+          <div class="component-label">Light Variant</div>
+          <div class="preview" style="padding:0;">
+            <div class="wf-review-carousel wf-review-carousel--light">
+              <div class="wf-review-carousel__summary">
+                <div class="wf-review-carousel__rating-text">Excellent</div>
+                <div class="wf-review-carousel__stars">★★★★★</div>
+                <div class="wf-review-carousel__count">Based on 3,847 reviews</div>
+                <div class="wf-review-carousel__tp-logo"></div>
+              </div>
+              <div class="wf-review-carousel__track-wrapper">
+                <div class="wf-review-carousel__track">
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Best hosting I've ever used</div>
+                    <div class="wf-review-card__excerpt">Switched from GoDaddy and the difference is night and day. Support actually knows what they're talking about and my site loads twice as fast.</div>
+                    <div class="wf-review-card__author">Sarah M.</div>
+                    <div class="wf-review-card__time">2 days ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">27 years for a reason</div>
+                    <div class="wf-review-card__excerpt">Been with DreamHost for 8 years now. They've never raised my price without warning and the uptime has been essentially perfect.</div>
+                    <div class="wf-review-card__author">James K.</div>
+                    <div class="wf-review-card__time">5 days ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Finally, hosting that just works</div>
+                    <div class="wf-review-card__excerpt">Set up WordPress in 5 minutes, SSL was automatic, and I haven't had to think about hosting since. That's exactly what I want.</div>
+                    <div class="wf-review-card__author">Priya R.</div>
+                    <div class="wf-review-card__time">1 week ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Support team is incredible</div>
+                    <div class="wf-review-card__excerpt">Had a DNS issue at midnight and their team walked me through it in chat. Resolved in 15 minutes. Can't say enough good things.</div>
+                    <div class="wf-review-card__author">Marcus T.</div>
+                    <div class="wf-review-card__time">3 days ago</div>
+                  </div>
+                </div>
+                <div class="wf-review-carousel__nav">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-label">Dark Variant</div>
+          <div class="lib-demo" style="padding:0;">
+            <div class="wf-review-carousel wf-review-carousel--dark">
+              <div class="wf-review-carousel__summary">
+                <div class="wf-review-carousel__rating-text">Excellent</div>
+                <div class="wf-review-carousel__stars">★★★★★</div>
+                <div class="wf-review-carousel__count">Based on 3,847 reviews</div>
+                <div class="wf-review-carousel__tp-logo"></div>
+              </div>
+              <div class="wf-review-carousel__track-wrapper">
+                <div class="wf-review-carousel__track">
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Best hosting I've ever used</div>
+                    <div class="wf-review-card__excerpt">Switched from GoDaddy and the difference is night and day. Support actually knows what they're talking about and my site loads twice as fast.</div>
+                    <div class="wf-review-card__author">Sarah M.</div>
+                    <div class="wf-review-card__time">2 days ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">27 years for a reason</div>
+                    <div class="wf-review-card__excerpt">Been with DreamHost for 8 years now. They've never raised my price without warning and the uptime has been essentially perfect.</div>
+                    <div class="wf-review-card__author">James K.</div>
+                    <div class="wf-review-card__time">5 days ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Finally, hosting that just works</div>
+                    <div class="wf-review-card__excerpt">Set up WordPress in 5 minutes, SSL was automatic, and I haven't had to think about hosting since. That's exactly what I want.</div>
+                    <div class="wf-review-card__author">Priya R.</div>
+                    <div class="wf-review-card__time">1 week ago</div>
+                  </div>
+                  <div class="wf-review-card">
+                    <div class="wf-review-card__stars">★★★★★</div>
+                    <div class="wf-review-card__title">Support team is incredible</div>
+                    <div class="wf-review-card__excerpt">Had a DNS issue at midnight and their team walked me through it in chat. Resolved in 15 minutes. Can't say enough good things.</div>
+                    <div class="wf-review-card__author">Marcus T.</div>
+                    <div class="wf-review-card__time">3 days ago</div>
+                  </div>
+                </div>
+                <div class="wf-review-carousel__nav">→</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════ -->
       <!-- FOOTER                  -->
       <!-- ═══════════════════════ -->
       <section class="lib-section" id="footer">
@@ -4055,15 +5772,33 @@
         item.classList.toggle('wf-faq-item--open');
       });
     });
+
+    // Product accordion
+    document.querySelectorAll('.wf-product-accordion__trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.wf-product-accordion__item');
+        item.classList.toggle('wf-product-accordion__item--open');
+      });
+    });
   </script>
   <script>
     // Sidebar collapse toggle
     const sidebar = document.getElementById('libSidebar');
     const toggle = document.getElementById('sidebarToggle');
-    toggle.addEventListener('click', () => {
-      const collapsed = sidebar.classList.toggle('lib-sidebar--collapsed');
-      toggle.classList.toggle('lib-sidebar-toggle--collapsed', collapsed);
-    });
+    const reopen = document.getElementById('sidebarReopen');
+
+    function collapseSidebar() {
+      sidebar.classList.add('lib-sidebar--collapsed');
+      toggle.classList.add('lib-sidebar-toggle--collapsed');
+      reopen.classList.add('lib-sidebar-reopen--visible');
+    }
+    function expandSidebar() {
+      sidebar.classList.remove('lib-sidebar--collapsed');
+      toggle.classList.remove('lib-sidebar-toggle--collapsed');
+      reopen.classList.remove('lib-sidebar-reopen--visible');
+    }
+    toggle.addEventListener('click', collapseSidebar);
+    reopen.addEventListener('click', expandSidebar);
 
     // Scroll-spy: highlight active sidebar link
     const sections = document.querySelectorAll('.lib-section[id]');
@@ -4098,13 +5833,6 @@
       sidebarLinks.forEach(link => link.classList.remove('active'));
       if (currentId && linkMap[currentId]) {
         linkMap[currentId].classList.add('active');
-        // Scroll sidebar to keep active link visible
-        const activeLink = linkMap[currentId];
-        const sidebarRect = sidebar.getBoundingClientRect();
-        const linkRect = activeLink.getBoundingClientRect();
-        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
-          activeLink.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        }
       }
       ticking = false;
     }

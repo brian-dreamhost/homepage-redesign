@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concept E: SiteGround-Style Premium — DreamHost Homepage Redesign</title>
+  <style>
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+
+    :root {
+      --wf-font: 'Gilroy', system-ui, sans-serif;
+      --wf-white: #FFFFFF;
+      --wf-page: #FAFAFA;
+      --wf-surface: #F2F2F4;
+      --wf-surface-2: #E8E8EC;
+      --wf-placeholder: #D4D4DA;
+      --wf-placeholder-dark: #B8B8C0;
+      --wf-border: #DCDCE0;
+      --wf-text: #1C1C22;
+      --wf-text-body: #52525E;
+      --wf-text-muted: #8C8C98;
+      --wf-text-faint: #ABABB4;
+      --wf-dark: #0A0A0C;
+      --wf-dark-surface: #18181C;
+      --wf-radius: 10px;
+      --wf-radius-sm: 6px;
+      --wf-radius-lg: 16px;
+      --wf-radius-pill: 999px;
+      --wf-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      --wf-shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --wf-max-w: 1600px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--wf-text-body);
+      background: var(--wf-white);
+    }
+
+    /* ── Placeholder Shapes ── */
+    .wf-img {
+      background: var(--wf-placeholder);
+      border-radius: var(--wf-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-img svg { opacity: 0.35; }
+    .wf-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--wf-placeholder);
+      flex-shrink: 0;
+    }
+    .wf-avatar--sm { width: 32px; height: 32px; }
+    .wf-avatar--lg { width: 56px; height: 56px; }
+    .wf-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--wf-radius-sm);
+      background: var(--wf-surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-icon--circle { border-radius: 50%; }
+    .wf-icon--lg { width: 52px; height: 52px; }
+    .wf-logo-placeholder {
+      width: 100px;
+      height: 28px;
+      background: var(--wf-placeholder);
+      border-radius: 4px;
+    }
+    .wf-logo {
+      width: 194px;
+      height: auto;
+      display: block;
+    }
+    .wf-logo--lg { width: 220px; }
+
+    /* ── Typography ── */
+    .wf-h1 { font-size: clamp(40px, 7vw, 7rem); font-weight: 700; line-height: 1.05; color: var(--wf-text); letter-spacing: -0.03em; }
+    .wf-h2 { font-size: clamp(32px, 5.5vw, 5.5rem); font-weight: 700; line-height: 1.08; color: var(--wf-text); letter-spacing: -0.025em; }
+    .wf-h3 { font-size: 22px; font-weight: 700; line-height: 1.25; color: var(--wf-text); }
+    .wf-h4 { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--wf-text); }
+    .wf-body { font-size: 16px; line-height: 1.65; color: var(--wf-text-body); }
+    .wf-body-sm { font-size: 14px; line-height: 1.6; color: var(--wf-text-body); }
+    .wf-caption { font-size: 13px; line-height: 1.5; color: var(--wf-text-muted); }
+    .wf-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Buttons ── */
+    .wf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--wf-font);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .wf-btn--primary {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+    }
+    .wf-btn--primary:hover { background: #050508; }
+    .wf-btn--secondary {
+      background: transparent;
+      color: var(--wf-text);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid var(--wf-border);
+    }
+    .wf-btn--secondary:hover { border-color: var(--wf-text); }
+    .wf-btn--ghost {
+      background: transparent;
+      color: var(--wf-text);
+      padding: 12px 16px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+    }
+    .wf-btn--ghost:hover { background: var(--wf-surface); }
+    .wf-btn--pill {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 32px;
+      border-radius: var(--wf-radius-pill);
+      font-size: 15px;
+    }
+    .wf-btn--sm { padding: 8px 18px; font-size: 13px; }
+    .wf-btn--lg { padding: 16px 36px; font-size: 17px; }
+    .wf-btn--wide { width: 100%; justify-content: center; }
+    .wf-btn--dark-secondary {
+      background: transparent;
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+    .wf-btn--dark-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 12px 16px;
+      font-size: 15px;
+    }
+
+    /* ── Inputs ── */
+    .wf-input {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      padding: 12px 16px;
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      background: var(--wf-white);
+      color: var(--wf-text);
+      outline: none;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+    .wf-input::placeholder { color: var(--wf-text-faint); }
+    .wf-input:focus { border-color: var(--wf-text-muted); }
+    .wf-input-group {
+      display: flex;
+      gap: 0;
+    }
+    .wf-input-group .wf-input {
+      border-radius: var(--wf-radius) 0 0 var(--wf-radius);
+      border-right: none;
+    }
+    .wf-input-group .wf-btn {
+      border-radius: 0 var(--wf-radius) var(--wf-radius) 0;
+      white-space: nowrap;
+    }
+
+    /* ── Badge / Pill ── */
+    .wf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--wf-radius-pill);
+      background: var(--wf-surface-2);
+      color: var(--wf-text-body);
+    }
+    .wf-badge--outline {
+      background: transparent;
+      border: 1px solid var(--wf-border);
+    }
+    .wf-badge--dark {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+    }
+
+    /* ── Trust Stars ── */
+    .wf-stars {
+      display: inline-flex;
+      gap: 2px;
+    }
+    .wf-star {
+      width: 18px;
+      height: 18px;
+      background: var(--wf-placeholder-dark);
+      border-radius: 2px;
+    }
+
+    /* ── Promo Bar ── */
+    .wf-promo-bar {
+      background: var(--wf-dark);
+      color: rgba(255,255,255,0.9);
+      padding: 8px 32px;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-promo-bar__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-promo-bar__left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-promo-bar__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .wf-promo-bar__right a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .wf-promo-bar__right a:hover { color: var(--wf-white); }
+    .wf-promo-bar strong { color: var(--wf-white); }
+    .wf-promo-bar__left a { color: var(--wf-white); text-decoration: underline; font-weight: 600; }
+
+    /* ── Main Nav ── */
+    .wf-nav {
+      background: var(--wf-white);
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    .wf-nav__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 24px;
+    }
+    .wf-nav__logo-link { display: flex; align-items: center; text-decoration: none; }
+    .wf-nav__links {
+      display: flex;
+      gap: 0;
+    }
+    .wf-nav__link {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--wf-text-body);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .wf-nav__link:hover { color: var(--wf-text); background: rgba(0,0,0,0.04); }
+    .wf-nav__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+    }
+    .wf-nav__cta {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0px 6px 24px 0px rgba(0,0,0,0.08);
+      font-family: var(--wf-font);
+    }
+    .wf-nav__cta:hover { background: #050508; transform: scale(1.03); }
+    .wf-chevron {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    /* ── Section ── */
+    .wf-section {
+      padding: 150px 48px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-section--dark {
+      background: var(--wf-dark);
+      max-width: none;
+      color: rgba(255,255,255,0.7);
+    }
+    .wf-section--dark .wf-h2,
+    .wf-section--dark .wf-h3,
+    .wf-section--dark .wf-h4 { color: var(--wf-white); }
+    .wf-section--alt {
+      background: var(--wf-surface);
+      max-width: none;
+    }
+    .wf-section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .wf-section__header .wf-eyebrow { margin-bottom: 12px; }
+    .wf-section__header .wf-body { max-width: 560px; margin: 12px auto 0; }
+
+    /* ── Split Section ── */
+    .wf-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    /* ── Trustpilot ── */
+    .wf-trustpilot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-size: 15px;
+      color: var(--wf-text-body);
+    }
+    .wf-trustpilot__label { font-weight: 400; font-size: 16px; color: var(--wf-text-body); }
+    .wf-trustpilot__excellent { font-weight: 700; font-size: 20px; color: var(--wf-text); font-style: italic; }
+    .wf-trustpilot__stars {
+      display: flex;
+      gap: 3px;
+    }
+    .wf-trustpilot__star {
+      width: 28px;
+      height: 28px;
+      background: var(--wf-placeholder-dark);
+      border-radius: 3px;
+      position: relative;
+    }
+    .wf-trustpilot__star--partial {
+      background: linear-gradient(90deg, var(--wf-placeholder-dark) 70%, var(--wf-placeholder) 70%);
+    }
+    .wf-trustpilot__star::after {
+      content: '\2605';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wf-white);
+      font-size: 15px;
+    }
+    .wf-trustpilot__meta { color: var(--wf-text-body); font-size: 15px; }
+    .wf-trustpilot__meta a { color: var(--wf-text); font-weight: 600; text-decoration: underline; }
+    .wf-trustpilot__logo { font-size: 18px; font-weight: 700; color: #191919; letter-spacing: -0.01em; }
+
+    /* ── Testimonial ── */
+    .wf-testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-testimonial {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      padding: 28px;
+    }
+    .wf-testimonial__stars { margin-bottom: 16px; }
+    .wf-testimonial__quote {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .wf-testimonial__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-testimonial__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+    }
+    .wf-testimonial__role {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── CTA Banner ── */
+    .wf-cta-banner {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 56px 48px;
+      text-align: center;
+    }
+    .wf-cta-banner .wf-h2 { color: var(--wf-white); margin-bottom: 12px; }
+    .wf-cta-banner .wf-body { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 28px; }
+
+    /* ── Support Cards ── */
+    .wf-support {
+      background: var(--wf-dark);
+      padding: 150px 48px;
+    }
+    .wf-support__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-support__heading {
+      font-size: clamp(32px, 5.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--wf-white);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .wf-support__desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+      max-width: 640px;
+    }
+    .wf-support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-support-card {
+      background: var(--wf-dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--wf-radius-lg);
+      padding: 36px 32px;
+    }
+    .wf-support-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-support-card__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-support-card__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .wf-support-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-white);
+      text-decoration: none;
+    }
+    .wf-support-card__link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .wf-footer {
+      background: var(--wf-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 56px 48px 32px;
+    }
+    .wf-footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1710px;
+      margin: 0 auto 40px;
+    }
+    .wf-footer__heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wf-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .wf-footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wf-footer__links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .wf-footer__links a:hover { color: rgba(255,255,255,0.8); }
+    .wf-footer__bottom {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .wf-footer__socials {
+      display: flex;
+      gap: 12px;
+    }
+    .wf-footer__social {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── Hero Domain Search ── */
+    .wf-hero--centered { text-align: center; }
+    .wf-hero--centered .wf-body { margin: 0 auto; }
+    .wf-hero__domain-search {
+      display: flex;
+      max-width: 520px;
+      margin-top: 28px;
+      border: 2px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      overflow: hidden;
+    }
+    .wf-hero--centered .wf-hero__domain-search { margin: 28px auto 0; }
+    .wf-hero__domain-search input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      font-family: var(--wf-font);
+      font-size: 15px;
+      outline: none;
+      background: transparent;
+      color: var(--wf-text);
+    }
+    .wf-hero__domain-search input::placeholder { color: var(--wf-text-faint); }
+    .wf-hero__domain-search button {
+      padding: 14px 28px;
+      border: none;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-family: var(--wf-font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .wf-hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+    .wf-hero--centered .wf-hero__trust { justify-content: center; }
+
+    /* ── Project Nav ── */
+    .project-nav {
+      background: var(--wf-dark);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+    }
+    .project-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .project-nav__logo { height: 32px; width: auto; }
+    .project-nav__divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.15);
+    }
+    .project-nav__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .project-nav__links {
+      display: flex;
+      gap: 4px;
+    }
+    .project-nav__links a {
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .project-nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .project-nav__links a.active { color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Helpers ── */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-24 { gap: 24px; }
+    .gap-32 { gap: 32px; }
+    .gap-48 { gap: 48px; }
+    .mb-4 { margin-bottom: 4px; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-20 { margin-bottom: 20px; }
+    .mb-24 { margin-bottom: 24px; }
+    .mb-28 { margin-bottom: 28px; }
+    .mb-32 { margin-bottom: 32px; }
+    .mb-48 { margin-bottom: 48px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-24 { margin-top: 24px; }
+    .w-full { width: 100%; }
+    .max-w-480 { max-width: 480px; }
+    .max-w-560 { max-width: 560px; }
+    .text-center { text-align: center; }
+
+
+    /* ═══════════════════════════════════════════════════════ */
+    /* CONCEPT E — SITEGROUND-STYLE COMPONENTS               */
+    /* ═══════════════════════════════════════════════════════ */
+
+    /* ── SiteGround Hero (dark, confident, centered) ── */
+    .sg-hero {
+      background: var(--wf-dark);
+      padding: 100px 48px 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .sg-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140%;
+      height: 120%;
+      background: radial-gradient(ellipse at center, rgba(180,180,190,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .sg-hero__inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .sg-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+    .sg-hero__eyebrow-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-hero__title {
+      font-size: clamp(44px, 6vw, 80px);
+      font-weight: 700;
+      line-height: 1.06;
+      color: var(--wf-white);
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .sg-hero__sub {
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.55);
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+    .sg-hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wf-white);
+      color: var(--wf-dark);
+      padding: 16px 40px;
+      border-radius: var(--wf-radius-pill);
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sg-hero__cta:hover { transform: scale(1.03); box-shadow: 0 8px 32px rgba(255,255,255,0.1); }
+    .sg-hero__trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+    }
+    .sg-hero__trust .wf-trustpilot__star {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ── 6-Card Equal-Weight Product Grid (SiteGround signature) ── */
+    .sg-products {
+      padding: 120px 48px 140px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .sg-products__header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .sg-products__header .wf-body {
+      max-width: 520px;
+      margin: 12px auto 0;
+    }
+    .sg-products__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .sg-product-card {
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      padding: 36px 32px;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .sg-product-card:hover {
+      border-color: var(--wf-text-muted);
+      box-shadow: var(--wf-shadow-md);
+    }
+    .sg-product-card__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--wf-surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .sg-product-card__icon svg { opacity: 0.4; }
+    .sg-product-card__name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--wf-text);
+      margin-bottom: 8px;
+    }
+    .sg-product-card__desc {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+    .sg-product-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .sg-product-card:hover .sg-product-card__link { gap: 10px; }
+
+    /* ── AI Platform Section (2-col split) ── */
+    .sg-ai-section {
+      background: var(--wf-surface);
+      padding: 140px 48px;
+    }
+    .sg-ai-section__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .sg-ai-section__visual {
+      background: var(--wf-placeholder);
+      border-radius: var(--wf-radius-lg);
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-ai-section__visual svg { opacity: 0.3; }
+
+    /* ── Domain Search Section ── */
+    .sg-domain {
+      padding: 140px 48px;
+      text-align: center;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .sg-domain__search {
+      display: flex;
+      max-width: 580px;
+      margin: 32px auto 0;
+      border: 2px solid var(--wf-border);
+      border-radius: var(--wf-radius-pill);
+      overflow: hidden;
+      background: var(--wf-white);
+    }
+    .sg-domain__search input {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      font-family: var(--wf-font);
+      font-size: 15px;
+      outline: none;
+      background: transparent;
+      color: var(--wf-text);
+    }
+    .sg-domain__search input::placeholder { color: var(--wf-text-faint); }
+    .sg-domain__search button {
+      padding: 16px 32px;
+      border: none;
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      font-family: var(--wf-font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 0 var(--wf-radius-pill) var(--wf-radius-pill) 0;
+    }
+    .sg-domain__hints {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+    .sg-domain__hints span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Human Support Section (warm, 2-col) ── */
+    .sg-support-human {
+      background: var(--wf-surface);
+      padding: 160px 48px;
+    }
+    .sg-support-human__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .sg-support-human__visual {
+      background: var(--wf-placeholder);
+      border-radius: var(--wf-radius-lg);
+      height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-support-human__visual svg { opacity: 0.3; }
+    .sg-support-human__stats {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .sg-support-human__stat {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sg-support-human__stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-support-human__stat-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-text);
+    }
+    .sg-support-human__stat-sub {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Customer Success Stories (3-col editorial) ── */
+    .sg-stories {
+      padding: 140px 48px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .sg-stories__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .sg-story-card {
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .sg-story-card:hover {
+      border-color: var(--wf-text-muted);
+      box-shadow: var(--wf-shadow-md);
+    }
+    .sg-story-card__img {
+      background: var(--wf-placeholder);
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-story-card__img svg { opacity: 0.25; }
+    .sg-story-card__body {
+      padding: 28px;
+    }
+    .sg-story-card__quote {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .sg-story-card__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sg-story-card__name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+    }
+    .sg-story-card__biz {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Trust/Awards Row ── */
+    .sg-trust {
+      padding: 80px 48px;
+      border-top: 1px solid var(--wf-border);
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .sg-trust__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+    .sg-trust__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .sg-trust__badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sg-trust__label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--wf-text-muted);
+      text-align: center;
+      max-width: 100px;
+    }
+
+    /* ── Minimal CTA Banner (SiteGround confidence — no pricing) ── */
+    .sg-cta-banner {
+      padding: 140px 48px;
+      text-align: center;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .sg-cta-banner__title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--wf-text);
+      letter-spacing: -0.025em;
+      margin-bottom: 16px;
+    }
+    .sg-cta-banner__sub {
+      font-size: 17px;
+      color: var(--wf-text-body);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 1. PROJECT NAV                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <nav class="project-nav">
+    <div class="project-nav__brand">
+      <img src="logo-dark.svg" alt="DreamHost" class="project-nav__logo" />
+      <div class="project-nav__divider"></div>
+      <span class="project-nav__label">Homepage Redesign</span>
+    </div>
+    <div class="project-nav__links">
+      <a href="index.html">Research</a>
+      <a href="wireframe-components.html">Component Library</a>
+      <a href="concepts.html" class="active">Concepts</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 2. PRIMARY NAV (clean, minimal)         -->
+  <!-- ═══════════════════════════════════════ -->
+  <nav class="wf-nav" style="border-bottom: 1px solid var(--wf-border);">
+    <div class="wf-nav__inner">
+      <a href="https://www.dreamhost.com" class="wf-nav__logo-link">
+        <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
+      </a>
+      <div class="wf-nav__links">
+        <a class="wf-nav__link" href="#">Web Hosting <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <a class="wf-nav__link" href="#">WordPress <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <a class="wf-nav__link" href="#">Website Builder <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <a class="wf-nav__link" href="#">Domains</a>
+        <a class="wf-nav__link" href="#">Email</a>
+        <a class="wf-nav__link" href="#">AI Tools</a>
+      </div>
+      <div class="wf-nav__right">
+        <a class="wf-nav__link" href="#" style="font-weight: 600;">Login</a>
+        <a class="wf-nav__cta" href="#">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 3. HERO — SiteGround style              -->
+  <!-- Dark, centered, Trustpilot IN the hero  -->
+  <!-- No pricing. Pure confidence.            -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-hero">
+    <div class="sg-hero__inner">
+      <div class="sg-hero__eyebrow">
+        <span class="sg-hero__eyebrow-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </span>
+        Employee-owned since 1997
+      </div>
+      <h1 class="sg-hero__title">Build, host, grow<br>your online presence</h1>
+      <p class="sg-hero__sub">Everything you need to create, launch, and scale your website — powered by award-winning hosting, AI tools, and real human support.</p>
+      <button class="sg-hero__cta">Get Started &rarr;</button>
+
+      <!-- Trustpilot IN the hero — SiteGround's key pattern -->
+      <div class="sg-hero__trust">
+        <span style="color: rgba(255,255,255,0.5);">Our customers say</span>
+        <span style="font-weight: 700; font-style: italic; color: rgba(255,255,255,0.8); font-size: 16px;">Excellent</span>
+        <div class="wf-trustpilot__stars">
+          <div class="wf-trustpilot__star" style="width: 24px; height: 24px;"></div>
+          <div class="wf-trustpilot__star" style="width: 24px; height: 24px;"></div>
+          <div class="wf-trustpilot__star" style="width: 24px; height: 24px;"></div>
+          <div class="wf-trustpilot__star" style="width: 24px; height: 24px;"></div>
+          <div class="wf-trustpilot__star wf-trustpilot__star--partial" style="width: 24px; height: 24px;"></div>
+        </div>
+        <span style="color: rgba(255,255,255,0.4); font-size: 13px;">4.7 / 5 &middot; 7,847 reviews on <span style="font-weight: 700; color: rgba(255,255,255,0.55);">&#9733; Trustpilot</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 4. 6 EQUAL-WEIGHT PRODUCT CARDS         -->
+  <!-- SiteGround's signature — 3x2 grid,     -->
+  <!-- no product hierarchy on the homepage    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-products">
+    <div class="sg-products__header">
+      <div class="wf-eyebrow mb-12">Fast, Secure, AI-Powered</div>
+      <h2 class="wf-h2">Website services for every need</h2>
+      <p class="wf-body">From your first website to a high-traffic store, DreamHost has the tools and infrastructure to make it happen.</p>
+    </div>
+    <div class="sg-products__grid">
+      <!-- Card 1: WordPress Hosting -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="sg-product-card__name">WordPress Hosting</div>
+        <div class="sg-product-card__desc">Managed WordPress with built-in caching, staging, and automatic updates. The fastest WordPress experience available.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+      <!-- Card 2: Remixer Website Builder -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="sg-product-card__name">Remixer Website Builder</div>
+        <div class="sg-product-card__desc">Describe your business, and Remixer builds a complete website — copy, images, layout, and all. No code required.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+      <!-- Card 3: Online Store -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        </div>
+        <div class="sg-product-card__name">Online Store</div>
+        <div class="sg-product-card__desc">WooCommerce hosting optimized for speed and security. Accept payments, manage inventory, and scale with confidence.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+      <!-- Card 4: Web Hosting -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
+        </div>
+        <div class="sg-product-card__name">Web Hosting</div>
+        <div class="sg-product-card__desc">Reliable shared hosting with NVMe SSD storage, free SSL, unlimited bandwidth, and 100% uptime guarantee.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+      <!-- Card 5: Email Hosting -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="sg-product-card__name">Email Hosting</div>
+        <div class="sg-product-card__desc">Professional email at your domain. Ad-free, reliable, with webmail access and built-in spam filtering. Included free.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+      <!-- Card 6: AI Tools -->
+      <div class="sg-product-card">
+        <div class="sg-product-card__icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div class="sg-product-card__name">Remixer AI</div>
+        <div class="sg-product-card__desc">AI-powered content, images, and SEO tools included with every plan. Generate, optimize, and publish — all in one place.</div>
+        <a class="sg-product-card__link" href="#">Learn More &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 5. REMIXER AI PLATFORM                  -->
+  <!-- SiteGround's "Powerful AI Studio" —     -->
+  <!-- 2-col: content left, visual right       -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-ai-section">
+    <div class="sg-ai-section__inner">
+      <div>
+        <div class="wf-eyebrow mb-16">Included with All Plans</div>
+        <h2 class="wf-h2 mb-16" style="font-size: clamp(32px, 4.5vw, 56px);">Powerful AI tools to<br>build and scale</h2>
+        <p class="wf-body mb-32" style="max-width: 460px;">Remixer AI is a complete creative platform — generate websites from a description, create marketing copy, optimize images, and improve SEO. Powered by the latest AI models, included at no extra cost.</p>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px;">
+          <div class="flex items-center gap-12">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--wf-surface-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-size: 15px; font-weight: 500; color: var(--wf-text);">AI website generation from a text description</span>
+          </div>
+          <div class="flex items-center gap-12">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--wf-surface-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-size: 15px; font-weight: 500; color: var(--wf-text);">Content writing, blog posts, and product descriptions</span>
+          </div>
+          <div class="flex items-center gap-12">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--wf-surface-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-size: 15px; font-weight: 500; color: var(--wf-text);">SEO optimization and image generation</span>
+          </div>
+          <div class="flex items-center gap-12">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--wf-surface-2); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span style="font-size: 15px; font-weight: 500; color: var(--wf-text);">Included with all hosting plans — no add-on cost</span>
+          </div>
+        </div>
+        <button class="wf-btn wf-btn--primary wf-btn--lg">Explore Remixer AI &rarr;</button>
+      </div>
+      <div class="sg-ai-section__visual">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 6. DOMAIN SEARCH                        -->
+  <!-- Clean, centered, pill-shaped input      -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-domain">
+    <h2 class="wf-h2 mb-12">Find the perfect domain name</h2>
+    <p class="wf-body max-w-560" style="margin: 0 auto;">Search for your domain, get AI-powered suggestions, and register it in seconds. Free with all annual hosting plans.</p>
+    <div class="sg-domain__search">
+      <input type="text" placeholder="Enter your domain name or business idea..." />
+      <button>Search</button>
+    </div>
+    <div class="sg-domain__hints">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        Free Domain Included
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        AI-Powered Suggestions
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        400+ Extensions Available
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+        Free Transfers
+      </span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 7. REAL SUPPORT, REAL HUMANS            -->
+  <!-- SiteGround's counter-position against   -->
+  <!-- AI-everything. DreamHost's strength too. -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-support-human">
+    <div class="sg-support-human__inner">
+      <div class="sg-support-human__visual">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div>
+        <h2 class="wf-h2 mb-16" style="font-size: clamp(32px, 4.5vw, 56px);">Real support,<br>real humans 24/7</h2>
+        <p class="wf-body mb-8" style="max-width: 440px;">Every conversation is with a real person — not a chatbot, not an AI script. Our in-house support team knows hosting inside and out, and they're available around the clock.</p>
+        <div class="sg-support-human__stats">
+          <div class="sg-support-human__stat">
+            <div class="sg-support-human__stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+            <div>
+              <div class="sg-support-human__stat-text">98% customer satisfaction</div>
+              <div class="sg-support-human__stat-sub">Consistently rated among the highest in the industry</div>
+            </div>
+          </div>
+          <div class="sg-support-human__stat">
+            <div class="sg-support-human__stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+              <div class="sg-support-human__stat-text">24/7 live support</div>
+              <div class="sg-support-human__stat-sub">Chat and email, every day of the year — no holidays off</div>
+            </div>
+          </div>
+          <div class="sg-support-human__stat">
+            <div class="sg-support-human__stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="sg-support-human__stat-text">In-house experts</div>
+              <div class="sg-support-human__stat-sub">WordPress specialists, server admins, and web developers — not outsourced</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 8. CUSTOMER SUCCESS STORIES             -->
+  <!-- 3-col editorial cards with screenshots  -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-stories">
+    <div class="sg-products__header">
+      <h2 class="wf-h2">Customer success stories</h2>
+      <p class="wf-body">See how businesses and creators build and grow with DreamHost.</p>
+    </div>
+    <div class="sg-stories__grid">
+      <!-- Story 1 -->
+      <div class="sg-story-card">
+        <div class="sg-story-card__img">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <div class="sg-story-card__body">
+          <div class="sg-story-card__quote">"We built our entire e-commerce store on DreamHost. The speed is incredible — our page load times dropped by 60% after migrating from our old host."</div>
+          <div class="sg-story-card__author">
+            <div class="wf-avatar wf-avatar--sm"></div>
+            <div>
+              <div class="sg-story-card__name">Sarah Chen</div>
+              <div class="sg-story-card__biz">Founder, Bloom & Gather</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Story 2 -->
+      <div class="sg-story-card">
+        <div class="sg-story-card__img">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <div class="sg-story-card__body">
+          <div class="sg-story-card__quote">"I used Remixer to build my portfolio site in an afternoon. I described what I needed, and it generated something better than I could have designed myself."</div>
+          <div class="sg-story-card__author">
+            <div class="wf-avatar wf-avatar--sm"></div>
+            <div>
+              <div class="sg-story-card__name">Marcus Rivera</div>
+              <div class="sg-story-card__biz">Freelance Photographer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Story 3 -->
+      <div class="sg-story-card">
+        <div class="sg-story-card__img">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        </div>
+        <div class="sg-story-card__body">
+          <div class="sg-story-card__quote">"We manage 30+ client sites on DreamHost VPS. The reliability is unmatched — zero downtime in 18 months, and their support team actually knows what they're doing."</div>
+          <div class="sg-story-card__author">
+            <div class="wf-avatar wf-avatar--sm"></div>
+            <div>
+              <div class="sg-story-card__name">Priya Sharma</div>
+              <div class="sg-story-card__biz">CEO, Pixel & Craft Agency</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 9. TRUST / AWARDS ROW                   -->
+  <!-- Subtle, understated — SiteGround style  -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-trust">
+    <div class="sg-trust__inner">
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M12 15l-2 5 2-1 2 1-2-5z"/><path d="M20 6a8.5 8.5 0 0 0-16 0c0 6 8 12 8 12s8-6 8-12z"/></svg>
+        </div>
+        <div class="sg-trust__label">PCMag Editors' Choice</div>
+      </div>
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="sg-trust__label">Forbes Advisor Best Of</div>
+      </div>
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="sg-trust__label">Carbon Neutral Certified</div>
+      </div>
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="sg-trust__label">Official WordPress.org Recommended</div>
+      </div>
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+        </div>
+        <div class="sg-trust__label">100% Uptime Guarantee</div>
+      </div>
+      <div class="sg-trust__item">
+        <div class="sg-trust__badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text-muted)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="sg-trust__label">Employee-Owned Since 1997</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 10. CTA BANNER                          -->
+  <!-- SiteGround confidence — no pricing,     -->
+  <!-- single CTA, minimal text                -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="sg-cta-banner">
+    <h2 class="sg-cta-banner__title">Start your website today</h2>
+    <p class="sg-cta-banner__sub">Join 1.5 million websites on the employee-owned host built for people who build things.</p>
+    <button class="wf-btn wf-btn--pill wf-btn--lg">Get Started &rarr;</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 11. SUPPORT CARDS                       -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-support">
+    <div class="wf-support__inner">
+      <div class="wf-support__heading">Need Some Help?</div>
+      <div class="wf-support__desc">Whether you're stuck or just want some tips on where to start, hit up our experts anytime. We're here to help!</div>
+      <div class="wf-support-grid">
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="wf-support-card__title">DreamHost Sales Help</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Chat Widget</div>
+          <a class="wf-support-card__link" href="#">Chat Now &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="wf-support-card__title">Customer Support Chat</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+          <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="wf-support-card__title">Customer Support Email</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+          <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 12. FOOTER                              -->
+  <!-- ═══════════════════════════════════════ -->
+  <footer class="wf-footer">
+    <div class="wf-footer__grid" style="grid-template-columns: 1.5fr repeat(5, 1fr);">
+      <div>
+        <img src="logo-dark.svg" alt="DreamHost" class="wf-logo wf-logo--lg mb-20">
+        <div style="font-size: 13px; line-height: 1.6; max-width: 240px;">Employee-owned since 1997. We build hosting for people who build things.</div>
+        <div class="wf-footer__socials mt-24">
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+        </div>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Products</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Remixer</a></li>
+          <li><a href="#">Managed WordPress</a></li>
+          <li><a href="#">WordPress Hosting</a></li>
+          <li><a href="#">Migrate to DreamHost</a></li>
+          <li><a href="#">AI Website Builder</a></li>
+          <li><a href="#">Web Hosting</a></li>
+          <li><a href="#">VPS</a></li>
+          <li><a href="#">Dedicated Servers</a></li>
+          <li><a href="#">Domain Names</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Company</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Affiliates</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Green Hosting</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Awards</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Legal</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Legal Information</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Report Abuse</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">WHOIS Lookup</a></li>
+          <li><a href="#">Cookie Settings</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Resources</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Knowledge Base</a></li>
+          <li><a href="#">System Status</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Glossary</a></li>
+          <li><a href="#">Business Name Generator</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Login</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Web Hosting</a></li>
+          <li><a href="#">DreamCompute</a></li>
+          <li><a href="#">Webmail</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wf-footer__bottom">
+      <span>&copy; 2026 DreamHost, LLC</span>
+      <div class="wf-footer__socials">
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
