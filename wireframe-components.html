@@ -35,7 +35,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 140px; }
 
     body {
       font-family: var(--wf-font);
@@ -3712,8 +3712,20 @@
       linkMap[id] = link;
     });
 
+    // Pause scroll-spy briefly after clicking a sidebar link
+    let spyPaused = false;
+    sidebarLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        spyPaused = true;
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        setTimeout(() => { spyPaused = false; }, 800);
+      });
+    });
+
     let ticking = false;
     function updateActiveLink() {
+      if (spyPaused) { ticking = false; return; }
       let currentId = '';
       const scrollY = window.scrollY + 160;
       sections.forEach(section => {
