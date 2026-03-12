@@ -121,34 +121,36 @@
       padding-top: 8px;
     }
     .lib-sidebar-toggle {
-      position: fixed;
-      left: 220px;
-      top: 112px;
+      position: sticky;
+      top: 105px;
       z-index: 250;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--wf-white);
-      border: 1px solid var(--wf-border);
-      box-shadow: var(--wf-shadow);
+      width: 36px;
+      flex-shrink: 0;
+      background: var(--wf-surface);
+      border: none;
+      border-right: 1px solid var(--wf-border);
       cursor: pointer;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      transition: left 0.2s ease, transform 0.2s ease;
+      padding-top: 16px;
       color: var(--wf-text-muted);
-      font-size: 14px;
+      font-size: 11px;
       line-height: 1;
-      padding: 0;
+      height: calc(100vh - 105px);
+      transition: background 0.15s;
     }
     .lib-sidebar-toggle:hover {
-      background: var(--wf-surface);
+      background: var(--wf-surface-2);
       color: var(--wf-text);
     }
-    .lib-sidebar-toggle--collapsed {
-      left: 0;
-      border-radius: 0 50% 50% 0;
-      border-left: none;
+    .lib-sidebar-toggle svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+    }
+    .lib-sidebar-toggle--collapsed svg {
+      transform: rotate(180deg);
     }
 
     .lib-main {
@@ -1618,7 +1620,7 @@
   <div class="lib-layout">
 
     <!-- ══ SIDEBAR TOGGLE ══ -->
-    <button class="lib-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">◀</button>
+    <button class="lib-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
 
     <!-- ══ SIDEBAR ══ -->
     <nav class="lib-sidebar" id="libSidebar">
@@ -3643,7 +3645,6 @@
     toggle.addEventListener('click', () => {
       const collapsed = sidebar.classList.toggle('lib-sidebar--collapsed');
       toggle.classList.toggle('lib-sidebar-toggle--collapsed', collapsed);
-      toggle.textContent = collapsed ? '▶' : '◀';
     });
 
     // Scroll-spy: highlight active sidebar link
