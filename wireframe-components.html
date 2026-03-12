@@ -80,6 +80,13 @@
       border-right: 1px solid var(--wf-border);
       padding: 20px 0;
       background: var(--wf-white);
+      transition: width 0.2s ease, padding 0.2s ease;
+    }
+    .lib-sidebar--collapsed {
+      width: 0;
+      padding: 0;
+      overflow: hidden;
+      border-right: none;
     }
     .lib-sidebar a {
       display: block;
@@ -89,8 +96,15 @@
       color: var(--wf-text-muted);
       text-decoration: none;
       transition: all 0.15s;
+      border-left: 3px solid transparent;
     }
     .lib-sidebar a:hover { color: var(--wf-text); background: var(--wf-surface); }
+    .lib-sidebar a.active {
+      color: var(--wf-text);
+      font-weight: 700;
+      border-left-color: var(--wf-text);
+      background: var(--wf-surface);
+    }
     .lib-sidebar__group {
       font-size: 12px;
       font-weight: 800;
@@ -105,6 +119,36 @@
       border-top: none;
       margin-top: 0;
       padding-top: 8px;
+    }
+    .lib-sidebar-toggle {
+      position: fixed;
+      left: 220px;
+      top: 112px;
+      z-index: 250;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      box-shadow: var(--wf-shadow);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: left 0.2s ease, transform 0.2s ease;
+      color: var(--wf-text-muted);
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+    }
+    .lib-sidebar-toggle:hover {
+      background: var(--wf-surface);
+      color: var(--wf-text);
+    }
+    .lib-sidebar-toggle--collapsed {
+      left: 0;
+      border-radius: 0 50% 50% 0;
+      border-left: none;
     }
 
     .lib-main {
@@ -761,27 +805,29 @@
       border: 1.5px solid var(--wf-border);
       border-radius: var(--wf-radius-lg);
       padding: 32px;
+      padding-top: 40px;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .wf-pricing-card--featured {
       border-color: var(--wf-dark);
       box-shadow: var(--wf-shadow-md);
-      position: relative;
     }
     .wf-pricing-card__badge {
       position: absolute;
-      top: -1px;
+      top: 0;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       background: var(--wf-dark);
       color: var(--wf-white);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 0 0 8px 8px;
+      padding: 6px 18px;
+      border-radius: var(--wf-radius-pill);
+      white-space: nowrap;
     }
     .wf-pricing-card__name {
       font-size: 18px;
@@ -838,6 +884,20 @@
       left: 0;
       color: var(--wf-text-muted);
       font-weight: 700;
+    }
+    .wf-pricing-card__more {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-text-muted);
+      text-decoration: none;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--wf-border);
+    }
+    .wf-pricing-card__more:hover {
+      color: var(--wf-text);
     }
 
     /* ── Feature Card ── */
@@ -1557,8 +1617,11 @@
 
   <div class="lib-layout">
 
+    <!-- ══ SIDEBAR TOGGLE ══ -->
+    <button class="lib-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">◀</button>
+
     <!-- ══ SIDEBAR ══ -->
-    <nav class="lib-sidebar">
+    <nav class="lib-sidebar" id="libSidebar">
       <div class="lib-sidebar__group">Primitives</div>
       <a href="#typography">Typography</a>
       <a href="#buttons">Buttons</a>
@@ -2234,6 +2297,7 @@
                 <li>Auto-Boost RAM Protection</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card wf-pricing-card--featured">
               <div class="wf-pricing-card__badge">Most Popular</div>
@@ -2253,6 +2317,7 @@
                 <li>Auto-Boost RAM Protection</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">VPS Enterprise</div>
@@ -2271,6 +2336,7 @@
                 <li>Auto-Boost RAM Protection</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">VPS Premier</div>
@@ -2289,6 +2355,7 @@
                 <li>Auto-Boost RAM Protection</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
           </div>
 
@@ -2365,6 +2432,7 @@
                 <li>Free Domain 1 Year</li>
                 <li>14-Day Backup Retention</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__badge" style="background:var(--wf-surface-2);color:var(--wf-text);">On Sale</div>
@@ -2384,6 +2452,7 @@
                 <li>Free Domain 1 Year</li>
                 <li>14-Day Backup Retention</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card wf-pricing-card--featured">
               <div class="wf-pricing-card__badge">Most Popular</div>
@@ -2403,6 +2472,7 @@
                 <li>Free Domain 1 Year</li>
                 <li>14-Day Backup Retention</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
           </div>
 
@@ -2451,6 +2521,7 @@
                 <li>Free SSL</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
 
             <div class="wf-pricing-card wf-pricing-card--featured">
@@ -2474,6 +2545,7 @@
                 <li>Unlimited Email</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
 
             <div class="wf-pricing-card">
@@ -2496,6 +2568,7 @@
                 <li>Unlimited Email</li>
                 <li>Free Domain 1 Year</li>
               </ul>
+              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
           </div>
         </div>
@@ -3562,6 +3635,56 @@
         item.classList.toggle('wf-faq-item--open');
       });
     });
+  </script>
+  <script>
+    // Sidebar collapse toggle
+    const sidebar = document.getElementById('libSidebar');
+    const toggle = document.getElementById('sidebarToggle');
+    toggle.addEventListener('click', () => {
+      const collapsed = sidebar.classList.toggle('lib-sidebar--collapsed');
+      toggle.classList.toggle('lib-sidebar-toggle--collapsed', collapsed);
+      toggle.textContent = collapsed ? '▶' : '◀';
+    });
+
+    // Scroll-spy: highlight active sidebar link
+    const sections = document.querySelectorAll('.lib-section[id]');
+    const sidebarLinks = document.querySelectorAll('.lib-sidebar a[href^="#"]');
+    const linkMap = {};
+    sidebarLinks.forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      linkMap[id] = link;
+    });
+
+    let ticking = false;
+    function updateActiveLink() {
+      let currentId = '';
+      const scrollY = window.scrollY + 160;
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollY) {
+          currentId = section.id;
+        }
+      });
+      sidebarLinks.forEach(link => link.classList.remove('active'));
+      if (currentId && linkMap[currentId]) {
+        linkMap[currentId].classList.add('active');
+        // Scroll sidebar to keep active link visible
+        const activeLink = linkMap[currentId];
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const linkRect = activeLink.getBoundingClientRect();
+        if (linkRect.top < sidebarRect.top || linkRect.bottom > sidebarRect.bottom) {
+          activeLink.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateActiveLink);
+        ticking = true;
+      }
+    });
+    updateActiveLink();
   </script>
 </body>
 </html>
