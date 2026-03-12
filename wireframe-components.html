@@ -31,7 +31,7 @@
       --wf-radius-pill: 999px;
       --wf-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
       --wf-shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
-      --wf-max-w: 1120px;
+      --wf-max-w: 1600px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -251,8 +251,8 @@
     .wf-logo--lg { width: 220px; }
 
     /* ── Typography ── */
-    .wf-h1 { font-size: clamp(36px, 4.5vw, 52px); font-weight: 700; line-height: 1.1; color: var(--wf-text); letter-spacing: -0.02em; }
-    .wf-h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 700; line-height: 1.15; color: var(--wf-text); letter-spacing: -0.015em; }
+    .wf-h1 { font-size: clamp(40px, 7vw, 7rem); font-weight: 700; line-height: 1.05; color: var(--wf-text); letter-spacing: -0.03em; }
+    .wf-h2 { font-size: clamp(32px, 5.5vw, 5.5rem); font-weight: 700; line-height: 1.08; color: var(--wf-text); letter-spacing: -0.025em; }
     .wf-h3 { font-size: 22px; font-weight: 700; line-height: 1.25; color: var(--wf-text); }
     .wf-h4 { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--wf-text); }
     .wf-body { font-size: 16px; line-height: 1.65; color: var(--wf-text-body); }
@@ -610,6 +610,45 @@
       box-shadow: var(--wf-shadow);
     }
 
+    /* ── Term Dropdown ── */
+    .wf-term-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--wf-text);
+      margin-bottom: 6px;
+    }
+    .wf-term-dropdown {
+      position: relative;
+      width: 320px;
+    }
+    .wf-term-dropdown__selected {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      background: var(--wf-white);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--wf-text);
+      cursor: pointer;
+    }
+    .wf-term-dropdown__chevron {
+      margin-left: auto;
+      color: var(--wf-text-muted);
+      font-size: 14px;
+    }
+    .wf-term-dropdown__badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--wf-radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      background: #EDE9FE;
+      color: #7C3AED;
+    }
+
     /* ── Card ── */
     .wf-card {
       background: var(--wf-white);
@@ -667,7 +706,7 @@
     .wf-promo-bar {
       background: #0073EC;
       color: rgba(255,255,255,0.9);
-      padding: 8px 16px;
+      padding: 8px 32px;
       font-size: 14px;
       font-weight: 500;
       display: flex;
@@ -675,8 +714,9 @@
       justify-content: space-between;
     }
     .wf-promo-bar__inner {
-      max-width: 1280px;
+      max-width: 1710px;
       margin: 0 auto;
+      padding: 0;
       width: 100%;
       display: flex;
       align-items: center;
@@ -700,7 +740,7 @@
     }
     .wf-promo-bar__right a:hover { color: var(--wf-white); }
     .wf-promo-bar strong { color: var(--wf-white); }
-    .wf-promo-bar a { color: var(--wf-white); text-decoration: underline; font-weight: 600; }
+    .wf-promo-bar__left a { color: var(--wf-white); text-decoration: underline; font-weight: 600; }
     .wf-countdown {
       display: inline-flex;
       gap: 6px;
@@ -723,18 +763,18 @@
       justify-content: space-between;
     }
     .wf-nav__inner {
-      max-width: 1280px;
+      max-width: 1710px;
       margin: 0 auto;
-      padding: 12px 16px;
+      padding: 20px 32px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       width: 100%;
+      gap: 24px;
     }
     .wf-nav__left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 24px;
     }
     .wf-nav__links {
       display: flex;
@@ -754,7 +794,8 @@
     .wf-nav__right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 16px;
+      margin-left: auto;
     }
     .wf-nav__cta {
       background: #0073EC;
@@ -775,6 +816,13 @@
     }
     .wf-nav__cta:hover { background: #1687FF; transform: scale(1.03); }
     .wf-nav__logo-link { display: flex; align-items: center; text-decoration: none; }
+    .wf-chevron {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
 
     /* ── Hero ── */
     .wf-hero {
@@ -836,91 +884,171 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      align-items: end;
     }
     .wf-pricing-card {
       background: var(--wf-white);
       border: 1.5px solid var(--wf-border);
-      border-radius: var(--wf-radius-lg);
-      padding: 32px;
-      padding-top: 40px;
+      border-radius: 24px;
+      padding: 36px 32px 28px;
       display: flex;
       flex-direction: column;
       position: relative;
     }
     .wf-pricing-card--featured {
-      border-color: var(--wf-dark);
-      box-shadow: var(--wf-shadow-md);
+      border-color: #0073EC;
+      border-width: 2px;
     }
-    .wf-pricing-card__badge {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--wf-dark);
-      color: var(--wf-white);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: var(--wf-radius-pill);
-      white-space: nowrap;
-    }
-    .wf-pricing-card__name {
-      font-size: 18px;
+    .wf-pricing-card__badge-wrap {
+      background: #DBEAFE;
+      border-radius: 24px 24px 0 0;
+      text-align: center;
+      padding: 14px 20px 40px;
+      margin-bottom: -24px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--wf-text);
-      margin-bottom: 4px;
+    }
+    .wf-pricing-card__name {
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 700;
+      color: var(--wf-text);
+      margin-bottom: 6px;
     }
     .wf-pricing-card__desc {
-      font-size: 14px;
-      color: var(--wf-text-muted);
+      font-size: 15px;
+      color: var(--wf-text-body);
       margin-bottom: 20px;
+    }
+    .wf-pricing-card__sale-badge {
+      display: inline-block;
+      background: #0073EC;
+      color: var(--wf-white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--wf-radius-pill);
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .wf-pricing-card__first-year {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-bottom: 4px;
     }
     .wf-pricing-card__price {
       display: flex;
       align-items: baseline;
-      gap: 4px;
-      margin-bottom: 4px;
+      gap: 6px;
+      margin-bottom: 20px;
     }
     .wf-pricing-card__amount {
-      font-size: 40px;
+      font-size: clamp(36px, 3.5vw, 48px);
       font-weight: 700;
       color: var(--wf-text);
       line-height: 1;
       letter-spacing: -0.02em;
     }
     .wf-pricing-card__period {
-      font-size: 15px;
+      font-size: 18px;
       color: var(--wf-text-muted);
     }
-    .wf-pricing-card__renewal {
+    .wf-pricing-card__save {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       font-size: 13px;
-      color: var(--wf-text-faint);
-      margin-bottom: 24px;
+      font-weight: 700;
+      color: var(--wf-text);
+      background: var(--wf-surface);
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-sm);
+    }
+    .wf-pricing-card__save .info-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #0073EC;
+      color: var(--wf-white);
+      font-size: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-pricing-card__cta {
+      width: 100%;
+      padding: 14px 24px;
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: var(--wf-radius-pill);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .wf-pricing-card__cta--outline {
+      background: var(--wf-white);
+      color: var(--wf-text);
+      border: 2px solid var(--wf-text);
+    }
+    .wf-pricing-card__cta--outline:hover { background: var(--wf-surface); }
+    .wf-pricing-card__cta--filled {
+      background: #0073EC;
+      color: var(--wf-white);
+      border: 2px solid #0073EC;
+    }
+    .wf-pricing-card__cta--filled:hover { background: #1687FF; border-color: #1687FF; }
+    .wf-pricing-card__renewal {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-top: 16px;
+      text-align: center;
     }
     .wf-pricing-card__features {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 24px;
-      padding-top: 24px;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
       border-top: 1px solid var(--wf-border);
       flex: 1;
     }
     .wf-pricing-card__features li {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--wf-text-body);
-      padding-left: 24px;
+      padding-left: 28px;
       position: relative;
+      line-height: 1.4;
     }
     .wf-pricing-card__features li::before {
       content: '✓';
       position: absolute;
       left: 0;
-      color: var(--wf-text-muted);
+      color: #0073EC;
       font-weight: 700;
+      font-size: 14px;
+    }
+    .wf-pricing-card__new-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0073EC;
+      border: 1.5px solid #0073EC;
+      border-radius: var(--wf-radius-sm);
+      padding: 1px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .wf-pricing-card__view-more {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      cursor: pointer;
     }
     .wf-pricing-card__more {
       display: block;
@@ -1138,25 +1266,195 @@
     .wf-cta-banner .wf-body { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 28px; }
 
     /* ── Support Cards ── */
+    .wf-support {
+      background: var(--wf-dark);
+      padding: 150px 48px;
+    }
+    .wf-support__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-support__heading {
+      font-size: clamp(32px, 5.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--wf-white);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .wf-support__desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+      max-width: 640px;
+    }
     .wf-support-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
     .wf-support-card {
-      background: var(--wf-surface);
+      background: var(--wf-dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--wf-radius-lg);
-      padding: 32px;
-      text-align: center;
+      padding: 36px 32px;
     }
-    .wf-support-card .wf-icon { margin: 0 auto 16px; }
-    .wf-support-card .wf-h4 { margin-bottom: 8px; }
-    .wf-support-card .wf-caption { margin-bottom: 16px; }
-    .wf-support-card a {
+    .wf-support-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-support-card__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-support-card__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .wf-support-card__link {
       font-size: 14px;
       font-weight: 600;
-      color: var(--wf-text);
+      color: var(--wf-white);
       text-decoration: none;
+    }
+    .wf-support-card__link:hover { text-decoration: underline; }
+
+    /* ── Tabbed Feature Showcase ── */
+    .wf-tab-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 0;
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+      min-height: 520px;
+    }
+    .wf-tab-showcase__tabs {
+      padding: 48px 0 48px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+    .wf-tab-showcase__eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+      padding-left: 2px;
+    }
+    .wf-tab-showcase__heading {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-tab-showcase__subheading {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .wf-tab-showcase__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .wf-tab-showcase__item {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wf-tab-showcase__item:last-child {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .wf-tab-showcase__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 20px 2px;
+      font-family: var(--wf-font);
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .wf-tab-showcase__trigger:hover {
+      color: rgba(255,255,255,0.8);
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__trigger {
+      color: var(--wf-white);
+    }
+    .wf-tab-showcase__chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      opacity: 0.4;
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__chevron {
+      opacity: 0.7;
+    }
+    .wf-tab-showcase__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px 0 2px;
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__body {
+      max-height: 200px;
+      padding: 0 24px 20px 2px;
+    }
+    .wf-tab-showcase__body p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-tab-showcase__media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .wf-tab-showcase__media-inner {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      background: var(--wf-dark-surface);
+      border-radius: var(--wf-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .wf-tab-showcase__media-inner svg { opacity: 0.25; }
+    .wf-tab-showcase__media-label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.3);
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-sm);
     }
 
     /* ── Gallery ── */
@@ -1222,7 +1520,7 @@
       display: grid;
       grid-template-columns: 1.5fr repeat(4, 1fr);
       gap: 40px;
-      max-width: var(--wf-max-w);
+      max-width: 1710px;
       margin: 0 auto 40px;
     }
     .wf-footer__heading {
@@ -1247,7 +1545,7 @@
     }
     .wf-footer__links a:hover { color: rgba(255,255,255,0.8); }
     .wf-footer__bottom {
-      max-width: var(--wf-max-w);
+      max-width: 1710px;
       margin: 0 auto;
       padding-top: 24px;
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -1445,11 +1743,11 @@
       margin: 0 auto;
     }
     .wf-planhero__title {
-      font-size: clamp(36px, 5vw, 56px);
+      font-size: clamp(40px, 7vw, 7rem);
       font-weight: 800;
-      line-height: 1.08;
+      line-height: 1.05;
       color: var(--wf-text);
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
       margin-bottom: 16px;
     }
     .wf-planhero__sub {
@@ -1860,11 +2158,25 @@
         </div>
 
         <div class="component-group">
-          <div class="component-label">Toggle group</div>
+          <div class="component-label">Toggle group (legacy)</div>
           <div class="wf-toggle-group">
             <button class="wf-toggle wf-toggle--active">Monthly</button>
             <button class="wf-toggle">Yearly</button>
             <button class="wf-toggle">3-Year</button>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-label">Term dropdown (current production pattern)</div>
+          <div>
+            <div class="wf-term-label">Length of Subscription</div>
+            <div class="wf-term-dropdown">
+              <div class="wf-term-dropdown__selected">
+                <span>4 Years</span>
+                <span class="wf-term-dropdown__badge">On Sale</span>
+                <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -2002,20 +2314,20 @@
           <div class="preview preview--flush">
             <nav class="wf-nav">
               <div class="wf-nav__inner">
-                <div class="wf-nav__left">
+                <a href="https://www.dreamhost.com" class="wf-nav__logo-link">
                   <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
-                  <div class="wf-nav__links">
-                    <a class="wf-nav__link" href="#">Remixer</a>
-                    <a class="wf-nav__link" href="#">WordPress</a>
-                    <a class="wf-nav__link" href="#">Hosting</a>
-                    <a class="wf-nav__link" href="#">Domains</a>
-                    <a class="wf-nav__link" href="#">Email</a>
-                    <a class="wf-nav__link" href="#">Pro Services</a>
-                    <a class="wf-nav__link" href="#">Pricing</a>
-                  </div>
+                </a>
+                <div class="wf-nav__links">
+                  <a class="wf-nav__link" href="#">Remixer <span style="display: inline-flex; align-items: center; justify-content: center; background: #0073EC; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 4px; margin-left: 2px; vertical-align: middle; line-height: 1;">AI</span></a>
+                  <a class="wf-nav__link" href="#">WordPress <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Hosting <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Domains <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Email <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Pro Services <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Pricing</a>
                 </div>
                 <div class="wf-nav__right">
-                  <a class="wf-nav__link" href="#">Login</a>
+                  <a class="wf-nav__link" href="#" style="font-weight: 600;">Login</a>
                   <a class="wf-nav__cta" href="#">Get Started</a>
                 </div>
               </div>
@@ -2029,34 +2341,33 @@
             <div class="wf-promo-bar">
               <div class="wf-promo-bar__inner">
                 <div class="wf-promo-bar__left">
-                  <span>Meet Remixer: Build a site with your words, not code. Starting at $1.99/mo</span>
-                  <a href="#">Talk to It. Watch It Build. →</a>
+                  <span>⏩ Meet Remixer: Build a site with your words, not code. Starting at $$$ →</span>
                 </div>
                 <div class="wf-promo-bar__right">
                   <a href="#">Knowledge Base</a>
                   <a href="#">News</a>
                   <a href="#">Support</a>
-                  <a href="#">English</a>
-                  <a href="#">$ USD</a>
+                  <a href="#">$ USD <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a href="#">⊕ English <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
                 </div>
               </div>
             </div>
             <nav class="wf-nav">
               <div class="wf-nav__inner">
-                <div class="wf-nav__left">
+                <a href="https://www.dreamhost.com" class="wf-nav__logo-link">
                   <img src="logo-light.svg" alt="DreamHost" class="wf-logo">
-                  <div class="wf-nav__links">
-                    <a class="wf-nav__link" href="#">Remixer</a>
-                    <a class="wf-nav__link" href="#">WordPress</a>
-                    <a class="wf-nav__link" href="#">Hosting</a>
-                    <a class="wf-nav__link" href="#">Domains</a>
-                    <a class="wf-nav__link" href="#">Email</a>
-                    <a class="wf-nav__link" href="#">Pro Services</a>
-                    <a class="wf-nav__link" href="#">Pricing</a>
-                  </div>
+                </a>
+                <div class="wf-nav__links">
+                  <a class="wf-nav__link" href="#">Remixer <span style="display: inline-flex; align-items: center; justify-content: center; background: #0073EC; color: #fff; font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 4px; margin-left: 2px; vertical-align: middle; line-height: 1;">AI</span></a>
+                  <a class="wf-nav__link" href="#">WordPress <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Hosting <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Domains <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Email <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Pro Services <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+                  <a class="wf-nav__link" href="#">Pricing</a>
                 </div>
                 <div class="wf-nav__right">
-                  <a class="wf-nav__link" href="#">Login</a>
+                  <a class="wf-nav__link" href="#" style="font-weight: 600;">Login</a>
                   <a class="wf-nav__cta" href="#">Get Started</a>
                 </div>
               </div>
@@ -2301,7 +2612,7 @@
       <section class="lib-section" id="hero-plancard">
         <div class="lib-section__label">Heroes</div>
         <h2 class="lib-section__title">Plan Card Hero (VPS)</h2>
-        <p class="lib-section__desc">Full-width hero that flows directly into plan cards. Matches current DreamHost VPS page: headline → sub → feature icons → Trustpilot → term toggle → cards. Term selector is a toggle (Monthly / Yearly / 3 Years).</p>
+        <p class="lib-section__desc">Full-width hero that flows directly into plan cards. Matches current DreamHost VPS page: headline → sub → feature icons → Trustpilot → term dropdown → cards. Term selector is a dropdown (Monthly / 1 Year / 2 Years / 4 Years).</p>
         <div class="lib-demo" style="padding:0;">
 
           <div class="wf-planhero">
@@ -2329,91 +2640,108 @@
             </div>
 
             <div class="wf-planhero__controls">
-              <div class="wf-toggle-group">
-                <button class="wf-toggle">Monthly</button>
-                <button class="wf-toggle">Yearly</button>
-                <button class="wf-toggle wf-toggle--active">3 Years</button>
+              <div class="wf-term-label">Length of Subscription</div>
+              <div class="wf-term-dropdown">
+                <div class="wf-term-dropdown__selected">
+                  <span>4 Years</span>
+                  <span class="wf-term-dropdown__badge">On Sale</span>
+                  <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="wf-pricing-grid--4">
+          <div class="wf-pricing-grid" style="grid-template-columns: repeat(4, 1fr);">
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">VPS Business</div>
               <div class="wf-pricing-card__desc">For growing small businesses</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$10</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $24.99/mo · 74% off</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
                 <li>2 Cores · 2 GB RAM</li>
                 <li>60 GB NVMe SSD</li>
-                <li>Remixer AI Website Builder</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 <li>Unlimited Websites</li>
                 <li>Auto-Boost RAM Protection</li>
-                <li>Free Domain 1 Year</li>
+                <li><strong>Free Domain</strong> for 1 Year</li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
-            <div class="wf-pricing-card wf-pricing-card--featured">
-              <div class="wf-pricing-card__badge">Most Popular</div>
-              <div class="wf-pricing-card__name">VPS Professional</div>
-              <div class="wf-pricing-card__desc">For high-performance websites</div>
-              <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$20</span>
-                <span class="wf-pricing-card__period">/mo</span>
+            <div style="display: flex; flex-direction: column;">
+              <div class="wf-pricing-card__badge-wrap">Most Popular</div>
+              <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
+                <div class="wf-pricing-card__name">VPS Professional</div>
+                <div class="wf-pricing-card__desc">For high-performance websites</div>
+                <div class="wf-pricing-card__sale-badge">ON SALE</div>
+                <div class="wf-pricing-card__first-year">First 4 years at</div>
+                <div class="wf-pricing-card__price">
+                  <span class="wf-pricing-card__amount">$$$</span>
+                  <span class="wf-pricing-card__period">/mo</span>
+                  <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
+                </div>
+                <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Sign Up Now</button>
+                <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
+                <ul class="wf-pricing-card__features">
+                  <li>2 Cores · 4 GB RAM</li>
+                  <li>120 GB NVMe SSD</li>
+                  <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+                  <li>Unlimited Websites</li>
+                  <li>Auto-Boost RAM Protection</li>
+                  <li><strong>Free Domain</strong> for 1 Year</li>
+                </ul>
+                <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $46.99/mo · 71% off</div>
-              <button class="wf-btn wf-btn--primary wf-btn--wide">Sign Up Now</button>
-              <ul class="wf-pricing-card__features">
-                <li>2 Cores · 4 GB RAM</li>
-                <li>120 GB NVMe SSD</li>
-                <li>Remixer AI Website Builder</li>
-                <li>Unlimited Websites</li>
-                <li>Auto-Boost RAM Protection</li>
-                <li>Free Domain 1 Year</li>
-              </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">VPS Enterprise</div>
               <div class="wf-pricing-card__desc">For resource-intensive websites</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$40</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $92.99/mo · 71% off</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
                 <li>4 Cores · 8 GB RAM</li>
                 <li>240 GB NVMe SSD</li>
-                <li>Remixer AI Website Builder</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 <li>Unlimited Websites</li>
                 <li>Auto-Boost RAM Protection</li>
-                <li>Free Domain 1 Year</li>
+                <li><strong>Free Domain</strong> for 1 Year</li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">VPS Premier</div>
               <div class="wf-pricing-card__desc">For mission-critical websites</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$60</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $114.99/mo · 65% off</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
                 <li>6 Cores · 12 GB RAM</li>
                 <li>360 GB NVMe SSD</li>
-                <li>Remixer AI Website Builder</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 <li>Unlimited Websites</li>
                 <li>Auto-Boost RAM Protection</li>
-                <li>Free Domain 1 Year</li>
+                <li><strong>Free Domain</strong> for 1 Year</li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
           </div>
 
@@ -2460,77 +2788,88 @@
                 <button class="wf-tier-toggle__opt">Agency<small>For managing multiple WordPress sites.</small></button>
               </div>
               <!-- Term length dropdown -->
-              <div class="wf-sub-length">
-                <div class="wf-sub-length__label">Length of Subscription</div>
-                <select class="wf-select" style="min-width:260px;">
-                  <option>Monthly</option>
-                  <option selected>1 Year  —  On Sale</option>
-                  <option>3 Years</option>
-                </select>
+              <div>
+                <div class="wf-term-label">Length of Subscription</div>
+                <div class="wf-term-dropdown">
+                  <div class="wf-term-dropdown__selected">
+                    <span>4 Years</span>
+                    <span class="wf-term-dropdown__badge">On Sale</span>
+                    <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="wf-pricing-grid">
             <div class="wf-pricing-card">
-              <div class="wf-pricing-card__badge" style="background:var(--wf-surface-2);color:var(--wf-text);">On Sale</div>
               <div class="wf-pricing-card__name">DreamPress 1</div>
               <div class="wf-pricing-card__desc">1 website · 40k monthly visits</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$14.99</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $19.99/mo · 40% off</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
                 <li>15 GB NVMe SSD</li>
                 <li>1 Professional Migration</li>
                 <li>Unmetered Bandwidth</li>
                 <li>Unlimited Mailboxes</li>
                 <li>Free Domain 1 Year</li>
-                <li>14-Day Backup Retention</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+            </div>
+            <div style="display: flex; flex-direction: column;">
+              <div class="wf-pricing-card__badge-wrap">Most Popular</div>
+              <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
+                <div class="wf-pricing-card__name">DreamPress 2</div>
+                <div class="wf-pricing-card__desc">2 websites · 80k monthly visits</div>
+                <div class="wf-pricing-card__sale-badge">ON SALE</div>
+                <div class="wf-pricing-card__first-year">First 4 years at</div>
+                <div class="wf-pricing-card__price">
+                  <span class="wf-pricing-card__amount">$$$</span>
+                  <span class="wf-pricing-card__period">/mo</span>
+                  <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
+                </div>
+                <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Sign Up Now</button>
+                <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
+                <ul class="wf-pricing-card__features">
+                  <li>25 GB NVMe SSD</li>
+                  <li>2 Professional Migrations</li>
+                  <li>Unmetered Bandwidth</li>
+                  <li>Unlimited Mailboxes</li>
+                  <li>Free Domain 1 Year</li>
+                  <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+                </ul>
+                <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+              </div>
             </div>
             <div class="wf-pricing-card">
-              <div class="wf-pricing-card__badge" style="background:var(--wf-surface-2);color:var(--wf-text);">On Sale</div>
-              <div class="wf-pricing-card__name">DreamPress 2</div>
-              <div class="wf-pricing-card__desc">2 websites · 80k monthly visits</div>
-              <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$17.99</span>
-                <span class="wf-pricing-card__period">/mo</span>
-              </div>
-              <div class="wf-pricing-card__renewal">Renews at $24.99/mo · 40% off</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
-              <ul class="wf-pricing-card__features">
-                <li>25 GB NVMe SSD</li>
-                <li>2 Professional Migrations</li>
-                <li>Unmetered Bandwidth</li>
-                <li>Unlimited Mailboxes</li>
-                <li>Free Domain 1 Year</li>
-                <li>14-Day Backup Retention</li>
-              </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
-            </div>
-            <div class="wf-pricing-card wf-pricing-card--featured">
-              <div class="wf-pricing-card__badge">Most Popular</div>
               <div class="wf-pricing-card__name">DreamPress 3</div>
               <div class="wf-pricing-card__desc">3 websites · 125k monthly visits</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$20.99</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $28.99/mo · 40% off</div>
-              <button class="wf-btn wf-btn--primary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
                 <li>30 GB NVMe SSD</li>
                 <li>3 Professional Migrations</li>
                 <li>Unmetered Bandwidth</li>
                 <li>Unlimited Mailboxes</li>
                 <li>Free Domain 1 Year</li>
-                <li>14-Day Backup Retention</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
           </div>
 
@@ -2550,12 +2889,16 @@
             <div class="wf-h2 mb-12">Choose your plan</div>
             <div class="wf-body text-center" style="max-width:480px;margin:0 auto;">Simple, transparent pricing. No bait-and-switch.</div>
             <div class="flex justify-center mt-24">
-              <select class="wf-select" style="width:auto; min-width:200px; text-align:center; font-weight:600;">
-                <option>Monthly</option>
-                <option selected>Yearly — On Sale</option>
-                <option>2 Years</option>
-                <option>4 Years</option>
-              </select>
+              <div>
+                <div class="wf-term-label">Length of Subscription</div>
+                <div class="wf-term-dropdown">
+                  <div class="wf-term-dropdown__selected">
+                    <span>4 Years</span>
+                    <span class="wf-term-dropdown__badge">On Sale</span>
+                    <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -2563,14 +2906,17 @@
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">Launch</div>
               <div class="wf-pricing-card__desc">For personal sites and blogs</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$2.89</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $10.99/mo</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
-                <li>Remixer AI Website Builder</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 <li>25 Websites</li>
                 <li>40k Monthly Visits</li>
                 <li>25 GB NVMe SSD</li>
@@ -2579,44 +2925,52 @@
                 <li>Free SSL</li>
                 <li>Free Domain 1 Year</li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
 
-            <div class="wf-pricing-card wf-pricing-card--featured">
-              <div class="wf-pricing-card__badge">Most Popular</div>
-              <div class="wf-pricing-card__name">Growth</div>
-              <div class="wf-pricing-card__desc">For growing businesses</div>
-              <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$3.99</span>
-                <span class="wf-pricing-card__period">/mo</span>
+            <div style="display: flex; flex-direction: column;">
+              <div class="wf-pricing-card__badge-wrap">Most Popular</div>
+              <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
+                <div class="wf-pricing-card__name">Growth</div>
+                <div class="wf-pricing-card__desc">For growing businesses</div>
+                <div class="wf-pricing-card__sale-badge">ON SALE</div>
+                <div class="wf-pricing-card__first-year">First 4 years at</div>
+                <div class="wf-pricing-card__price">
+                  <span class="wf-pricing-card__amount">$$$</span>
+                  <span class="wf-pricing-card__period">/mo</span>
+                  <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
+                </div>
+                <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Sign Up Now</button>
+                <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
+                <ul class="wf-pricing-card__features">
+                  <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+                  <li>50 Websites</li>
+                  <li>200k Monthly Visits</li>
+                  <li>50 GB NVMe SSD</li>
+                  <li>Unmetered Bandwidth</li>
+                  <li>Daily Backups</li>
+                  <li>Unlimited Free SSL</li>
+                  <li>Unlimited Email</li>
+                  <li>Free Domain 1 Year</li>
+                </ul>
+                <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $12.99/mo</div>
-              <button class="wf-btn wf-btn--primary wf-btn--wide">Sign Up Now</button>
-              <ul class="wf-pricing-card__features">
-                <li>Remixer AI Website Builder</li>
-                <li>50 Websites</li>
-                <li>200k Monthly Visits</li>
-                <li>50 GB NVMe SSD</li>
-                <li>Unmetered Bandwidth</li>
-                <li>Daily Backups</li>
-                <li>Unlimited Free SSL</li>
-                <li>Unlimited Email</li>
-                <li>Free Domain 1 Year</li>
-              </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
             </div>
 
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">Scale</div>
               <div class="wf-pricing-card__desc">For high-traffic sites</div>
+              <div class="wf-pricing-card__sale-badge">ON SALE</div>
+              <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
-                <span class="wf-pricing-card__amount">$9.99</span>
+                <span class="wf-pricing-card__amount">$$$</span>
                 <span class="wf-pricing-card__period">/mo</span>
+                <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
               </div>
-              <div class="wf-pricing-card__renewal">Renews at $25.99/mo</div>
-              <button class="wf-btn wf-btn--secondary wf-btn--wide">Sign Up Now</button>
+              <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
+              <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
-                <li>Remixer AI Website Builder</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 <li>100 Websites</li>
                 <li>400k Monthly Visits</li>
                 <li>100 GB NVMe SSD</li>
@@ -2626,7 +2980,7 @@
                 <li>Unlimited Email</li>
                 <li>Free Domain 1 Year</li>
               </ul>
-              <a href="#" class="wf-pricing-card__more">View More →</a>
+              <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
           </div>
         </div>
@@ -3335,29 +3689,37 @@
         <div class="lib-section__label">Actions</div>
         <div class="lib-section__title">Support Cards</div>
 
-        <div class="preview preview--padded">
-          <div class="wf-section__header mb-48">
-            <div class="wf-h2">Need Some Help?</div>
-            <div class="wf-body">Whether you're stuck or just want some tips, our experts are here to help.</div>
-          </div>
-          <div class="wf-support-grid">
-            <div class="wf-support-card">
-              <div class="wf-icon wf-icon--lg wf-icon--circle" style="margin:0 auto 16px;"></div>
-              <div class="wf-h4 mb-8">DreamHost Sales Help</div>
-              <div class="wf-caption mb-16">24/7/365 Through the Chat Widget</div>
-              <a href="#">Chat Now →</a>
-            </div>
-            <div class="wf-support-card">
-              <div class="wf-icon wf-icon--lg wf-icon--circle" style="margin:0 auto 16px;"></div>
-              <div class="wf-h4 mb-8">Customer Support Chat</div>
-              <div class="wf-caption mb-16">24/7/365 Through the Panel</div>
-              <a href="#">Go to Panel →</a>
-            </div>
-            <div class="wf-support-card">
-              <div class="wf-icon wf-icon--lg wf-icon--circle" style="margin:0 auto 16px;"></div>
-              <div class="wf-h4 mb-8">Customer Support Email</div>
-              <div class="wf-caption mb-16">24/7/365 Through the Panel</div>
-              <a href="#">Go to Panel →</a>
+        <div class="preview preview--flush">
+          <div class="wf-support">
+            <div class="wf-support__inner">
+              <div class="wf-support__heading">Need Some Help?</div>
+              <div class="wf-support__desc">Whether you're stuck or just want some tips on where to start, hit up our experts anytime. We're here to help!</div>
+              <div class="wf-support-grid">
+                <div class="wf-support-card">
+                  <div class="wf-support-card__icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                  </div>
+                  <div class="wf-support-card__title">DreamHost Sales Help</div>
+                  <div class="wf-support-card__desc">24/7/365 Through the Chat Widget</div>
+                  <a class="wf-support-card__link" href="#">Chat Now &rarr;</a>
+                </div>
+                <div class="wf-support-card">
+                  <div class="wf-support-card__icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div class="wf-support-card__title">Customer Support Chat</div>
+                  <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+                  <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+                </div>
+                <div class="wf-support-card">
+                  <div class="wf-support-card__icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  </div>
+                  <div class="wf-support-card__title">Customer Support Email</div>
+                  <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+                  <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
