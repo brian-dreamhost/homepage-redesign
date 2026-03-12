@@ -100,7 +100,7 @@
     /* ── Concept Grid ── */
     .concept-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
@@ -170,6 +170,49 @@
       line-height: 1.55;
     }
 
+    .concept-tile__desc p { margin-bottom: 8px; }
+    .concept-tile__desc p:last-child { margin-bottom: 0; }
+
+    .concept-tile__thumb-summary {
+      width: 100%;
+      height: 100%;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #FAFBFC;
+    }
+    .concept-tile__thumb-summary .line {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+    }
+    .concept-tile__thumb-summary .line--title {
+      width: 60%;
+      height: 8px;
+      background: var(--dreamhost);
+      opacity: 0.35;
+    }
+    .concept-tile__thumb-summary .line--price {
+      width: 30%;
+      height: 10px;
+      background: var(--text);
+      opacity: 0.15;
+      border-radius: 4px;
+    }
+    .concept-tile__thumb-summary .card-row {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+    .concept-tile__thumb-summary .mini-card {
+      flex: 1;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
     .concept-tile--placeholder {
       border-style: dashed;
       cursor: default;
@@ -212,17 +255,27 @@
 
       <!-- Placeholder tiles — replace href="#" with actual prototype paths -->
 
-      <a href="#" class="concept-tile concept-tile--placeholder">
+      <a href="concept-a-commercial.html" class="concept-tile">
         <div class="concept-tile__thumb">
-          <div class="concept-tile__thumb-placeholder">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-            <span>Coming soon</span>
+          <div class="concept-tile__thumb-summary">
+            <div class="line line--title"></div>
+            <div class="line line--price"></div>
+            <div class="line" style="width: 80%"></div>
+            <div class="line" style="width: 50%"></div>
+            <div class="card-row">
+              <div class="mini-card"></div>
+              <div class="mini-card"></div>
+              <div class="mini-card"></div>
+            </div>
           </div>
         </div>
         <div class="concept-tile__body">
           <div class="concept-tile__label">Concept A</div>
           <div class="concept-tile__name">Commercial / Price-Led</div>
-          <div class="concept-tile__desc">Plan cards front and center. Intro rates, promo banners, domain search, term toggles. "Here's what we offer, pick a plan, get started now." The Hostinger/GoDaddy playbook applied to DreamHost.</div>
+          <div class="concept-tile__desc">
+            <p>Plan cards front and center. Hosting pricing leads the page at $2.95/mo, followed by Remixer as the easy alternative. Performance data and reliability benchmarks close the deal. The Hostinger/GoDaddy playbook — price-first, trust-second — adapted for DreamHost.</p>
+            <p><strong>Unlike competitors:</strong> DreamHost shows renewal pricing upfront (Hostinger hides 5.5x increases), leads with 0% failure rate data (no competitor publishes load test results), and positions Remixer as an honest alternative rather than forcing everyone through the same funnel.</p>
+          </div>
         </div>
       </a>
 
@@ -236,7 +289,10 @@
         <div class="concept-tile__body">
           <div class="concept-tile__label">Concept B</div>
           <div class="concept-tile__name">Remixer-Led</div>
-          <div class="concept-tile__desc">AI website builder as the headline. $1.99/mo Netflix pricing anchor. "Built with Remixer" gallery. Hosting plans positioned as the engine underneath. Target: the no-dashboard crowd who just wants to be online.</div>
+          <div class="concept-tile__desc">
+            <p>AI website builder as the headline. $1.99/mo Netflix pricing anchor. "Built with Remixer" gallery. Hosting plans positioned as the engine underneath. Target: the no-dashboard crowd who just wants to be online.</p>
+            <p><strong>Unlike competitors:</strong> GoDaddy wraps everything under "Airo" branding but still requires a dashboard. Hostinger's AI is bolt-on. Remixer IS the product — describe what you want, watch it build. No competitor offers a truly conversational site builder at this price point.</p>
+          </div>
         </div>
       </a>
 
@@ -250,7 +306,10 @@
         <div class="concept-tile__body">
           <div class="concept-tile__label">Concept C</div>
           <div class="concept-tile__name">Social Proof / Trust-Led</div>
-          <div class="concept-tile__desc">Trustpilot rating in the hero. Customer testimonials, "Built with DreamHost" showcase, vertical-specific examples (restaurants, photographers, agencies). Let customers sell for you.</div>
+          <div class="concept-tile__desc">
+            <p>Trustpilot rating in the hero. Customer testimonials, "Built with DreamHost" showcase, vertical-specific examples. Let customers sell for you.</p>
+            <p><strong>Unlike competitors:</strong> SiteGround puts Trustpilot 4.9 in the hero but stops there. BlueHost stacks WordPress.org badges. DreamHost can combine trust data with real performance benchmarks (0% failure rate) and 27 years of independence — a trust story no PE-owned competitor can tell.</p>
+          </div>
         </div>
       </a>
 
@@ -264,7 +323,95 @@
         <div class="concept-tile__body">
           <div class="concept-tile__label">Concept D</div>
           <div class="concept-tile__name">Performance-Led</div>
-          <div class="concept-tile__desc">Lead with the data no competitor can match. 0% failure rate under load, sub-20ms TTFB, 3 datacenter regions. ReviewSignals benchmarks, speed comparison charts. The "infrastructure nerds" angle.</div>
+          <div class="concept-tile__desc">
+            <p>Lead with the data no competitor can match. 0% failure rate under load, sub-20ms TTFB, 3 datacenter regions. ReviewSignals benchmarks, speed comparison charts. The "infrastructure nerds" angle.</p>
+            <p><strong>Unlike competitors:</strong> BlueHost publishes one number (247ms). Nobody else publishes any. DreamHost has K6 load test data showing 0% failure while WPEngine hits 13.5% and Kinsta hits 93.4%. This is the only concept where the data IS the differentiator, not just supporting evidence.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="concept-tile concept-tile--placeholder">
+        <div class="concept-tile__thumb">
+          <div class="concept-tile__thumb-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+        <div class="concept-tile__body">
+          <div class="concept-tile__label">Concept E</div>
+          <div class="concept-tile__name">Audience-Led (Small Business)</div>
+          <div class="concept-tile__desc">
+            <p>We are your partner. Homepage organized around who you are and what you're building — not what we sell. Small business owners see themselves in customer stories, vertical-specific examples, and growth-focused messaging. Plans positioned as the engine behind your success.</p>
+            <p><strong>Unlike competitors:</strong> Every competitor organizes by product (hosting, domains, email). This concept organizes by outcome — "I want to launch a restaurant site" or "I need an online store." DreamHost becomes the partner, not the vendor. SiteGround's Trustpilot-in-hero approach meets Hostinger's customer gallery, but with DreamHost's human support story as the backbone.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="concept-tile concept-tile--placeholder">
+        <div class="concept-tile__thumb">
+          <div class="concept-tile__thumb-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+        <div class="concept-tile__body">
+          <div class="concept-tile__label">Concept F</div>
+          <div class="concept-tile__name">GoDaddy-Inspired</div>
+          <div class="concept-tile__desc">
+            <p>Domain search IS the hero CTA. Tabbed product navigator below (Hosting, WordPress, Domains, Email, Remixer) lets visitors self-select. Airo-style unified AI branding applied to Remixer. Customer video testimonials and an extended FAQ section for SEO.</p>
+            <p><strong>Unlike GoDaddy:</strong> DreamHost can run this playbook without the bloat. GoDaddy's page has 11 sections selling everything to everyone. This version keeps the domain-first capture and product tabs but cuts the noise — fewer sections, honest pricing, no "Airo every day" repetition.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="concept-tile concept-tile--placeholder">
+        <div class="concept-tile__thumb">
+          <div class="concept-tile__thumb-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+        <div class="concept-tile__body">
+          <div class="concept-tile__label">Concept G</div>
+          <div class="concept-tile__name">BlueHost-Inspired</div>
+          <div class="concept-tile__desc">
+            <p>Trust stacking from the first pixel. Hero leads with WordPress.org recommendation, 30-day guarantee, and "1.5 million websites" stat. Speed benchmarks section with real TTFB data. Phone number in the header. FAQ section at the bottom for SEO. Pricing buried after trust-building.</p>
+            <p><strong>Unlike BlueHost:</strong> BlueHost publishes one speed number (247ms) with no methodology. DreamHost has K6 load test data, 0% failure rate, and 3 datacenter regions. Same trust-first structure, but backed by data BlueHost can't match — plus 27 years of independence vs. PE ownership.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="concept-tile concept-tile--placeholder">
+        <div class="concept-tile__thumb">
+          <div class="concept-tile__thumb-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+        <div class="concept-tile__body">
+          <div class="concept-tile__label">Concept H</div>
+          <div class="concept-tile__name">Hostinger-Inspired</div>
+          <div class="concept-tile__desc">
+            <p>Price-first conversion machine. Countdown timer in promo bar. Hero sells one number ($2.95/mo) with a "Claim Deal" CTA. Dense page: 12+ sections covering website builder, email, customer gallery, press logos, and a full pricing table at the bottom. Volume stats (1.5M sites, 27 years).</p>
+            <p><strong>Unlike Hostinger:</strong> Hostinger's $1.99 requires a 48-month commitment that renews at 5.5x. DreamHost shows renewal pricing upfront and offers a 97-day money-back guarantee (vs. Hostinger's 30 days). Same urgency-driven format, but with honest pricing and no bait-and-switch.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="concept-tile concept-tile--placeholder">
+        <div class="concept-tile__thumb">
+          <div class="concept-tile__thumb-placeholder">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            <span>Coming soon</span>
+          </div>
+        </div>
+        <div class="concept-tile__body">
+          <div class="concept-tile__label">Concept I</div>
+          <div class="concept-tile__name">SiteGround-Inspired</div>
+          <div class="concept-tile__desc">
+            <p>The leanest page of all. No pricing on the homepage. Trustpilot 4.7 directly in the hero — let the rating do the selling. Six product cards with equal visual weight (Remixer, WordPress, Hosting, VPS, Email, Domains). "Real support, real humans 24/7" as an explicit counter to the AI-everything trend.</p>
+            <p><strong>Unlike SiteGround:</strong> SiteGround aggregates everyone else's AI (ChatGPT, Claude, Gemini) into "AI Studio." DreamHost built Remixer — a first-party AI product, not a reseller bundle. Same premium-platform confidence, but with a proprietary AI story and 27 years of employee ownership as the trust backbone.</p>
+          </div>
         </div>
       </a>
 
