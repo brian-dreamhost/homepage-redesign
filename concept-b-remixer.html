@@ -1018,6 +1018,39 @@
     .max-w-480 { max-width: 480px; }
     .max-w-560 { max-width: 560px; }
     .text-center { text-align: center; }
+    /* ── Domain Search ── */
+    .wf-hero__domain-search {
+      display: flex;
+      max-width: 520px;
+      margin-top: 28px;
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      overflow: hidden;
+    }
+    .wf-hero--centered .wf-hero__domain-search { margin: 28px auto 0; }
+    .wf-hero__domain-search input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      outline: none;
+      font-family: var(--wf-font);
+      font-size: 15px;
+      background: transparent;
+      color: var(--wf-text);
+    }
+    .wf-hero__domain-search input::placeholder { color: var(--wf-text-faint); }
+    .wf-hero__domain-search button {
+      padding: 14px 28px;
+      border: none;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-family: var(--wf-font);
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .wf-hero__domain-search button:hover { background: #050508; }
   </style>
 </head>
 <body>
@@ -1210,7 +1243,7 @@
             </div>
             <div class="feature-tab" data-tab="2">
               <div class="feature-tab__title">Global CDN</div>
-              <div class="feature-tab__body">Content delivered from the nearest edge location worldwide. Up to 96% faster TTFB for international visitors. Powered by Bunny CDN across Portland, Amsterdam, and Singapore.</div>
+              <div class="feature-tab__body">Content delivered from the nearest edge location worldwide. Up to 96% faster TTFB for international visitors. Powered by BunnyCDN with 10 global points of presence.</div>
             </div>
             <div class="feature-tab" data-tab="3">
               <div class="feature-tab__title">NVMe Performance</div>
@@ -1218,7 +1251,7 @@
             </div>
             <div class="feature-tab" data-tab="4">
               <div class="feature-tab__title">Security Built In</div>
-              <div class="feature-tab__body">Free SSL on every domain, automated malware scanning, DDoS protection, and domain privacy included — not sold as add-ons. Your site is protected from day one.</div>
+              <div class="feature-tab__body">Free SSL on every domain, DreamShield malware scanning included with Growth+ plans, DDoS protection, and domain privacy — not sold as add-ons. Your site is protected from day one.</div>
             </div>
           </div>
         </div>
@@ -1236,7 +1269,7 @@
     <div class="wf-split">
       <div>
         <div class="wf-eyebrow mb-12">POWERED BY DREAMHOST</div>
-        <h2 class="wf-h2 mb-16">Built on 25+ Years of Hosting</h2>
+        <h2 class="wf-h2 mb-16">Built on 29 Years of Hosting</h2>
         <p class="wf-body mb-12">Remixer sites run on the same infrastructure that powers 1.5 million websites. NVMe storage, global CDN, 100% uptime guarantee.</p>
         <div class="infra-stats">
           <div class="infra-stat">
@@ -1248,7 +1281,7 @@
             <div class="infra-stat__label">Uptime Guarantee</div>
           </div>
           <div class="infra-stat">
-            <div class="infra-stat__number">27</div>
+            <div class="infra-stat__number">29</div>
             <div class="infra-stat__label">Years of Operation</div>
           </div>
         </div>
@@ -1293,7 +1326,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--wf-text)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <h4 class="wf-h4 mb-8">100% Uptime Guarantee</h4>
-          <p class="wf-body-sm">Credit-backed uptime SLA — not just marketing language. Redundant infrastructure, NVMe storage, and 25+ years of operational experience.</p>
+          <p class="wf-body-sm">Credit-backed uptime SLA — not just marketing language. Redundant infrastructure, NVMe storage, and 29 years of operational experience.</p>
         </div>
         <div style="padding: 36px; background: var(--wf-white); border: 1px solid var(--wf-border); border-radius: var(--wf-radius-lg);">
           <div class="wf-icon wf-icon--lg mb-16">
@@ -1317,6 +1350,30 @@
           <p class="wf-body-sm">Your files, your domain, your data. No lock-in contracts, no proprietary formats. Move freely. We earn your business every month.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DOMAIN SEARCH                           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section wf-section--alt">
+    <div class="wf-section__header">
+      <span class="wf-eyebrow">DOMAINS</span>
+      <h2 class="wf-h2">Your Name. Your Site. Start Here.</h2>
+      <p class="wf-body">Every Remixer site needs a domain. Search for yours — free for the first year with any annual plan.</p>
+      <div class="wf-hero__domain-search" style="margin: 28px auto 0;">
+        <input type="text" placeholder="Find your perfect domain" />
+        <button>Search</button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.com <span style="color: var(--wf-text-muted); font-weight: 400;">$9.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.online <span style="color: var(--wf-text-muted); font-weight: 400;">$1.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.shop <span style="color: var(--wf-text-muted); font-weight: 400;">$0.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.pro <span style="color: var(--wf-text-muted); font-weight: 400;">$17.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.io <span style="color: var(--wf-text-muted); font-weight: 400;">$39.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.ai <span style="color: var(--wf-text-muted); font-weight: 400;">$89.99</span></span>
+      </div>
+      <p class="wf-caption" style="margin-top: 20px;">Free domain with annual plans · 400+ TLDs available · Free transfers</p>
     </div>
   </div>
 
@@ -1506,7 +1563,7 @@
             <span>What is DreamPress?</span>
             <span class="wf-faq-trigger__icon">+</span>
           </button>
-          <div class="wf-faq-body">DreamPress is managed WordPress hosting. We handle core updates, security patches, daily backups, and caching so you don't have to. It includes a built-in CDN powered by Bunny, one-click staging for testing changes, and on-demand backups. It's WordPress without the ops work.</div>
+          <div class="wf-faq-body">DreamPress is managed WordPress hosting. We handle core updates, security patches, daily backups, and caching so you don't have to. It includes a built-in CDN powered by BunnyCDN, one-click staging for testing changes, and on-demand backups. It's WordPress without the ops work.</div>
         </div>
         <div class="wf-faq-item">
           <button class="wf-faq-trigger">

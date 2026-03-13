@@ -50,11 +50,11 @@
     /* ═══════════════════════════════════════ */
     .lib-header {
       position: sticky;
-      top: 48px;
+      top: 56px;
       z-index: 200;
       background: var(--wf-white);
       border-bottom: 1px solid var(--wf-border);
-      padding: 16px 32px;
+      padding: 14px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -74,8 +74,8 @@
       width: 220px;
       flex-shrink: 0;
       position: sticky;
-      top: 113px;
-      height: calc(100vh - 113px);
+      top: 105px;
+      height: calc(100vh - 105px);
       overflow-y: auto;
       overscroll-behavior: contain;
       border-right: 1px solid var(--wf-border);
@@ -123,7 +123,7 @@
     }
     .lib-sidebar-toggle {
       position: sticky;
-      top: 113px;
+      top: 105px;
       z-index: 250;
       width: 36px;
       flex-shrink: 0;
@@ -138,7 +138,7 @@
       color: var(--wf-text-muted);
       font-size: 11px;
       line-height: 1;
-      height: calc(100vh - 113px);
+      height: calc(100vh - 105px);
       transition: background 0.15s, width 0.2s ease, padding 0.2s ease, border 0.2s ease;
     }
     .lib-sidebar-toggle:hover {
@@ -162,7 +162,7 @@
     /* Floating reopen button */
     .lib-sidebar-reopen {
       position: fixed;
-      top: 122px;
+      top: 114px;
       left: 8px;
       z-index: 300;
       width: 32px;
@@ -1788,6 +1788,9 @@
       max-width: var(--wf-max-w);
       margin: 0 auto;
     }
+    .lib-demo > .wf-pricing-grid {
+      padding: 0 40px 40px;
+    }
     .wf-planhero__title {
       font-size: clamp(40px, 7vw, 7rem);
       font-weight: 800;
@@ -2979,7 +2982,6 @@
 
   <header class="lib-header">
     <div class="lib-header__title">Wireframe Component Library</div>
-    <div class="lib-header__sub">Grayscale &middot; DreamHost Homepage Redesign</div>
   </header>
 
   <div class="lib-layout">
@@ -3560,6 +3562,14 @@
               <input type="text" placeholder="Find your domain name..." />
               <button>Search</button>
             </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px;">
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.com <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$9.99</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.online <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$1.99</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.shop <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$0.99</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.pro <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$17.99</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.io <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$39.99</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.ai <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$89.99</span></span>
+            </div>
             <div class="wf-hero__trust">
               <span>Free domain with annual plans</span>
               <span>·</span>
@@ -3615,12 +3625,12 @@
       <section class="lib-section" id="hero-split-media">
         <div class="lib-section__label">Heroes</div>
         <h2 class="lib-section__title">Split + Media Strip</h2>
-        <p class="lib-section__desc">Heritage/trust angle — 27 years, independently owned. Media strip below shows customer sites or product screenshots. Counter-positions against PE-owned competitors.</p>
+        <p class="lib-section__desc">Heritage/trust angle — 29 years, independently owned. Media strip below shows customer sites or product screenshots. Counter-positions against PE-owned competitors.</p>
         <div class="lib-demo">
           <div class="wf-hero wf-hero--centered" style="padding-bottom:0;">
             <div class="wf-eyebrow mb-16">Independently Owned Since 1997</div>
             <h1 class="wf-h1 mb-16">We Don't Answer to<br>Private Equity</h1>
-            <p class="wf-body max-w-560" style="margin:0 auto;">27 years of hosting websites for creators, businesses, and developers. No VC pressure to cut corners. No PE playbook to milk renewals. Just great hosting.</p>
+            <p class="wf-body max-w-560" style="margin:0 auto;">29 years of hosting websites for creators, businesses, and developers. No VC pressure to cut corners. No PE playbook to milk renewals. Just great hosting.</p>
             <div class="wf-hero__actions">
               <button class="wf-btn wf-btn--primary wf-btn--lg">Get Started from $1.99/mo</button>
               <button class="wf-btn wf-btn--secondary wf-btn--lg">Compare Plans</button>
@@ -3856,7 +3866,7 @@
           <div class="wf-pricing-grid">
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">DreamPress 1</div>
-              <div class="wf-pricing-card__desc">1 website · 40k monthly visits</div>
+              <div class="wf-pricing-card__desc">1 website · 25k monthly visits</div>
               <div class="wf-pricing-card__sale-badge">ON SALE</div>
               <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
@@ -3880,7 +3890,7 @@
               <div class="wf-pricing-card__badge-wrap">Most Popular</div>
               <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
                 <div class="wf-pricing-card__name">DreamPress 2</div>
-                <div class="wf-pricing-card__desc">2 websites · 80k monthly visits</div>
+                <div class="wf-pricing-card__desc">2 websites · 30k monthly visits</div>
                 <div class="wf-pricing-card__sale-badge">ON SALE</div>
                 <div class="wf-pricing-card__first-year">First 4 years at</div>
                 <div class="wf-pricing-card__price">
@@ -3903,7 +3913,7 @@
             </div>
             <div class="wf-pricing-card">
               <div class="wf-pricing-card__name">DreamPress 3</div>
-              <div class="wf-pricing-card__desc">3 websites · 125k monthly visits</div>
+              <div class="wf-pricing-card__desc">3 websites · 50k monthly visits</div>
               <div class="wf-pricing-card__sale-badge">ON SALE</div>
               <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
@@ -3956,8 +3966,8 @@
 
           <div class="wf-pricing-grid">
             <div class="wf-pricing-card">
-              <div class="wf-pricing-card__name">Launch</div>
-              <div class="wf-pricing-card__desc">For personal sites and blogs</div>
+              <div class="wf-pricing-card__name">DreamPress 1</div>
+              <div class="wf-pricing-card__desc">1 website · 25k monthly visits</div>
               <div class="wf-pricing-card__sale-badge">ON SALE</div>
               <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
@@ -3968,14 +3978,12 @@
               <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
               <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
-                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
-                <li>25 Websites</li>
-                <li>40k Monthly Visits</li>
-                <li>25 GB NVMe SSD</li>
+                <li>15 GB NVMe SSD</li>
+                <li>1 Professional Migration</li>
                 <li>Unmetered Bandwidth</li>
-                <li>Daily Backups</li>
-                <li>Free SSL</li>
+                <li>Unlimited Mailboxes</li>
                 <li>Free Domain 1 Year</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
               </ul>
               <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
@@ -3983,8 +3991,8 @@
             <div style="display: flex; flex-direction: column;">
               <div class="wf-pricing-card__badge-wrap">Most Popular</div>
               <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
-                <div class="wf-pricing-card__name">Growth</div>
-                <div class="wf-pricing-card__desc">For growing businesses</div>
+                <div class="wf-pricing-card__name">DreamPress 2</div>
+                <div class="wf-pricing-card__desc">2 websites · 30k monthly visits</div>
                 <div class="wf-pricing-card__sale-badge">ON SALE</div>
                 <div class="wf-pricing-card__first-year">First 4 years at</div>
                 <div class="wf-pricing-card__price">
@@ -3995,23 +4003,20 @@
                 <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Sign Up Now</button>
                 <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
                 <ul class="wf-pricing-card__features">
-                  <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
-                  <li>50 Websites</li>
-                  <li>200k Monthly Visits</li>
-                  <li>50 GB NVMe SSD</li>
+                  <li>25 GB NVMe SSD</li>
+                  <li>2 Professional Migrations</li>
                   <li>Unmetered Bandwidth</li>
-                  <li>Daily Backups</li>
-                  <li>Unlimited Free SSL</li>
-                  <li>Unlimited Email</li>
+                  <li>Unlimited Mailboxes</li>
                   <li>Free Domain 1 Year</li>
+                  <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
                 </ul>
                 <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
               </div>
             </div>
 
             <div class="wf-pricing-card">
-              <div class="wf-pricing-card__name">Scale</div>
-              <div class="wf-pricing-card__desc">For high-traffic sites</div>
+              <div class="wf-pricing-card__name">DreamPress 3</div>
+              <div class="wf-pricing-card__desc">3 websites · 50k monthly visits</div>
               <div class="wf-pricing-card__sale-badge">ON SALE</div>
               <div class="wf-pricing-card__first-year">First 4 years at</div>
               <div class="wf-pricing-card__price">
@@ -4022,15 +4027,12 @@
               <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
               <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
               <ul class="wf-pricing-card__features">
-                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
-                <li>100 Websites</li>
-                <li>400k Monthly Visits</li>
-                <li>100 GB NVMe SSD</li>
+                <li>30 GB NVMe SSD</li>
+                <li>3 Professional Migrations</li>
                 <li>Unmetered Bandwidth</li>
-                <li>Daily Backups</li>
-                <li>Unlimited Free SSL</li>
-                <li>Unlimited Email</li>
+                <li>Unlimited Mailboxes</li>
                 <li>Free Domain 1 Year</li>
+                <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
               </ul>
               <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
             </div>
@@ -4158,7 +4160,7 @@
               <div>
                 <div class="wf-eyebrow mb-12">Free Website</div>
                 <div class="wf-h2 mb-12">Free Website Built for You</div>
-                <div class="wf-body">We'll help you build your WordPress site, including content, layout, and template tweaks.</div>
+                <div class="wf-body">We'll build your WordPress site for you — real humans, custom design, no templates.</div>
                 <div class="wf-hero__actions">
                   <button class="wf-btn wf-btn--primary">Get Started</button>
                   <button class="wf-btn wf-btn--ghost">Compare Plans</button>
@@ -4302,7 +4304,7 @@
               </div>
               <div class="wf-included-strip__item">
                 <div class="wf-included-strip__icon">✓</div>
-                <span>Built-in Traffic Dashboard</span>
+                <span>Built-in Traffic Analytics</span>
               </div>
               <div class="wf-included-strip__item">
                 <div class="wf-included-strip__icon">✓</div>
@@ -4339,7 +4341,7 @@
                 </div>
                 <div class="wf-included-strip__item" style="color:rgba(255,255,255,0.7);">
                   <div class="wf-included-strip__icon" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);">✓</div>
-                  <span>Unlimited Traffic</span>
+                  <span>Unmetered Bandwidth</span>
                 </div>
               </div>
             </div>
@@ -4491,8 +4493,8 @@
             <div class="wf-addon-card">
               <div class="wf-addon-card__icon"></div>
               <div>
-                <div class="wf-addon-card__name">DreamShield Protect</div>
-                <div class="wf-addon-card__desc">Protect your site with daily automatic malware scans and removal.</div>
+                <div class="wf-addon-card__name">DreamShield</div>
+                <div class="wf-addon-card__desc">Protect your site with daily automatic malware scanning and threat alerts.</div>
                 <div class="wf-addon-card__price">$3.00<span>/mo</span></div>
               </div>
             </div>
@@ -4571,7 +4573,7 @@
             <div class="wf-product-card">
               <div class="wf-product-card__icon"></div>
               <div class="wf-h4">Web Hosting</div>
-              <div class="wf-body-sm">Shared hosting with unlimited bandwidth and storage.</div>
+              <div class="wf-body-sm">Web hosting with unmetered bandwidth and NVMe SSD storage.</div>
               <a href="#" class="wf-product-card__link">Learn More →</a>
             </div>
             <div class="wf-product-card">
@@ -4650,7 +4652,7 @@
                   <div class="wf-product-accordion__trigger-icon">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity:0.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                   </div>
-                  <span class="wf-product-accordion__trigger-name">DreamPress Pro</span>
+                  <span class="wf-product-accordion__trigger-name">DreamPress</span>
                   <span class="wf-product-accordion__chevron">+</span>
                 </button>
                 <div class="wf-product-accordion__body">
@@ -5035,7 +5037,7 @@
                   </div>
                   <div class="wf-review-card">
                     <div class="wf-review-card__stars">★★★★★</div>
-                    <div class="wf-review-card__title">27 years for a reason</div>
+                    <div class="wf-review-card__title">29 years for a reason</div>
                     <div class="wf-review-card__excerpt">Been with DreamHost for 8 years now. They've never raised my price without warning and the uptime has been essentially perfect.</div>
                     <div class="wf-review-card__author">James K.</div>
                     <div class="wf-review-card__time">5 days ago</div>
@@ -5082,7 +5084,7 @@
                   </div>
                   <div class="wf-review-card">
                     <div class="wf-review-card__stars">★★★★★</div>
-                    <div class="wf-review-card__title">27 years for a reason</div>
+                    <div class="wf-review-card__title">29 years for a reason</div>
                     <div class="wf-review-card__excerpt">Been with DreamHost for 8 years now. They've never raised my price without warning and the uptime has been essentially perfect.</div>
                     <div class="wf-review-card__author">James K.</div>
                     <div class="wf-review-card__time">5 days ago</div>
@@ -5239,7 +5241,7 @@
                   <span>What types of hosting does DreamHost offer?</span>
                   <span class="wf-faq-trigger__icon">+</span>
                 </button>
-                <div class="wf-faq-body">We offer Shared Hosting, Managed WordPress (DreamPress), VPS, Dedicated Servers, and Cloud hosting. Each plan is designed for different needs — from personal blogs to high-traffic applications.</div>
+                <div class="wf-faq-body">We offer Web Hosting, Managed WordPress (DreamPress), VPS, Dedicated Servers, and Cloud hosting. Each plan is designed for different needs — from personal blogs to high-traffic applications.</div>
               </div>
               <div class="wf-faq-item">
                 <button class="wf-faq-trigger">
@@ -5403,12 +5405,12 @@
         <div class="lib-demo" style="padding: 0;">
           <div class="wf-dc-map">
             <div class="wf-dc-map__title">Global Infrastructure, Local Speed</div>
-            <div class="wf-dc-map__subtitle">Three datacenters across three continents — your site loads fast, everywhere.</div>
+            <div class="wf-dc-map__subtitle">Three datacenters across two continents — your site loads fast, everywhere.</div>
             <div class="wf-dc-map__visual">
               <span style="color: var(--wf-placeholder-dark); font-size: 14px; z-index: 1;">[ World Map Visualization ]</span>
-              <div class="wf-dc-dot" style="left: 22%; top: 35%;" data-label="Portland"></div>
+              <div class="wf-dc-dot" style="left: 22%; top: 35%;" data-label="Oregon"></div>
               <div class="wf-dc-dot" style="left: 48%; top: 30%;" data-label="Amsterdam"></div>
-              <div class="wf-dc-dot" style="left: 78%; top: 55%;" data-label="Singapore"></div>
+              <div class="wf-dc-dot" style="left: 27%; top: 38%;" data-label="Virginia"></div>
             </div>
             <div class="wf-dc-stats">
               <div class="wf-dc-stat">
@@ -5672,7 +5674,7 @@
               <ul class="wf-stats-content__checklist">
                 <li><span class="wf-stats-content__check">✓</span> Free domain with annual plans</li>
                 <li><span class="wf-stats-content__check">✓</span> Free SSL certificates on every site</li>
-                <li><span class="wf-stats-content__check">✓</span> Unlimited bandwidth and storage</li>
+                <li><span class="wf-stats-content__check">✓</span> Unmetered bandwidth and NVMe SSD storage</li>
                 <li><span class="wf-stats-content__check">✓</span> 24/7 in-house expert support</li>
                 <li><span class="wf-stats-content__check">✓</span> 30-day money-back guarantee</li>
                 <li><span class="wf-stats-content__check">✓</span> 100% carbon neutral hosting</li>
@@ -5712,7 +5714,7 @@
                 <div class="wf-bridge-card">
                   <div class="wf-bridge-card__icon"></div>
                   <div class="wf-h4">Grow Easily</div>
-                  <div class="wf-body-sm">Unlimited bandwidth, scalable resources, and expert support when you need it.</div>
+                  <div class="wf-body-sm">Unmetered bandwidth, scalable resources, and expert support when you need it.</div>
                   <button class="wf-btn wf-btn--secondary wf-btn--sm">Learn More →</button>
                 </div>
               </div>
@@ -5759,8 +5761,8 @@
                   </div>
                   <div class="wf-hybrid-card__body">
                     <div class="wf-hybrid-card__badge">Hosting</div>
-                    <div class="wf-h4">Shared Hosting</div>
-                    <div class="wf-body-sm">Fast, reliable hosting with unlimited traffic and a free domain included.</div>
+                    <div class="wf-h4">Web Hosting</div>
+                    <div class="wf-body-sm">Fast, reliable hosting with unmetered bandwidth and a free domain included.</div>
                     <a href="#" class="wf-hybrid-card__link">View Plans →</a>
                   </div>
                 </div>

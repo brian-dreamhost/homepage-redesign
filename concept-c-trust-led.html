@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Concept A: Commercial / Price-Led — DreamHost Homepage Redesign</title>
+  <title>Concept C: Social Proof / Trust-Led — DreamHost Homepage Redesign</title>
   <style>
     @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
     @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
@@ -250,18 +250,6 @@
     }
     .wf-input::placeholder { color: var(--wf-text-faint); }
     .wf-input:focus { border-color: var(--wf-text-muted); }
-    .wf-input-group {
-      display: flex;
-      gap: 0;
-    }
-    .wf-input-group .wf-input {
-      border-radius: var(--wf-radius) 0 0 var(--wf-radius);
-      border-right: none;
-    }
-    .wf-input-group .wf-btn {
-      border-radius: 0 var(--wf-radius) var(--wf-radius) 0;
-      white-space: nowrap;
-    }
 
     /* ── Badge / Pill ── */
     .wf-badge {
@@ -449,6 +437,38 @@
     .wf-section__header .wf-eyebrow { margin-bottom: 12px; }
     .wf-section__header .wf-body { max-width: 560px; margin: 12px auto 0; }
 
+    /* ── Domain Search ── */
+    .wf-hero__domain-search {
+      display: flex;
+      max-width: 520px;
+      margin-top: 28px;
+      border: 2px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      overflow: hidden;
+    }
+    .wf-hero--centered .wf-hero__domain-search { margin: 28px auto 0; }
+    .wf-hero__domain-search input {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      font-family: var(--wf-font);
+      font-size: 15px;
+      outline: none;
+      background: transparent;
+      color: var(--wf-text);
+    }
+    .wf-hero__domain-search input::placeholder { color: var(--wf-text-faint); }
+    .wf-hero__domain-search button {
+      padding: 14px 28px;
+      border: none;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-family: var(--wf-font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     /* ── Split Section ── */
     .wf-split {
       display: grid;
@@ -479,7 +499,7 @@
     }
     .wf-section--dark .wf-stat__label { color: rgba(255,255,255,0.5); }
 
-    /* ── Testimonial ── */
+    /* ── Testimonial Grid ── */
     .wf-testimonial-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -514,20 +534,225 @@
       color: var(--wf-text-muted);
     }
 
-    /* ── Big Testimonial ── */
-    .wf-testimonial-big {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 0;
+    /* ── Testimonial Split ── */
+    .wf-testimonial-split {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: start;
     }
-    .wf-testimonial-big__quote {
-      font-size: clamp(24px, 3vw, 32px);
+    .wf-testimonial-split__featured {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      padding: 40px;
+    }
+    .wf-testimonial-split__featured-stars { margin-bottom: 20px; }
+    .wf-testimonial-split__featured-quote {
+      font-size: clamp(20px, 2.5vw, 24px);
       font-weight: 500;
       font-style: italic;
-      line-height: 1.4;
+      line-height: 1.45;
       color: var(--wf-text);
       margin-bottom: 28px;
+    }
+    .wf-testimonial-split__featured-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-testimonial-split__featured-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-text);
+    }
+    .wf-testimonial-split__featured-role {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+    .wf-testimonial-split__grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .wf-testimonial-split__card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      padding: 28px;
+    }
+    .wf-testimonial-split__card-stars { margin-bottom: 12px; }
+    .wf-testimonial-split__card-quote {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--wf-text-body);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .wf-testimonial-split__card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+    }
+    .wf-testimonial-split__card-role {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Showcase Block ── */
+    .wf-showcase-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .wf-showcase-block:last-child { border-bottom: none; }
+    .wf-showcase-block--reverse { direction: rtl; }
+    .wf-showcase-block--reverse > * { direction: ltr; }
+    .wf-showcase-block__text .wf-eyebrow { margin-bottom: 12px; }
+    .wf-showcase-block__text .wf-h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 16px;
+    }
+    .wf-showcase-block__text .wf-body { margin-bottom: 24px; }
+    .wf-showcase-block__text .wf-caption { margin-top: 12px; }
+    .wf-showcase-block__media {
+      height: 360px;
+      background: var(--wf-surface);
+      border-radius: var(--wf-radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Logo Bar ── */
+    .wf-logo-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 24px 0;
+    }
+    .wf-logo-bar__item {
+      width: 100px;
+      height: 24px;
+      background: var(--wf-placeholder);
+      border-radius: 4px;
+      opacity: 0.5;
+    }
+
+    /* ── Review Carousel ── */
+    .wf-review-carousel {
+      padding: 64px 48px;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+    }
+    .wf-review-carousel--light {
+      background: var(--wf-surface);
+    }
+    .wf-review-carousel__summary {
+      flex-shrink: 0;
+      width: 240px;
+      padding-top: 8px;
+    }
+    .wf-review-carousel__rating-text {
+      font-family: var(--wf-font);
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .wf-review-carousel__stars {
+      font-size: 24px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      color: var(--wf-text);
+    }
+    .wf-review-carousel__count {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+      margin-bottom: 16px;
+    }
+    .wf-review-carousel__tp-logo {
+      width: 100px;
+      height: 24px;
+      background: var(--wf-placeholder);
+      border-radius: 4px;
+    }
+    .wf-review-carousel__track-wrapper {
+      flex: 1;
+      min-width: 0;
+      position: relative;
+    }
+    .wf-review-carousel__track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+    .wf-review-carousel__track::-webkit-scrollbar { display: none; }
+    .wf-review-card {
+      flex-shrink: 0;
+      width: 280px;
+      padding: 24px;
+      border-radius: var(--wf-radius-lg);
+      scroll-snap-align: start;
+    }
+    .wf-review-carousel--light .wf-review-card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+    }
+    .wf-review-card__stars {
+      font-size: 16px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: var(--wf-text);
+    }
+    .wf-review-card__title {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .wf-review-card__excerpt {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--wf-text-muted);
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .wf-review-card__author {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .wf-review-card__time {
+      font-size: 12px;
+      color: var(--wf-text-muted);
+      margin-top: 2px;
+    }
+    .wf-review-carousel__nav {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 18px;
     }
 
     /* ── FAQ ── */
@@ -995,34 +1220,6 @@
       margin-left: 8px;
       vertical-align: middle;
     }
-    .wf-pricing-card__term-picker {
-      display: flex;
-      gap: 4px;
-      background: var(--wf-surface);
-      border-radius: var(--wf-radius-pill);
-      padding: 3px;
-      margin-bottom: 16px;
-    }
-    .wf-pricing-card__term {
-      flex: 1;
-      font-family: var(--wf-font);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 4px;
-      border-radius: var(--wf-radius-pill);
-      border: none;
-      background: none;
-      color: var(--wf-text-muted);
-      cursor: pointer;
-      text-align: center;
-      line-height: 1.2;
-      white-space: nowrap;
-    }
-    .wf-pricing-card__term--active {
-      background: var(--wf-white);
-      color: var(--wf-text);
-      box-shadow: var(--wf-shadow);
-    }
     .wf-pricing-card__view-more {
       text-align: center;
       margin-top: 20px;
@@ -1033,72 +1230,38 @@
       cursor: pointer;
     }
 
-    /* ── Datacenter Map ── */
-    .wf-dc-map { padding: 48px 40px; background: var(--wf-dark); border-radius: var(--wf-radius-lg); color: var(--wf-white); }
-    .wf-dc-map__title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    .wf-dc-map__subtitle { font-size: 16px; color: var(--wf-placeholder-dark); margin-bottom: 36px; }
-    .wf-dc-map__visual { background: var(--wf-dark-surface); border-radius: var(--wf-radius); height: 260px; display: flex; align-items: center; justify-content: center; margin-bottom: 36px; position: relative; overflow: hidden; }
-    .wf-dc-map__visual::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(255,255,255,0.04) 49px, rgba(255,255,255,0.04) 50px), repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(255,255,255,0.04) 49px, rgba(255,255,255,0.04) 50px); }
-    .wf-dc-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--wf-white); position: absolute; box-shadow: 0 0 0 4px rgba(255,255,255,0.2), 0 0 20px rgba(255,255,255,0.15); }
-    .wf-dc-dot::after { content: attr(data-label); position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 600; white-space: nowrap; color: var(--wf-placeholder-dark); }
-    .wf-dc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .wf-dc-stat { text-align: center; }
-    .wf-dc-stat__value { font-size: 36px; font-weight: 800; line-height: 1.1; }
-    .wf-dc-stat__label { font-size: 13px; color: var(--wf-placeholder-dark); margin-top: 4px; }
+    /* ── Stats Strip ── */
+    .wf-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+      padding: 64px 48px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-stats-strip__number {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--wf-text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .wf-stats-strip__label {
+      font-size: 14px;
+      color: var(--wf-text-muted);
+      margin-top: 4px;
+    }
 
-    /* ── Competitive Reliability Grid ── */
-    .wf-reliability { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .wf-reliability__card { padding: 28px 24px; border-radius: var(--wf-radius); text-align: center; }
-    .wf-reliability__card--hero { background: var(--wf-dark); color: var(--wf-white); grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 40px; padding: 40px; }
-    .wf-reliability__card--competitor { background: var(--wf-surface); }
-    .wf-reliability__pct { font-size: 48px; font-weight: 800; line-height: 1; }
-    .wf-reliability__pct--small { font-size: 32px; }
-    .wf-reliability__name { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--wf-text); }
-    .wf-reliability__label { font-size: 13px; color: var(--wf-text-muted); margin-top: 4px; }
-    .wf-reliability__detail { font-size: 12px; color: var(--wf-text-faint); margin-top: 6px; }
-
-    /* ── Hero Domain Search ── */
+    /* ── Hero Centered ── */
     .wf-hero--centered { text-align: center; }
     .wf-hero--centered .wf-body { margin: 0 auto; }
-    .wf-hero__domain-search {
+    .wf-hero__actions {
       display: flex;
-      max-width: 520px;
+      gap: 12px;
       margin-top: 28px;
-      border: 2px solid var(--wf-border);
-      border-radius: var(--wf-radius);
-      overflow: hidden;
     }
-    .wf-hero--centered .wf-hero__domain-search { margin: 28px auto 0; }
-    .wf-hero__domain-search input {
-      flex: 1;
-      padding: 14px 20px;
-      border: none;
-      font-family: var(--wf-font);
-      font-size: 15px;
-      outline: none;
-      background: transparent;
-      color: var(--wf-text);
-    }
-    .wf-hero__domain-search input::placeholder { color: var(--wf-text-faint); }
-    .wf-hero__domain-search button {
-      padding: 14px 28px;
-      border: none;
-      background: var(--wf-text);
-      color: var(--wf-white);
-      font-family: var(--wf-font);
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .wf-hero__trust {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 20px;
-      font-size: 13px;
-      color: var(--wf-text-muted);
-    }
-    .wf-hero--centered .wf-hero__trust { justify-content: center; }
+    .wf-hero--centered .wf-hero__actions { justify-content: center; }
 
     /* ── Project Nav ── */
     .project-nav {
@@ -1146,55 +1309,6 @@
     }
     .project-nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
     .project-nav__links a.active { color: #fff; background: rgba(255,255,255,0.1); }
-
-    /* ── Product Showcase (stacked 2-col blocks) ── */
-    .wf-product-showcase {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .wf-product-showcase__item {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      padding: 80px 0;
-      border-bottom: 1px solid var(--wf-border);
-    }
-    .wf-product-showcase__item:last-child { border-bottom: none; }
-    .wf-product-showcase__item:nth-child(even) .wf-product-showcase__visual { order: -1; }
-    .wf-product-showcase__visual {
-      background: var(--wf-surface);
-      border-radius: var(--wf-radius-lg);
-      height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .wf-product-showcase__visual svg { opacity: 0.3; }
-
-    /* ── Stats Bar (light) ── */
-    .wf-stats-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      text-align: center;
-      padding: 64px 48px;
-      max-width: var(--wf-max-w);
-      margin: 0 auto;
-    }
-    .wf-stats-strip__number {
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 800;
-      color: var(--wf-text);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-    .wf-stats-strip__label {
-      font-size: 14px;
-      color: var(--wf-text-muted);
-      margin-top: 4px;
-    }
 
     /* ── Helpers ── */
     .flex { display: flex; }
@@ -1255,7 +1369,7 @@
         <a href="#">News</a>
         <a href="#">Support</a>
         <a href="#">$ USD <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
-        <a href="#">⊕ English <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
+        <a href="#">&#8853; English <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></a>
       </div>
     </div>
   </div>
@@ -1285,13 +1399,273 @@
   </nav>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 4. PLAN CARD HERO                       -->
+  <!-- 4. HERO — CENTERED, TRUST-LED           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div style="padding: 100px 48px 80px; max-width: var(--wf-max-w); margin: 0 auto;" class="wf-hero--centered">
+    <div class="wf-eyebrow mb-16">TRUSTED SINCE 1997</div>
+    <h1 class="wf-h1 mb-16">29 Years of Keeping Businesses Online</h1>
+    <p class="wf-body max-w-560" style="margin: 0 auto 32px; font-size: 18px; line-height: 1.6;">1.5 million websites. 100% uptime guarantee. Award-winning support. There's a reason small businesses have trusted DreamHost for nearly three decades.</p>
+
+    <!-- Trustpilot prominent -->
+    <div class="wf-trustpilot" style="margin-bottom: 36px;">
+      <span class="wf-trustpilot__excellent">Excellent</span>
+      <div class="wf-trustpilot__stars">
+        <div class="wf-trustpilot__star" style="width: 32px; height: 32px;"></div>
+        <div class="wf-trustpilot__star" style="width: 32px; height: 32px;"></div>
+        <div class="wf-trustpilot__star" style="width: 32px; height: 32px;"></div>
+        <div class="wf-trustpilot__star" style="width: 32px; height: 32px;"></div>
+        <div class="wf-trustpilot__star wf-trustpilot__star--partial" style="width: 32px; height: 32px;"></div>
+      </div>
+      <span class="wf-trustpilot__meta">4.7 out of 5 based on <a href="#">7,847 reviews</a></span>
+      <span class="wf-trustpilot__logo">&#9733; Trustpilot</span>
+    </div>
+
+    <div class="wf-hero__actions">
+      <button class="wf-btn wf-btn--primary wf-btn--lg">See Plans &amp; Pricing &rarr;</button>
+      <button class="wf-btn wf-btn--secondary wf-btn--lg">Read Customer Stories</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 5. STATS BAR                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <div style="border-top: 1px solid var(--wf-border); border-bottom: 1px solid var(--wf-border);">
+    <div class="wf-stats-strip">
+      <div>
+        <div class="wf-stats-strip__number">29+</div>
+        <div class="wf-stats-strip__label">Years in Business</div>
+      </div>
+      <div>
+        <div class="wf-stats-strip__number">1.5M+</div>
+        <div class="wf-stats-strip__label">Websites Hosted</div>
+      </div>
+      <div>
+        <div class="wf-stats-strip__number">100%</div>
+        <div class="wf-stats-strip__label">Uptime Guarantee</div>
+      </div>
+      <div>
+        <div class="wf-stats-strip__number">4.7/5</div>
+        <div class="wf-stats-strip__label">Trustpilot Rating</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 6. TESTIMONIAL SPLIT                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="wf-section__header">
+      <div class="wf-eyebrow mb-12">WHAT OUR CUSTOMERS SAY</div>
+      <h2 class="wf-h2">Real Businesses. Real Results.</h2>
+    </div>
+    <div class="wf-testimonial-split">
+      <!-- Featured testimonial -->
+      <div class="wf-testimonial-split__featured">
+        <div class="wf-testimonial-split__featured-stars">
+          <div class="wf-stars" style="gap: 3px;">
+            <div class="wf-star" style="width: 22px; height: 22px;"></div>
+            <div class="wf-star" style="width: 22px; height: 22px;"></div>
+            <div class="wf-star" style="width: 22px; height: 22px;"></div>
+            <div class="wf-star" style="width: 22px; height: 22px;"></div>
+            <div class="wf-star" style="width: 22px; height: 22px;"></div>
+          </div>
+        </div>
+        <div class="wf-testimonial-split__featured-quote">"Switching to DreamHost was the best decision we made for our business. The support team actually understands WordPress, and our site has never gone down."</div>
+        <div class="wf-testimonial-split__featured-author">
+          <div class="wf-avatar wf-avatar--lg"></div>
+          <div>
+            <div class="wf-testimonial-split__featured-name">Rachel V.</div>
+            <div class="wf-testimonial-split__featured-role">Marketing Director, Bloom &amp; Fern Co.</div>
+          </div>
+        </div>
+      </div>
+      <!-- Smaller cards -->
+      <div class="wf-testimonial-split__grid">
+        <div class="wf-testimonial-split__card">
+          <div class="wf-testimonial-split__card-stars">
+            <div class="wf-stars" style="gap: 2px;">
+              <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+            </div>
+          </div>
+          <div class="wf-testimonial-split__card-quote">"Finally, a host that shows you the real price upfront. No 4-year commitment required to get a decent rate."</div>
+          <div class="wf-testimonial-split__card-name">Marcus T.</div>
+          <div class="wf-testimonial-split__card-role">Owner, Eastside Auto Detail</div>
+        </div>
+        <div class="wf-testimonial-split__card">
+          <div class="wf-testimonial-split__card-stars">
+            <div class="wf-stars" style="gap: 2px;">
+              <div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div>
+            </div>
+          </div>
+          <div class="wf-testimonial-split__card-quote">"We moved 12 client sites to DreamHost. Zero downtime during migration, and the Pro Services team handled everything."</div>
+          <div class="wf-testimonial-split__card-name">Priya S.</div>
+          <div class="wf-testimonial-split__card-role">Founder, Kite Digital Agency</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 7. SHOWCASE BLOCK — PERFORMANCE         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="wf-showcase-block" style="border-bottom: none; padding-top: 0;">
+      <div class="wf-showcase-block__text">
+        <div class="wf-eyebrow">PERFORMANCE YOU CAN VERIFY</div>
+        <h2 class="wf-h2">We Don't Just Claim Speed — We Prove It</h2>
+        <p class="wf-body">Independent load testing by ReviewSignal showed DreamHost achieved a 0% error rate under heavy traffic. NVMe storage, global data centers, and infrastructure built for reliability — not marketing slides.</p>
+        <p class="wf-caption">Data from ReviewSignal independent hosting benchmark tests</p>
+        <div style="margin-top: 24px;">
+          <button class="wf-btn wf-btn--primary">See Performance Data &rarr;</button>
+        </div>
+      </div>
+      <div class="wf-showcase-block__media">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/></svg>
+        <span style="position: absolute; font-size: 13px; color: var(--wf-text-muted);">[ Benchmark Chart ]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 8. REVIEW CAROUSEL (Light)              -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-review-carousel wf-review-carousel--light">
+    <div class="wf-review-carousel__summary">
+      <div class="wf-review-carousel__rating-text">Excellent</div>
+      <div class="wf-review-carousel__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="wf-review-carousel__count">4.7 out of 5 based on 7,847 reviews</div>
+      <div class="wf-review-carousel__tp-logo"></div>
+    </div>
+    <div class="wf-review-carousel__track-wrapper">
+      <div class="wf-review-carousel__track">
+        <div class="wf-review-card">
+          <div class="wf-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="wf-review-card__title">Best hosting decision we ever made</div>
+          <div class="wf-review-card__excerpt">We switched from a big-name host after they got acquired and support went downhill. DreamHost has been consistent for 3 years — same team, same quality. Support actually knows what they're talking about.</div>
+          <div class="wf-review-card__author">Jennifer L.</div>
+          <div class="wf-review-card__time">2 weeks ago</div>
+        </div>
+        <div class="wf-review-card">
+          <div class="wf-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="wf-review-card__title">14 years and counting</div>
+          <div class="wf-review-card__excerpt">I've been with DreamHost since 2012. Never had a reason to switch. The panel is clean, backups work, and when I've needed help, they respond fast.</div>
+          <div class="wf-review-card__author">David K.</div>
+          <div class="wf-review-card__time">1 month ago</div>
+        </div>
+        <div class="wf-review-card">
+          <div class="wf-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="wf-review-card__title">Migrated 8 client sites seamlessly</div>
+          <div class="wf-review-card__excerpt">As an agency, we need reliable hosting for multiple clients. DreamHost's migration tools worked perfectly, and their support helped with the tricky ones.</div>
+          <div class="wf-review-card__author">Anika P.</div>
+          <div class="wf-review-card__time">3 weeks ago</div>
+        </div>
+        <div class="wf-review-card">
+          <div class="wf-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="wf-review-card__title">Finally, honest pricing</div>
+          <div class="wf-review-card__excerpt">Renewal rates are shown right on the plan page — no surprises buried in footnotes. That kind of transparency is rare in hosting.</div>
+          <div class="wf-review-card__author">Tom R.</div>
+          <div class="wf-review-card__time">1 week ago</div>
+        </div>
+        <div class="wf-review-card">
+          <div class="wf-review-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <div class="wf-review-card__title">Support that actually helps</div>
+          <div class="wf-review-card__excerpt">Had a DNS issue at 2am. Support chat connected me to someone who knew exactly what to do. Resolved in 15 minutes. Try that with GoDaddy.</div>
+          <div class="wf-review-card__author">Maria S.</div>
+          <div class="wf-review-card__time">5 days ago</div>
+        </div>
+      </div>
+      <div class="wf-review-carousel__nav">&rarr;</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 9. SHOWCASE BLOCK REVERSE — INDEPENDENCE -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="wf-showcase-block wf-showcase-block--reverse" style="border-bottom: none;">
+      <div class="wf-showcase-block__text">
+        <div class="wf-eyebrow">INDEPENDENT SINCE 1997</div>
+        <h2 class="wf-h2">No Private Equity. No Corporate Parent. Just Better Hosting.</h2>
+        <p class="wf-body">While other hosts answer to investors and quarterly earnings, DreamHost answers to customers. That independence means honest pricing, long-term product decisions, and support that's never been outsourced.</p>
+        <div style="margin-top: 24px;">
+          <button class="wf-btn wf-btn--primary">Our Story &rarr;</button>
+        </div>
+      </div>
+      <div class="wf-showcase-block__media">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span style="position: absolute; font-size: 13px; color: var(--wf-text-muted);">[ Team / Office Photo ]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 10. LOGO BAR                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <div style="border-top: 1px solid var(--wf-border); border-bottom: 1px solid var(--wf-border); padding: 40px 48px;">
+    <div style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-eyebrow text-center mb-24">TRUSTED BY BUSINESSES EVERYWHERE</div>
+      <div class="wf-logo-bar">
+        <div class="wf-logo-bar__item"></div>
+        <div class="wf-logo-bar__item" style="width: 80px;"></div>
+        <div class="wf-logo-bar__item" style="width: 120px;"></div>
+        <div class="wf-logo-bar__item" style="width: 90px;"></div>
+        <div class="wf-logo-bar__item" style="width: 110px;"></div>
+        <div class="wf-logo-bar__item" style="width: 85px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DOMAIN SEARCH                           -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section--alt">
+    <div style="max-width: var(--wf-max-w); margin: 0 auto; padding: 120px 48px;" class="wf-hero--centered">
+      <div class="wf-eyebrow" style="margin-bottom: 12px;">DOMAINS</div>
+      <h2 class="wf-h2" style="margin-bottom: 12px;">Claim Your Domain</h2>
+      <p class="wf-body" style="max-width: 560px; margin: 0 auto;">Every hosting plan includes a free domain for the first year. Your name, your brand, online in minutes.</p>
+      <div class="wf-hero__domain-search">
+        <input type="text" placeholder="Search for a domain name..." />
+        <button>Search</button>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px;">
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.com <span style="color: var(--wf-text-muted); font-weight: 400;">$9.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.online <span style="color: var(--wf-text-muted); font-weight: 400;">$1.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.shop <span style="color: var(--wf-text-muted); font-weight: 400;">$0.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.pro <span style="color: var(--wf-text-muted); font-weight: 400;">$17.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.io <span style="color: var(--wf-text-muted); font-weight: 400;">$39.99</span></span>
+        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-text);">.ai <span style="color: var(--wf-text-muted); font-weight: 400;">$89.99</span></span>
+      </div>
+      <p class="wf-body-sm" style="margin-top: 20px; color: var(--wf-text-muted);">Free domain with annual plans &middot; 400+ TLDs available &middot; Free transfers</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 11. PLAN HERO — WEB HOSTING             -->
   <!-- ═══════════════════════════════════════ -->
   <div class="wf-planhero">
-    <h1 class="wf-planhero__title">Fast, Reliable Web Hosting Starting at $$$</h1>
-    <p class="wf-planhero__sub">Everything you need to build your website. Free domain, free SSL, unlimited bandwidth, and 24/7 expert support included with every plan.</p>
+    <h2 class="wf-planhero__title" style="font-size: clamp(36px, 6vw, 5.5rem);">Plans That Earn Your Trust</h2>
+    <p class="wf-planhero__sub">Transparent pricing with renewal rates shown upfront. No 48-month commitments to get a good rate.</p>
 
-    <div class="wf-trustpilot">
+    <div class="wf-planhero__features">
+      <div class="wf-planhero__feature">
+        <div class="wf-planhero__feature-icon"></div>
+        <span>Free Domain</span>
+      </div>
+      <div class="wf-planhero__feature">
+        <div class="wf-planhero__feature-icon"></div>
+        <span>Free SSL</span>
+      </div>
+      <div class="wf-planhero__feature">
+        <div class="wf-planhero__feature-icon"></div>
+        <span>Free Website Build</span>
+      </div>
+      <div class="wf-planhero__feature">
+        <div class="wf-planhero__feature-icon"></div>
+        <span>30-Day Money-Back</span>
+      </div>
+    </div>
+
+    <div class="wf-trustpilot" style="margin-bottom: 32px;">
       <span class="wf-trustpilot__label">Our customers say</span>
       <span class="wf-trustpilot__excellent">Excellent</span>
       <div class="wf-trustpilot__stars">
@@ -1301,43 +1675,50 @@
         <div class="wf-trustpilot__star"></div>
         <div class="wf-trustpilot__star wf-trustpilot__star--partial"></div>
       </div>
-      <span class="wf-trustpilot__meta">4.7 out of 5 based on <a href="#">7,847 reviews</a></span>
+      <span class="wf-trustpilot__meta">4.7 / 5 &middot; <a href="#">7,847 reviews</a></span>
       <span class="wf-trustpilot__logo">&#9733; Trustpilot</span>
     </div>
 
+    <div class="wf-planhero__controls">
+      <div class="wf-term-label">Choose Your Billing Term</div>
+      <div class="wf-term-dropdown">
+        <div class="wf-term-dropdown__selected">
+          <span>4-Year Term</span>
+          <span class="wf-term-dropdown__badge">Best Value</span>
+          <span class="wf-term-dropdown__chevron">&#9662;</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="wf-pricing-grid">
-    <!-- WordPress Hosting Launch -->
+    <!-- Launch -->
     <div class="wf-pricing-card">
       <div class="wf-pricing-card__name">Web Hosting Launch</div>
       <div class="wf-pricing-card__desc">Reliable hosting for new or simple sites.</div>
       <div class="wf-pricing-card__sale-badge">ON SALE</div>
       <div class="wf-pricing-card__first-year">First 4 years at</div>
       <div class="wf-pricing-card__price">
-        <span class="wf-pricing-card__amount">$$$</span>
+        <span class="wf-pricing-card__amount">$$$$</span>
         <span class="wf-pricing-card__period">/mo</span>
         <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
       </div>
       <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
       <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
       <ul class="wf-pricing-card__features">
-        <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
         <li><strong>25</strong> Websites</li>
-        <li><strong>40k</strong> Monthly Visits</li>
-        <li><strong>25 GB</strong> NVMe SSD storage</li>
+        <li><strong>~40K</strong> Monthly Visits</li>
+        <li><strong>25 GB</strong> NVMe SSD Storage</li>
         <li><strong>Unmetered</strong> Bandwidth</li>
         <li><strong>Daily</strong> Automated Backups</li>
-        <li><strong>Unlimited Free</strong> SSL Certificates</li>
-        <li><strong>3 Months Free</strong> – 20 Mailboxes</li>
-        <li><strong>Free</strong> Professional Website Build</li>
-        <li><strong>Free Domain</strong> for 1 Year</li>
-        <li><strong>30-Day</strong> Money-Back Guarantee</li>
+        <li><strong>Free</strong> SSL Certificates</li>
+        <li><strong>20</strong> Email Mailboxes</li>
+        <li>Standard 24/7 Support</li>
       </ul>
       <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
     </div>
 
-    <!-- WordPress Hosting Growth (FEATURED) -->
+    <!-- Growth (FEATURED) -->
     <div style="display: flex; flex-direction: column;">
     <div class="wf-pricing-card__badge-wrap">Most Popular</div>
     <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
@@ -1346,449 +1727,149 @@
       <div class="wf-pricing-card__sale-badge">ON SALE</div>
       <div class="wf-pricing-card__first-year">First 4 years at</div>
       <div class="wf-pricing-card__price">
-        <span class="wf-pricing-card__amount">$$$</span>
+        <span class="wf-pricing-card__amount">$$$$</span>
         <span class="wf-pricing-card__period">/mo</span>
         <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
       </div>
       <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Sign Up Now</button>
       <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
       <ul class="wf-pricing-card__features">
-        <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
         <li><strong>50</strong> Websites</li>
-        <li><strong>200k</strong> Monthly Visits</li>
-        <li><strong>50 GB</strong> NVMe SSD storage</li>
+        <li><strong>~200K</strong> Monthly Visits</li>
+        <li><strong>50 GB</strong> NVMe SSD Storage</li>
         <li><strong>Unmetered</strong> Bandwidth</li>
         <li><strong>Daily</strong> Automated Backups</li>
-        <li><strong>Unlimited Free</strong> SSL Certificates</li>
-        <li><strong>3 Months Free</strong> – 40 Mailboxes</li>
-        <li><strong>Free</strong> Professional Website Build</li>
-        <li><strong>Free Domain</strong> for 1 Year</li>
-        <li><strong>30-Day</strong> Money-Back Guarantee</li>
+        <li><strong>Free</strong> SSL Certificates</li>
+        <li><strong>DreamShield</strong> Included</li>
+        <li><strong>Free</strong> CDN Trial</li>
+        <li>Standard 24/7 Support</li>
       </ul>
       <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
     </div>
     </div>
 
-    <!-- WordPress Hosting Scale -->
+    <!-- Scale -->
     <div class="wf-pricing-card">
       <div class="wf-pricing-card__name">Web Hosting Scale</div>
       <div class="wf-pricing-card__desc">Maximum resources for high-traffic sites.</div>
       <div class="wf-pricing-card__sale-badge">ON SALE</div>
       <div class="wf-pricing-card__first-year">First 4 years at</div>
       <div class="wf-pricing-card__price">
-        <span class="wf-pricing-card__amount">$$$</span>
+        <span class="wf-pricing-card__amount">$$$$</span>
         <span class="wf-pricing-card__period">/mo</span>
         <span class="wf-pricing-card__save">SAVE %%% <span class="info-icon">i</span></span>
       </div>
       <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Sign Up Now</button>
       <div class="wf-pricing-card__renewal">Auto-renews at $$$/mo after 4 years.</div>
       <ul class="wf-pricing-card__features">
-        <li><strong>Remixer</strong> AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
         <li><strong>100</strong> Websites</li>
-        <li><strong>400k</strong> Monthly Visits</li>
-        <li><strong>100 GB</strong> NVMe SSD storage</li>
+        <li><strong>~400K</strong> Monthly Visits</li>
+        <li><strong>100 GB</strong> NVMe SSD Storage</li>
         <li><strong>Unmetered</strong> Bandwidth</li>
         <li><strong>Daily</strong> Automated Backups</li>
-        <li><strong>Unlimited Free</strong> SSL Certificates</li>
-        <li><strong>3 Months Free</strong> – 60 Mailboxes</li>
-        <li><strong>Free</strong> Professional Website Build</li>
-        <li><strong>Free Domain</strong> for 1 Year</li>
-        <li><strong>30-Day</strong> Money-Back Guarantee</li>
+        <li><strong>Free</strong> SSL Certificates</li>
+        <li><strong>DreamShield</strong> Included</li>
+        <li><strong>Free</strong> CDN Trial</li>
+        <li><strong>Priority</strong> 24/7 Support</li>
       </ul>
       <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
     </div>
   </div>
-  <div style="text-align: center; padding: 16px 48px 32px; max-width: var(--wf-max-w); margin: 0 auto;">
-    <span class="wf-caption">30-Day Money-Back Guarantee on all shared hosting plans.</span>
-  </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 5. INCLUDED FEATURE STRIP (pricing coda) -->
+  <!-- 12. WHY CHOOSE (Dark, Centered)         -->
   <!-- ═══════════════════════════════════════ -->
-  <div style="border-top: 1px solid var(--wf-border); border-bottom: 1px solid var(--wf-border);">
-    <div class="wf-included-strip" style="max-width: var(--wf-max-w); margin: 0 auto;">
-      <div class="wf-included-strip__item">
-        <div class="wf-included-strip__icon">&#10003;</div>
-        <span>Free SSL</span>
+  <div class="wf-section">
+    <div class="wf-why-choose" style="grid-template-columns: 1fr; text-align: center; gap: 32px;">
+      <div>
+        <div class="wf-eyebrow" style="color: rgba(255,255,255,0.4); margin-bottom: 16px;">THE DREAMHOST DIFFERENCE</div>
+        <h2 class="wf-h2" style="color: var(--wf-white); margin-bottom: 16px;">Why 1.5 Million Websites Trust Us</h2>
       </div>
-      <div class="wf-included-strip__item">
-        <div class="wf-included-strip__icon">&#10003;</div>
-        <span>1-Click WordPress</span>
-      </div>
-      <div class="wf-included-strip__item">
-        <div class="wf-included-strip__icon">&#10003;</div>
-        <span>Free Domain</span>
-      </div>
-      <div class="wf-included-strip__item">
-        <div class="wf-included-strip__icon">&#10003;</div>
-        <span>Unmetered Bandwidth</span>
-      </div>
-      <div class="wf-included-strip__item">
-        <div class="wf-included-strip__icon">&#10003;</div>
-        <span>AI Business Suite</span>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 40px; max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> Independent &amp; Employee-Focused Since 1997
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> 100% Uptime Guarantee
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> Transparent Pricing — Renewal Rates Shown Upfront
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> Carbon-Neutral Hosting
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> 30-Day Money-Back Guarantee
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8);">
+          <span class="wf-why-choose__check">&#10003;</span> Award-Winning 24/7 Expert Support
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 7. PRODUCT SHOWCASE (3-Path)            -->
+  <!-- 13. FAQ (Centered)                      -->
   <!-- ═══════════════════════════════════════ -->
   <div class="wf-section">
     <div class="wf-section__header">
-      <div class="wf-eyebrow mb-12">From Idea to Online</div>
-      <h2 class="wf-h2">Three Ways to Build Your Site</h2>
-      <p class="wf-body">Whether you want AI to build it, WordPress to power it, or dedicated resources to scale it — DreamHost has your path.</p>
+      <h2 class="wf-h2">Frequently Asked Questions</h2>
     </div>
-    <div class="wf-product-showcase">
-      <!-- Path 1: Remixer -->
-      <div class="wf-product-showcase__item">
-        <div>
-          <div class="wf-eyebrow mb-12">Remixer AI Website Builder</div>
-          <h3 class="wf-h2 mb-12" style="font-size: clamp(28px, 4vw, 40px);">Describe It. Remixer Builds It.</h3>
-          <p class="wf-body mb-24">Tell Remixer about your business and watch it generate a complete, professional website — copy, images, layout, and all. No templates. No drag-and-drop. Just your words, turned into a live site in minutes.</p>
-          <button class="wf-btn wf-btn--primary">Start Building with Remixer &rarr;</button>
-          <div class="wf-caption mt-12">Included with all hosting plans &middot; Also available standalone</div>
-        </div>
-        <div class="wf-product-showcase__visual">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-        </div>
+    <div class="wf-faq wf-faq--centered">
+      <div class="wf-faq-item wf-faq-item--open">
+        <button class="wf-faq-trigger">
+          <span>How long has DreamHost been in business?</span>
+          <span class="wf-faq-trigger__icon">+</span>
+        </button>
+        <div class="wf-faq-body">Since 1997 — over 29 years. We're one of the longest-running independent hosting companies, and we've been profitable and growing the entire time. No acquisitions, no PE bailouts.</div>
       </div>
-      <!-- Path 2: WordPress / DreamPress -->
-      <div class="wf-product-showcase__item">
-        <div>
-          <div class="wf-eyebrow mb-12">WordPress &amp; DreamPress</div>
-          <h3 class="wf-h2 mb-12" style="font-size: clamp(28px, 4vw, 40px);">The Fastest Managed WordPress</h3>
-          <p class="wf-body mb-24">DreamPress delivers managed WordPress hosting with built-in caching, automatic updates, and daily backups. Powered by isolated server resources so your site stays fast no matter what your neighbor does.</p>
-          <button class="wf-btn wf-btn--primary">Explore DreamPress &rarr;</button>
-          <div class="wf-caption mt-12">1-click staging &middot; Free migration &middot; Failover protection</div>
-        </div>
-        <div class="wf-product-showcase__visual">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
+      <div class="wf-faq-item">
+        <button class="wf-faq-trigger">
+          <span>What's your uptime guarantee?</span>
+          <span class="wf-faq-trigger__icon">+</span>
+        </button>
+        <div class="wf-faq-body">100%. If your site goes down due to our infrastructure, you get credit. We back this with redundant systems, NVMe storage, and data centers in Oregon, Virginia, and Amsterdam.</div>
       </div>
-      <!-- Path 3: VPS & Cloud -->
-      <div class="wf-product-showcase__item">
-        <div>
-          <div class="wf-eyebrow mb-12">VPS &amp; Cloud Hosting</div>
-          <h3 class="wf-h2 mb-12" style="font-size: clamp(28px, 4vw, 40px);">Dedicated Resources to Scale</h3>
-          <p class="wf-body mb-24">When shared hosting isn't enough, VPS gives you isolated CPU, RAM, and NVMe storage. Full root access, managed or unmanaged. Perfect for high-traffic sites, apps, and agencies managing multiple clients.</p>
-          <button class="wf-btn wf-btn--primary">See VPS Plans &rarr;</button>
-          <div class="wf-caption mt-12">Starting at $$$/mo &middot; Scalable resources &middot; Full root access</div>
-        </div>
-        <div class="wf-product-showcase__visual">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1"/><circle cx="6" cy="18" r="1"/></svg>
-        </div>
+      <div class="wf-faq-item">
+        <button class="wf-faq-trigger">
+          <span>Will my renewal rate increase dramatically?</span>
+          <span class="wf-faq-trigger__icon">+</span>
+        </button>
+        <div class="wf-faq-body">We believe in transparent pricing. Renewal rates are shown right on the pricing page — not hidden in footnotes or terms of service. We also don't require 48-month commitments to access our best rates.</div>
+      </div>
+      <div class="wf-faq-item">
+        <button class="wf-faq-trigger">
+          <span>What kind of support do you offer?</span>
+          <span class="wf-faq-trigger__icon">+</span>
+        </button>
+        <div class="wf-faq-body">24/7 expert support from real humans who know hosting. Not a chatbot, not a script reader. Our team has years of experience with WordPress, DNS, email, and server configuration.</div>
+      </div>
+      <div class="wf-faq-item">
+        <button class="wf-faq-trigger">
+          <span>Who owns DreamHost?</span>
+          <span class="wf-faq-trigger__icon">+</span>
+        </button>
+        <div class="wf-faq-body">DreamHost is independently owned — no private equity firm, no corporate conglomerate. That means our decisions are driven by what's best for customers, not what maximizes quarterly returns for investors.</div>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 8. DOMAIN SEARCH                        -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section--alt">
-    <div style="max-width: var(--wf-max-w); margin: 0 auto; padding: 120px 48px;" class="wf-hero--centered">
-      <div class="wf-eyebrow mb-12">Domains</div>
-      <h2 class="wf-h2 mb-12">Find Your Perfect Domain</h2>
-      <p class="wf-body max-w-560" style="margin: 0 auto;">Every hosting plan includes a free domain for the first year. Search for yours or transfer an existing one — we'll handle the migration.</p>
-      <div class="wf-hero__domain-search">
-        <input type="text" placeholder="Search for a domain name..." />
-        <button>Search</button>
-      </div>
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 24px;">
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.com <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$9.99</span></span>
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.online <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$1.99</span></span>
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.shop <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$0.99</span></span>
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.pro <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$17.99</span></span>
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.io <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$39.99</span></span>
-        <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.06); border-radius: var(--wf-radius-sm); font-size: 14px; font-weight: 600; color: var(--wf-white);">.ai <span style="color: rgba(255,255,255,0.5); font-weight: 400;">$89.99</span></span>
-      </div>
-      <div class="wf-hero__trust">
-        <span>Free with annual plans &middot; 400+ TLDs available &middot; Free transfers</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 8b. EMAIL & PRO SERVICES                -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
-      <!-- Email -->
-      <div style="background: var(--wf-surface); border-radius: var(--wf-radius-lg); padding: 48px 40px; display: flex; flex-direction: column;">
-        <div class="wf-eyebrow mb-12">Professional Email</div>
-        <h3 class="wf-h3" style="margin-bottom: 12px;">Email That Matches Your Domain</h3>
-        <p class="wf-body" style="margin-bottom: 24px; flex: 1;">Get you@yourdomain.com with every hosting plan. Ad-free, reliable email with webmail access, IMAP/POP support, and spam filtering built in. 3 months free on all plans.</p>
-        <div>
-          <button class="wf-btn wf-btn--primary wf-btn--sm">Explore Email &rarr;</button>
-        </div>
-      </div>
-      <!-- Pro Services -->
-      <div style="background: var(--wf-surface); border-radius: var(--wf-radius-lg); padding: 48px 40px; display: flex; flex-direction: column;">
-        <div class="wf-eyebrow mb-12">Pro Services</div>
-        <h3 class="wf-h3" style="margin-bottom: 12px;">Let Our Experts Build It for You</h3>
-        <p class="wf-body" style="margin-bottom: 24px; flex: 1;">From custom WordPress design to SEO and marketing — our professional services team handles the heavy lifting so you can focus on running your business.</p>
-        <div>
-          <button class="wf-btn wf-btn--primary wf-btn--sm">See Pro Services &rarr;</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 9. DATACENTER & CDN MAP                 -->
-  <!-- ═══════════════════════════════════════ -->
-  <div style="background: linear-gradient(180deg, #F2F2F4 0%, #E8E8EC 100%); padding: 150px 48px;">
-    <div style="max-width: var(--wf-max-w); margin: 0 auto; display: grid; grid-template-columns: 1fr 1.8fr; gap: 64px; align-items: center;">
-      <div>
-        <h2 class="wf-h2" style="margin-bottom: 20px;">Explore Our Datacenter and CDN Locations</h2>
-        <p class="wf-body">Our network spans the globe, bringing seamless performance and low latency through our datacenters and CDN locations.</p>
-      </div>
-      <div>
-        <div class="wf-dc-map__visual" style="background: transparent; border: none; height: 340px;">
-          <span style="color: var(--wf-placeholder-dark); font-size: 14px; z-index: 1;">[ Interactive World Map ]</span>
-          <div class="wf-dc-dot" style="left: 18%; top: 32%;" data-label="Hillsboro"></div>
-          <div class="wf-dc-dot" style="left: 25%; top: 28%;" data-label="Ashburn"></div>
-          <div class="wf-dc-dot" style="left: 48%; top: 26%;" data-label="Amsterdam"></div>
-          <div class="wf-dc-dot" style="left: 80%; top: 48%;" data-label="Singapore (CDN)"></div>
-        </div>
-        <div style="display: flex; justify-content: center; gap: 32px; margin-top: 16px; font-size: 14px; color: var(--wf-text-body);">
-          <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: var(--wf-dark); display: inline-block;"></span> Data Center Locations</span>
-          <span style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: var(--wf-placeholder-dark); display: inline-block;"></span> CDN Locations</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 9. RELIABILITY GRID                     -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section">
-    <div class="wf-section__header">
-      <div class="wf-h2">Zero Failures. Every Time.</div>
-      <div class="wf-body">K6 load testing — 30 min sustained traffic, Aug 2025 (ReviewSignals methodology)</div>
-    </div>
-    <div class="wf-reliability">
-      <div class="wf-reliability__card wf-reliability__card--hero">
-        <div>
-          <div class="wf-reliability__pct" style="font-size: 64px;">0%</div>
-          <div style="font-size: 16px; margin-top: 8px; color: rgba(255,255,255,0.7);">Failure Rate</div>
-        </div>
-        <div style="text-align: left;">
-          <div style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">DreamPress</div>
-          <div style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5;">554,000 requests served<br>4,780 peak requests/sec<br>12.5ms P95 response time</div>
-        </div>
-      </div>
-      <div class="wf-reliability__card wf-reliability__card--competitor">
-        <div class="wf-reliability__name">Leading WP Host A</div>
-        <div class="wf-reliability__pct wf-reliability__pct--small" style="color: var(--wf-text);">13.5%</div>
-        <div class="wf-reliability__label">Failure Rate</div>
-        <div class="wf-reliability__detail">148K failed requests</div>
-      </div>
-      <div class="wf-reliability__card wf-reliability__card--competitor">
-        <div class="wf-reliability__name">Leading WP Host B</div>
-        <div class="wf-reliability__pct wf-reliability__pct--small" style="color: var(--wf-text);">31.8%</div>
-        <div class="wf-reliability__label">Failure Rate</div>
-        <div class="wf-reliability__detail">Site disabled under load</div>
-      </div>
-      <div class="wf-reliability__card wf-reliability__card--competitor">
-        <div class="wf-reliability__name">Leading WP Host C</div>
-        <div class="wf-reliability__pct wf-reliability__pct--small" style="color: var(--wf-text);">93.4%</div>
-        <div class="wf-reliability__label">Failure Rate</div>
-        <div class="wf-reliability__detail">4.8M failed requests</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 10. WHY CHOOSE DREAMHOST (Dark)         -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section">
-    <div class="wf-why-choose" style="grid-template-columns: 1fr; text-align: center; gap: 0;">
-      <!-- Stats row — credibility proof -->
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-bottom: 48px; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08);">
-        <div>
-          <div style="font-size: clamp(36px, 4vw, 52px); font-weight: 800; color: var(--wf-white); line-height: 1.1; letter-spacing: -0.02em;">1.5M+</div>
-          <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px;">Websites Hosted</div>
-        </div>
-        <div>
-          <div style="font-size: clamp(36px, 4vw, 52px); font-weight: 800; color: var(--wf-white); line-height: 1.1; letter-spacing: -0.02em;">29+</div>
-          <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px;">Years in Business</div>
-        </div>
-        <div>
-          <div style="font-size: clamp(36px, 4vw, 52px); font-weight: 800; color: var(--wf-white); line-height: 1.1; letter-spacing: -0.02em;">400K+</div>
-          <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px;">Domains Managed</div>
-        </div>
-        <div>
-          <div style="font-size: clamp(36px, 4vw, 52px); font-weight: 800; color: var(--wf-white); line-height: 1.1; letter-spacing: -0.02em;">100%</div>
-          <div style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 4px;">Uptime Guarantee</div>
-        </div>
-      </div>
-      <!-- Why DreamHost — story + reasons -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; text-align: left;">
-        <div>
-          <h2 class="wf-h2">Why Choose DreamHost?</h2>
-          <p class="wf-body">We're not a holding company or a private equity play. DreamHost is employee-owned — the people who build your hosting are the people who own the company. That changes everything about how we treat you.</p>
-          <button class="wf-btn wf-btn--pill" style="background: var(--wf-white); color: var(--wf-dark); margin-top: 28px;">Get Started &rarr;</button>
-        </div>
-        <div>
-          <ul class="wf-why-choose__list">
-            <li><span class="wf-why-choose__check">&#10003;</span> Employee-Owned Since 1997</li>
-            <li><span class="wf-why-choose__check">&#10003;</span> 100% Uptime Guarantee</li>
-            <li><span class="wf-why-choose__check">&#10003;</span> No Hidden Fees or Upsells</li>
-            <li><span class="wf-why-choose__check">&#10003;</span> Carbon-Neutral Hosting</li>
-            <li><span class="wf-why-choose__check">&#10003;</span> 30-Day Money-Back Guarantee</li>
-            <li><span class="wf-why-choose__check">&#10003;</span> Award-Winning 24/7 Support</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 11. TESTIMONIALS                        -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section--dark" style="padding: 150px 48px;">
-    <div style="max-width: var(--wf-max-w); margin: 0 auto;">
-      <div class="wf-eyebrow" style="color: rgba(255,255,255,0.4); margin-bottom: 12px;">Testimonials</div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
-        <!-- Left: featured quote -->
-        <div>
-          <h2 class="wf-h2" style="color: var(--wf-white); margin-bottom: 32px;">What Our Customers Say</h2>
-          <blockquote style="font-size: clamp(22px, 2.5vw, 28px); font-weight: 500; font-style: italic; line-height: 1.4; color: var(--wf-white); margin-bottom: 32px; max-width: 540px;">"We've been with DreamHost for 14 years. The reliability is unmatched — our site has never gone down during a product launch, and the support team actually understands WordPress."</blockquote>
-          <div class="flex items-center gap-12">
-            <div class="wf-avatar wf-avatar--lg" style="background: rgba(255,255,255,0.15);"></div>
-            <div>
-              <div style="font-size: 15px; font-weight: 600; color: var(--wf-white);">David Nakamura</div>
-              <div style="font-size: 13px; color: rgba(255,255,255,0.4);">Founder, Cascade Outdoor Gear</div>
-            </div>
-          </div>
-          <div style="display: flex; align-items: center; gap: 16px; margin-top: 32px;">
-            <div class="wf-trustpilot__stars" style="gap: 3px;">
-              <div class="wf-trustpilot__star" style="width: 20px; height: 20px;"></div>
-              <div class="wf-trustpilot__star" style="width: 20px; height: 20px;"></div>
-              <div class="wf-trustpilot__star" style="width: 20px; height: 20px;"></div>
-              <div class="wf-trustpilot__star" style="width: 20px; height: 20px;"></div>
-              <div class="wf-trustpilot__star wf-trustpilot__star--partial" style="width: 20px; height: 20px;"></div>
-            </div>
-            <span style="font-size: 13px; color: rgba(255,255,255,0.4);">4.7 / 5 on Trustpilot &middot; 7,847 reviews</span>
-          </div>
-        </div>
-        <!-- Right: 2x2 grid of smaller cards -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div style="background: var(--wf-dark-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--wf-radius-lg); padding: 28px;">
-            <div class="wf-stars" style="margin-bottom: 12px;"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; font-style: italic; margin-bottom: 16px;">"Used for years, excellent service. Reliable. Nothing else to say. Highly recommended."</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--wf-white);">Sarah Chen</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Business Owner</div>
-          </div>
-          <div style="background: var(--wf-dark-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--wf-radius-lg); padding: 28px;">
-            <div class="wf-stars" style="margin-bottom: 12px;"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; font-style: italic; margin-bottom: 16px;">"A complicated upgrade made easy. DreamHost handled everything seamlessly."</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--wf-white);">Marcus Rivera</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Developer</div>
-          </div>
-          <div style="background: var(--wf-dark-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--wf-radius-lg); padding: 28px;">
-            <div class="wf-stars" style="margin-bottom: 12px;"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; font-style: italic; margin-bottom: 16px;">"Fast response and reliable. Great support. Will stay with DreamHost for years."</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--wf-white);">Priya Sharma</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Freelancer</div>
-          </div>
-          <div style="background: var(--wf-dark-surface); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--wf-radius-lg); padding: 28px;">
-            <div class="wf-stars" style="margin-bottom: 12px;"><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div><div class="wf-star"></div></div>
-            <div style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; font-style: italic; margin-bottom: 16px;">"Migrated 12 client sites with zero downtime. Their support team is genuinely excellent."</div>
-            <div style="font-size: 13px; font-weight: 600; color: var(--wf-white);">James Whitfield</div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.35);">Agency Owner</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 14. FAQ                                 -->
-  <!-- ═══════════════════════════════════════ -->
-  <div class="wf-section">
-    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start;">
-      <div>
-        <h2 class="wf-h2">Frequently Asked Questions</h2>
-      </div>
-      <div class="wf-faq">
-        <div class="wf-faq-item wf-faq-item--open">
-          <button class="wf-faq-trigger">
-            <span>Do I need technical experience to use DreamHost?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Not at all. Our control panel is designed for beginners, and our 1-click installer makes setting up WordPress or other applications effortless. Plus, our support team is available 24/7 to help.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>How long does it take to get my site online?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Minutes. After signing up, your hosting account is provisioned instantly. Use our 1-click WordPress installer and you can have a live site in under 5 minutes.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>What kind of support does DreamHost offer?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">We offer 24/7 live chat and email support staffed by real humans (not bots). Our team includes WordPress experts, server administrators, and web developers who can help with everything from basic setup to complex migrations.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>Do hosting plans include a free domain name?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Yes. Every annual and multi-year hosting plan includes a free domain registration for the first year. You can choose from popular extensions like .com, .net, .org, and more.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>Can I upgrade to a more powerful hosting plan later?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Absolutely. You can upgrade from Shared to VPS or DreamPress at any time from your control panel. We'll prorate the difference, and there's no downtime during the upgrade.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>Do you include SSL certificates?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Yes, every hosting plan includes free Let's Encrypt SSL certificates that auto-renew. Your visitors will see the padlock icon and your site will load over HTTPS automatically.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>What is your money-back guarantee?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">We offer a 30-Day Money-Back Guarantee on all shared hosting plans. If you're not satisfied for any reason, we'll issue a full refund — no questions asked.</div>
-        </div>
-        <div class="wf-faq-item">
-          <button class="wf-faq-trigger">
-            <span>Can I transfer my existing site to DreamHost?</span>
-            <span class="wf-faq-trigger__icon">+</span>
-          </button>
-          <div class="wf-faq-body">Yes. We offer free WordPress migrations through our automated migration plugin. For non-WordPress sites, our support team can guide you through the process step by step.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════ -->
-  <!-- 15. CTA BANNER (Dark)                   -->
+  <!-- 14. CTA BANNER                          -->
   <!-- ═══════════════════════════════════════ -->
   <div class="wf-section">
     <div class="wf-cta-banner">
-      <h2 class="wf-h2">Build Something That Lasts</h2>
-      <p class="wf-body">Join 1.5 million websites on the employee-owned host that puts you first. Plans start at $$$.</p>
+      <h2 class="wf-h2">Join 1.5 Million Websites That Trust DreamHost</h2>
+      <p class="wf-body">See why businesses choose — and stay with — DreamHost. Start risk-free with our 30-day money-back guarantee.</p>
       <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <button class="wf-btn wf-btn--primary" style="background: var(--wf-white); color: var(--wf-dark);">See All Plans &rarr;</button>
-        <button class="wf-btn wf-btn--dark-secondary">Build with Remixer &rarr;</button>
+        <button class="wf-btn wf-btn--primary" style="background: var(--wf-white); color: var(--wf-dark);">Get Started &rarr;</button>
+        <button class="wf-btn wf-btn--dark-secondary">Talk to an Expert</button>
       </div>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 16. SUPPORT CARDS                       -->
+  <!-- 15. SUPPORT CARDS                       -->
   <!-- ═══════════════════════════════════════ -->
   <div class="wf-support">
     <div class="wf-support__inner">
@@ -1824,7 +1905,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!-- 17. FOOTER                              -->
+  <!-- 16. FOOTER                              -->
   <!-- ═══════════════════════════════════════ -->
   <footer class="wf-footer">
     <div class="wf-footer__grid" style="grid-template-columns: 1.5fr repeat(5, 1fr);">
