@@ -30,7 +30,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 68px; }
 
     body {
       font-family: var(--font);
@@ -45,11 +45,11 @@
     .page-layout { display: flex; }
 
     .sidebar {
-      width: 200px;
+      width: 220px;
       flex-shrink: 0;
       position: sticky;
-      top: 48px;
-      height: calc(100vh - 48px);
+      top: 56px;
+      height: calc(100vh - 56px);
       overflow-y: auto;
       overscroll-behavior: contain;
       border-right: 1px solid var(--border);
@@ -57,12 +57,12 @@
       background: var(--bg);
     }
     .sidebar__group {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--text);
-      padding: 20px 20px 6px;
+      padding: 20px 24px 6px;
       margin-top: 4px;
       border-top: 1px solid var(--border);
     }
@@ -75,8 +75,8 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 5px 20px 5px 20px;
-      font-size: 13px;
+      padding: 6px 24px 6px 24px;
+      font-size: 14px;
       font-weight: 500;
       color: var(--text-secondary);
       text-decoration: none;
@@ -105,7 +105,7 @@
 
     .sidebar-toggle {
       position: sticky;
-      top: 48px;
+      top: 56px;
       z-index: 250;
       width: 36px;
       flex-shrink: 0;
@@ -118,9 +118,9 @@
       justify-content: center;
       padding-top: 16px;
       color: var(--text-secondary);
-      font-size: 11px;
+      font-size: 13px;
       line-height: 1;
-      height: calc(100vh - 48px);
+      height: calc(100vh - 56px);
       transition: background 0.15s, width 0.2s ease, padding 0.2s ease, border 0.2s ease;
     }
     .sidebar-toggle:hover { background: var(--border); color: var(--text); }
@@ -130,7 +130,7 @@
 
     .sidebar-reopen {
       position: fixed;
-      top: 60px;
+      top: 68px;
       left: 8px;
       z-index: 300;
       width: 32px;
@@ -154,8 +154,7 @@
 
     .page-main { flex: 1; min-width: 0; }
 
-    .wrap { max-width: 880px; margin: 0 auto; padding: 0 32px; }
-    .wrap--wide { max-width: 1060px; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 32px; }
 
     /* ── Project Nav (shared across all pages) ── */
     .project-nav {
@@ -165,7 +164,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 48px;
+      height: 56px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -175,7 +174,7 @@
       align-items: center;
       gap: 14px;
     }
-    .project-nav__logo { height: 32px; width: auto; }
+    .project-nav__logo { height: 36px; width: auto; }
     .project-nav__divider {
       width: 1px;
       height: 18px;
@@ -193,9 +192,9 @@
       gap: 4px;
     }
     .project-nav__links a {
-      padding: 5px 14px;
-      font-size: 13px;
-      font-weight: 600;
+      padding: 6px 16px;
+      font-size: 15px;
+      font-weight: 400;
       color: rgba(255,255,255,0.55);
       text-decoration: none;
       border-radius: 8px;
@@ -231,16 +230,14 @@
 
     /* ── Executive Summary ── */
     .exec-summary {
-      background: var(--blue-bg);
-      border: 1px solid var(--blue-border);
-      border-radius: 16px;
-      padding: 40px 44px;
+      border-left: 4px solid var(--dreamhost);
+      padding: 0 0 0 28px;
       margin: 0 0 80px;
     }
     .exec-summary__label {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--dreamhost);
       margin-bottom: 16px;
@@ -279,9 +276,9 @@
     /* ── Section ── */
     .section { padding: 80px 0; border-top: 1px solid var(--border); }
     .section__label {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-secondary);
       margin-bottom: 12px;
@@ -318,9 +315,9 @@
       flex-shrink: 0;
     }
     .portrait__name {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
     .portrait__positioning {
@@ -361,9 +358,9 @@
       padding: 16px;
     }
     .stat__label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-secondary);
       margin-bottom: 4px;
@@ -377,9 +374,9 @@
     /* ── Page Flow ── */
     .flow { margin-bottom: 32px; }
     .flow__title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-secondary);
       margin-bottom: 12px;
@@ -393,7 +390,7 @@
     }
     .flow li {
       counter-increment: flow;
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.5;
       padding: 10px 16px 10px 44px;
       background: var(--bg-alt);
@@ -405,7 +402,7 @@
       position: absolute;
       left: 14px;
       top: 10px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--text-secondary);
     }
@@ -444,9 +441,9 @@
       border: 1px solid var(--amber-border);
     }
     .callout__label {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 8px;
       color: var(--amber);
@@ -461,9 +458,9 @@
     }
     th {
       text-align: left;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       color: var(--text-secondary);
       padding: 14px 16px;
@@ -543,7 +540,7 @@
     .snapshot--godaddy .snapshot__name { color: var(--godaddy); }
 
     .snapshot__price {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--text-secondary);
       background: var(--bg-alt);
@@ -551,7 +548,7 @@
       border-radius: 6px;
     }
     .snapshot__tagline {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-secondary);
       margin-bottom: 20px;
       line-height: 1.45;
@@ -564,12 +561,12 @@
     }
     .bar-row {
       display: grid;
-      grid-template-columns: 110px 1fr 32px;
+      grid-template-columns: 120px 1fr 32px;
       align-items: center;
       gap: 10px;
     }
     .bar-row__label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
       letter-spacing: 0.02em;
@@ -593,7 +590,7 @@
     .snapshot--godaddy .bar-row__fill { background: var(--godaddy); }
 
     .bar-row__value {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary);
       text-align: right;
@@ -604,7 +601,7 @@
       margin-top: 18px;
       padding-top: 14px;
       border-top: 1px solid var(--border);
-      font-size: 13.5px;
+      font-size: 14px;
       line-height: 1.5;
       color: var(--text);
     }
@@ -616,7 +613,7 @@
     .page-footer {
       padding: 40px 0;
       text-align: center;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-secondary);
       border-top: 1px solid var(--border);
     }
@@ -642,6 +639,8 @@
   <div class="page-layout">
 
   <!-- ══ SIDEBAR ══ -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+
   <nav class="sidebar" id="sidebar">
     <div class="sidebar__group">Overview</div>
     <a href="#summary">Executive Summary</a>
@@ -657,8 +656,6 @@
     <a href="#pricing">Pricing</a>
     <a href="#trust">Trust & Credibility</a>
   </nav>
-
-  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
 
   <!-- ══ MAIN CONTENT ══ -->
   <div class="page-main">
@@ -687,7 +684,7 @@
   <!-- ══════════════════════════════════════ -->
   <!-- COMPETITOR SNAPSHOT GRID              -->
   <!-- ══════════════════════════════════════ -->
-  <div id="snapshots" class="wrap wrap--wide">
+  <div id="snapshots" class="wrap">
     <div class="snapshot-grid">
 
       <!-- ── Hostinger ── -->
