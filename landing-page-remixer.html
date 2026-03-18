@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remixer AI Website Builder — DreamHost</title>
+  <style>
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+
+    :root {
+      --wf-font: 'Gilroy', system-ui, sans-serif;
+      --wf-white: #FFFFFF;
+      --wf-page: #FAFAFA;
+      --wf-surface: #F2F2F4;
+      --wf-surface-2: #E8E8EC;
+      --wf-placeholder: #D4D4DA;
+      --wf-placeholder-dark: #B8B8C0;
+      --wf-border: #DCDCE0;
+      --wf-text: #1C1C22;
+      --wf-text-body: #52525E;
+      --wf-text-muted: #8C8C98;
+      --wf-text-faint: #ABABB4;
+      --wf-dark: #28282E;
+      --wf-dark-surface: #36363C;
+      --wf-radius: 10px;
+      --wf-radius-sm: 6px;
+      --wf-radius-lg: 16px;
+      --wf-radius-pill: 999px;
+      --wf-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      --wf-shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --wf-max-w: 1600px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+
+    body {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--wf-text-body);
+      background: var(--wf-white);
+    }
+
+    /* ── Project Nav ── */
+    .project-nav {
+      background: #000000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+    }
+    .project-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .project-nav__logo { height: 36px; width: auto; }
+    .project-nav__divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.15);
+    }
+    .project-nav__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .project-nav__links {
+      display: flex;
+      gap: 4px;
+    }
+    .project-nav__links a {
+      padding: 6px 16px;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .project-nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .project-nav__links a.active { color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Placeholder Shapes ── */
+    .wf-img {
+      background: var(--wf-placeholder);
+      border-radius: var(--wf-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-img svg { opacity: 0.35; }
+    .wf-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--wf-placeholder);
+      flex-shrink: 0;
+    }
+    .wf-avatar--sm { width: 32px; height: 32px; }
+    .wf-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--wf-radius-sm);
+      background: var(--wf-surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-icon--circle { border-radius: 50%; }
+    .wf-icon--lg { width: 52px; height: 52px; }
+    .wf-logo {
+      width: 194px;
+      height: auto;
+      display: block;
+    }
+    .wf-logo--lg { width: 220px; }
+
+    /* ── Typography ── */
+    .wf-h1 { font-size: clamp(40px, 7vw, 7rem); font-weight: 700; line-height: 1.05; color: var(--wf-text); letter-spacing: -0.03em; }
+    .wf-h2 { font-size: clamp(32px, 5.5vw, 5.5rem); font-weight: 700; line-height: 1.08; color: var(--wf-text); letter-spacing: -0.025em; }
+    .wf-h3 { font-size: 22px; font-weight: 700; line-height: 1.25; color: var(--wf-text); }
+    .wf-h4 { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--wf-text); }
+    .wf-body { font-size: 16px; line-height: 1.65; color: var(--wf-text-body); }
+    .wf-body-sm { font-size: 14px; line-height: 1.6; color: var(--wf-text-body); }
+    .wf-caption { font-size: 13px; line-height: 1.5; color: var(--wf-text-muted); }
+    .wf-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Buttons ── */
+    .wf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--wf-font);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .wf-btn--primary {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+    }
+    .wf-btn--primary:hover { background: #1a1a1e; }
+    .wf-btn--secondary {
+      background: transparent;
+      color: var(--wf-text);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid var(--wf-border);
+    }
+    .wf-btn--secondary:hover { border-color: var(--wf-text); }
+    .wf-btn--pill {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 32px;
+      border-radius: var(--wf-radius-pill);
+      font-size: 15px;
+    }
+    .wf-btn--lg { padding: 16px 36px; font-size: 17px; }
+    .wf-btn--dark-secondary {
+      background: transparent;
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+
+    /* ── Nav ── */
+    .wf-nav {
+      background: var(--wf-white);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-nav__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 24px;
+    }
+    .wf-nav__left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .wf-nav__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+    }
+    .wf-nav__logo-link { display: flex; align-items: center; text-decoration: none; }
+
+    /* ── Hero ── */
+    .wf-hero {
+      padding: 150px 48px 120px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-hero--centered { text-align: center; }
+    .wf-hero--centered .wf-body { margin: 0 auto; }
+    .wf-hero__actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .wf-hero--centered .wf-hero__actions { justify-content: center; }
+    .wf-hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+    .wf-hero--centered .wf-hero__trust { justify-content: center; flex-wrap: wrap; }
+
+    /* ── Section ── */
+    .wf-section {
+      padding: 150px 48px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-section--dark {
+      background: var(--wf-dark);
+      max-width: none;
+      color: rgba(255,255,255,0.7);
+    }
+    .wf-section--dark .wf-h1,
+    .wf-section--dark .wf-h2,
+    .wf-section--dark .wf-h3,
+    .wf-section--dark .wf-h4 { color: var(--wf-white); }
+    .wf-section--dark .wf-body,
+    .wf-section--dark .wf-body-sm { color: rgba(255,255,255,0.65); }
+    .wf-section--dark .wf-caption { color: rgba(255,255,255,0.5); }
+    .wf-section--dark .wf-eyebrow { color: rgba(255,255,255,0.5); }
+    .wf-section--alt {
+      background: var(--wf-surface);
+      max-width: none;
+    }
+    .wf-section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .wf-section__header .wf-eyebrow { margin-bottom: 12px; }
+    .wf-section__header .wf-body { max-width: 560px; margin: 12px auto 0; }
+
+    /* ── Steps ── */
+    .wf-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .wf-step {
+      display: flex;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .wf-step:last-child { border-bottom: none; }
+    .wf-step__num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--wf-text);
+      flex-shrink: 0;
+    }
+    .wf-step__content { flex: 1; }
+    .wf-step__title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--wf-text);
+      margin-bottom: 4px;
+    }
+
+    /* ── Feature Grid ── */
+    .wf-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-feature-card {
+      padding: 28px;
+    }
+    .wf-feature-card .wf-icon { margin-bottom: 16px; }
+    .wf-feature-card .wf-h4 { margin-bottom: 8px; }
+
+    /* ── Split ── */
+    .wf-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    /* ── Stats Bar ── */
+    .wf-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .wf-stat__number {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--wf-text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .wf-section--dark .wf-stat__number { color: var(--wf-white); }
+    .wf-stat__label {
+      font-size: 14px;
+      color: var(--wf-text-muted);
+      margin-top: 4px;
+    }
+    .wf-section--dark .wf-stat__label { color: rgba(255,255,255,0.5); }
+
+    /* ── Testimonial Split ── */
+    .wf-testimonial-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .wf-testimonial-split__featured {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .wf-testimonial-split__featured-quote {
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-testimonial-split__featured-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-testimonial-split__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .wf-testimonial-split__card {
+      background: var(--wf-dark-surface);
+      border-radius: var(--wf-radius);
+      padding: 20px;
+    }
+    .wf-testimonial-split__card-quote {
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .wf-testimonial-split__card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__card-role {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── Trustpilot ── */
+    .wf-trustpilot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: var(--wf-text-body);
+    }
+    .wf-trustpilot__label { font-weight: 400; }
+    .wf-trustpilot__rating { font-weight: 700; }
+    .wf-trustpilot__stars {
+      display: flex;
+      gap: 2px;
+    }
+    .wf-trustpilot__star {
+      width: 24px;
+      height: 24px;
+      background: var(--wf-text);
+      border-radius: 3px;
+      position: relative;
+    }
+    .wf-trustpilot__star::after {
+      content: '\2605';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wf-white);
+      font-size: 14px;
+    }
+    .wf-trustpilot__meta { color: var(--wf-text-muted); }
+    .wf-trustpilot__meta a { color: var(--wf-text-body); font-weight: 600; text-decoration: underline; }
+    .wf-section--dark .wf-trustpilot { color: rgba(255,255,255,0.6); }
+    .wf-section--dark .wf-trustpilot__star { background: rgba(255,255,255,0.8); }
+    .wf-section--dark .wf-trustpilot__star::after { color: var(--wf-dark); }
+    .wf-section--dark .wf-trustpilot__meta { color: rgba(255,255,255,0.4); }
+    .wf-section--dark .wf-trustpilot__meta a { color: rgba(255,255,255,0.6); }
+    .wf-section--dark .wf-trustpilot__rating { color: var(--wf-white); }
+
+    /* ── Why Choose (used for Pro Services) ── */
+    .wf-why-choose {
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      padding: 56px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .wf-why-choose .wf-h2 { color: var(--wf-white); margin-bottom: 12px; }
+    .wf-why-choose .wf-body { color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+    .wf-why-choose__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .wf-why-choose__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+    .wf-why-choose__check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--wf-white);
+      margin-top: 1px;
+    }
+
+    /* ── Support Cards ── */
+    .wf-support {
+      background: var(--wf-dark);
+      padding: 150px 48px;
+    }
+    .wf-support__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-support__heading {
+      font-size: clamp(32px, 5.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--wf-white);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .wf-support__desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+      max-width: 640px;
+    }
+    .wf-support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-support-card {
+      background: var(--wf-dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--wf-radius-lg);
+      padding: 36px 32px;
+    }
+    .wf-support-card__icon {
+      width: 48px;
+      height: 56px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-support-card__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-support-card__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .wf-support-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-white);
+      text-decoration: none;
+    }
+    .wf-support-card__link:hover { text-decoration: underline; }
+
+    /* ── Term Dropdown ── */
+    .wf-term-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--wf-text);
+      margin-bottom: 6px;
+    }
+    .wf-term-dropdown {
+      position: relative;
+      width: 320px;
+    }
+    .wf-term-dropdown__selected {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      background: var(--wf-white);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--wf-text);
+      cursor: pointer;
+    }
+    .wf-term-dropdown__chevron {
+      margin-left: auto;
+      color: var(--wf-text-muted);
+      font-size: 14px;
+    }
+    .wf-term-dropdown__badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--wf-radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--wf-surface-2);
+      color: var(--wf-text);
+    }
+
+    /* ── Pricing Card ── */
+    .wf-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: end;
+    }
+    .wf-pricing-card {
+      background: var(--wf-white);
+      border: 1.5px solid var(--wf-border);
+      border-radius: 24px;
+      padding: 36px 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .wf-pricing-card--featured {
+      border-color: var(--wf-text);
+      border-width: 2px;
+    }
+    .wf-pricing-card__badge-wrap {
+      background: var(--wf-surface);
+      border-radius: 24px 24px 0 0;
+      text-align: center;
+      padding: 14px 20px 40px;
+      margin-bottom: -24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--wf-text);
+    }
+    .wf-pricing-card__name {
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 700;
+      color: var(--wf-text);
+      margin-bottom: 6px;
+    }
+    .wf-pricing-card__desc {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      margin-bottom: 20px;
+    }
+    .wf-pricing-card__sale-badge {
+      display: inline-block;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--wf-radius-pill);
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .wf-pricing-card__first-year {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-bottom: 4px;
+    }
+    .wf-pricing-card__price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .wf-pricing-card__amount {
+      font-size: clamp(36px, 3.5vw, 48px);
+      font-weight: 700;
+      color: var(--wf-text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .wf-pricing-card__period {
+      font-size: 18px;
+      color: var(--wf-text-muted);
+    }
+    .wf-pricing-card__save {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wf-text);
+      background: var(--wf-surface);
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-sm);
+    }
+    .wf-pricing-card__save .info-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-size: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-pricing-card__cta {
+      width: 100%;
+      padding: 14px 24px;
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: var(--wf-radius-pill);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .wf-pricing-card__cta--outline {
+      background: var(--wf-white);
+      color: var(--wf-text);
+      border: 2px solid var(--wf-text);
+    }
+    .wf-pricing-card__cta--outline:hover { background: var(--wf-surface); }
+    .wf-pricing-card__cta--filled {
+      background: var(--wf-text);
+      color: var(--wf-white);
+      border: 2px solid var(--wf-text);
+    }
+    .wf-pricing-card__cta--filled:hover { background: var(--wf-dark-surface); border-color: var(--wf-dark-surface); }
+    .wf-pricing-card__renewal {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-top: 16px;
+      text-align: center;
+    }
+    .wf-pricing-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--wf-border);
+      flex: 1;
+    }
+    .wf-pricing-card__features li {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .wf-pricing-card__features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--wf-text);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .wf-pricing-card__new-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--wf-text);
+      border: 1.5px solid var(--wf-text);
+      border-radius: var(--wf-radius-sm);
+      padding: 1px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .wf-pricing-card__view-more {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      cursor: pointer;
+    }
+    .wf-pricing-card__more {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-text-muted);
+      text-decoration: none;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--wf-border);
+    }
+    .wf-pricing-card__more:hover {
+      color: var(--wf-text);
+    }
+    .wf-chevron { width: 10px; height: 10px; }
+
+    /* ── FAQ ── */
+    .wf-faq-split {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .wf-faq-split__left {
+      position: sticky;
+      top: 160px;
+    }
+    .wf-faq-split__left .wf-h2 { margin-bottom: 16px; }
+    .wf-section--dark .wf-faq-split__left .wf-h2 { color: var(--wf-white); }
+    .wf-section--dark .wf-faq-trigger { color: var(--wf-white); }
+    .wf-section--dark .wf-faq-trigger__icon { color: rgba(255,255,255,0.5); }
+    .wf-section--dark .wf-faq-body { color: rgba(255,255,255,0.6); }
+    .wf-section--dark .wf-faq-item { border-bottom-color: rgba(255,255,255,0.1); }
+    .wf-faq { max-width: none; }
+    .wf-faq-item {
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .wf-faq-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--wf-text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    .wf-faq-trigger__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--wf-text-muted);
+      font-weight: 300;
+      transition: transform 0.2s;
+    }
+    .wf-faq-item--open .wf-faq-trigger__icon { transform: rotate(45deg); }
+    .wf-faq-body {
+      display: none;
+      padding: 0 0 20px;
+      font-size: 15px;
+      color: var(--wf-text-body);
+      line-height: 1.65;
+    }
+    .wf-faq-item--open .wf-faq-body { display: block; }
+
+    /* ── Footer ── */
+    .wf-footer {
+      background: var(--wf-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 56px 48px 32px;
+    }
+    .wf-footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(5, 1fr);
+      gap: 40px;
+      max-width: 1710px;
+      margin: 0 auto 40px;
+    }
+    .wf-footer__heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wf-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .wf-footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wf-footer__links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .wf-footer__links a:hover { color: rgba(255,255,255,0.8); }
+    .wf-footer__bottom {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .wf-footer__socials {
+      display: flex;
+      gap: 12px;
+    }
+    .wf-footer__social {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── Helpers ── */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-24 { gap: 24px; }
+    .gap-32 { gap: 32px; }
+    .gap-48 { gap: 48px; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-20 { margin-bottom: 20px; }
+    .mb-24 { margin-bottom: 24px; }
+    .mb-28 { margin-bottom: 28px; }
+    .mb-32 { margin-bottom: 32px; }
+    .mb-48 { margin-bottom: 48px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-24 { margin-top: 24px; }
+    .w-full { width: 100%; }
+    .max-w-480 { max-width: 480px; }
+    .max-w-560 { max-width: 560px; }
+    .text-center { text-align: center; }
+
+    /* ── Product Nav (sticky below project nav) ── */
+    .product-nav {
+      position: sticky;
+      top: 56px;
+      z-index: 200;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: none;
+      margin-bottom: -82px;
+    }
+    .product-nav.scrolled {
+      background: var(--wf-white);
+      border-bottom-color: var(--wf-border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .product-nav .product-nav__logo {
+      filter: invert(1) brightness(2);
+      transition: filter 0.2s;
+    }
+    .product-nav.scrolled .product-nav__logo {
+      filter: none;
+    }
+    .product-nav .wf-btn--pill {
+      background: transparent;
+      color: var(--wf-white);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      transition: all 0.2s;
+    }
+    .product-nav .wf-btn--pill:hover {
+      border-color: var(--wf-white);
+    }
+    .product-nav.scrolled .wf-btn--pill {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      border-color: var(--wf-dark);
+    }
+    .product-nav.scrolled .wf-btn--pill:hover {
+      background: #1a1a1e;
+      border-color: #1a1a1e;
+    }
+    .product-nav__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .product-nav__logo {
+      height: 42px;
+      width: auto;
+    }
+
+    /* ── Trust dots separator ── */
+    .trust-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--wf-placeholder-dark);
+      flex-shrink: 0;
+    }
+    .wf-section--dark .trust-dot { background: rgba(255,255,255,0.3); }
+
+    /* ── Pricing guarantee line ── */
+    .pricing-guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--wf-text-muted);
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--wf-border);
+    }
+
+    /* ── Hero Dark ── */
+    .wf-hero--dark {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+    }
+    .wf-hero--dark .wf-h1,
+    .wf-hero--dark .wf-h2,
+    .wf-hero--dark .wf-h3,
+    .wf-hero--dark .wf-h4 { color: var(--wf-white); }
+    .wf-hero--dark .wf-body { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-body-sm { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-caption { color: rgba(255,255,255,0.5); }
+    .wf-hero--dark .wf-eyebrow { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-hero__trust { color: var(--wf-placeholder-dark); }
+    .wf-hero--dark .wf-btn--primary {
+      background: var(--wf-white);
+      color: var(--wf-dark);
+    }
+    .wf-hero--dark .wf-btn--primary:hover { background: var(--wf-surface); }
+    .wf-hero--dark .wf-btn--secondary {
+      color: var(--wf-white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .wf-hero--dark .wf-btn--secondary:hover { border-color: var(--wf-white); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .wf-feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .wf-pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+      .wf-term-dropdown { width: 100%; }
+      .wf-split { grid-template-columns: 1fr; gap: 40px; }
+      .wf-why-choose { grid-template-columns: 1fr; }
+      .wf-testimonial-split { grid-template-columns: 1fr; }
+      .wf-support-grid { grid-template-columns: 1fr; }
+      .wf-footer__grid { grid-template-columns: 1fr 1fr; }
+      .wf-stats-bar { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .project-nav { padding: 0 16px; }
+      .project-nav__links { display: none; }
+      .product-nav__inner { padding: 12px 16px; }
+      .wf-hero { padding: 48px 24px 40px; }
+      .wf-section { padding: 80px 24px; }
+      .wf-section--alt { padding: 80px 24px; }
+      .wf-support { padding: 80px 24px; }
+      .wf-footer { padding: 40px 24px 24px; }
+      .wf-footer__grid { grid-template-columns: 1fr; gap: 32px; }
+      .wf-feature-grid { grid-template-columns: 1fr; }
+      .wf-hero__actions { flex-direction: column; align-items: center; }
+      .wf-hero__trust { flex-direction: column; gap: 8px; }
+      .wf-testimonial-split__grid { grid-template-columns: 1fr; }
+      .wf-stats-bar { grid-template-columns: 1fr; gap: 32px; }
+      .wf-faq-split { grid-template-columns: 1fr; gap: 32px; }
+      .wf-faq-split__left { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 1. PROJECT NAV                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <nav class="project-nav">
+    <div class="project-nav__brand">
+      <img src="logo-dark.svg" alt="DreamHost" class="project-nav__logo" />
+      <div class="project-nav__divider"></div>
+      <span class="project-nav__label">Homepage Redesign</span>
+    </div>
+    <div class="project-nav__links">
+      <a href="index.html">Research</a>
+      <a href="wireframe-components.html">Component Library</a>
+      <a href="concepts.html" class="active">Concepts</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 2. PRODUCT NAV                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <nav class="product-nav">
+    <div class="product-nav__inner">
+      <a href="https://www.dreamhost.com" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center;">
+        <img src="logo-mono-light.svg" alt="DreamHost" class="product-nav__logo" />
+      </a>
+      <a href="#pricing" class="wf-btn wf-btn--pill">See Plans &amp; Pricing</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 3. HERO                                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-hero--dark" style="max-width: none;">
+    <div class="wf-hero wf-hero--centered" style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-eyebrow mb-12">Remixer AI Website Builder</div>
+      <h1 class="wf-h1 mb-16">Turn Your Words Into a Website</h1>
+      <p class="wf-body max-w-560">Describe what you need. Remixer builds a complete, professional site in minutes. No coding, no design skills, no complicated dashboards.</p>
+      <div class="wf-hero__actions">
+        <a href="#pricing" class="wf-btn wf-btn--primary wf-btn--lg">See Plans &amp; Pricing</a>
+        <a href="#how-it-works" class="wf-btn wf-btn--secondary wf-btn--lg">See How It Works</a>
+      </div>
+      <div class="flex items-center justify-center gap-24" style="margin-top: 32px; flex-wrap: wrap;">
+        <span class="wf-caption" style="color: rgba(255,255,255,0.5);">Our customers say</span>
+        <span class="wf-badge" style="background: rgba(255,255,255,0.1); color: var(--wf-white);">Excellent</span>
+        <div class="wf-stars">
+          <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+          <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+          <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+          <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+          <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+        </div>
+        <span class="wf-caption" style="color: rgba(255,255,255,0.4);">4.7 out of 5 based on 2,842 reviews</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 4. HOW IT WORKS                         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section" id="how-it-works">
+    <div class="wf-section__header">
+      <div class="wf-eyebrow">How It Works</div>
+      <h2 class="wf-h2">From Idea to Website in Four Steps</h2>
+      <p class="wf-body">No templates to browse, no settings to configure. Just tell Remixer what you need and watch it come together.</p>
+    </div>
+    <div class="wf-steps" style="max-width: 720px; margin: 0 auto;">
+      <div class="wf-step">
+        <div class="wf-step__num">1</div>
+        <div class="wf-step__content">
+          <div class="wf-step__title">Describe What You Need</div>
+          <p class="wf-body-sm">Tell Remixer what you're building in your own words. A bakery site, a consulting portfolio, an online store. Just describe it like you'd tell a friend.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__num">2</div>
+        <div class="wf-step__content">
+          <div class="wf-step__title">Remixer Builds Your Website</div>
+          <p class="wf-body-sm">A complete first version, generated in minutes. Real pages, real content structure, real design. Not a blank template with placeholder text.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__num">3</div>
+        <div class="wf-step__content">
+          <div class="wf-step__title">Refine Until It's Yours</div>
+          <p class="wf-body-sm">Chat to change anything, or click to edit directly. Swap images, rewrite headlines, add pages. Remixer adapts to you, not the other way around.</p>
+        </div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-step__num">4</div>
+        <div class="wf-step__content">
+          <div class="wf-step__title">Preview and Publish</div>
+          <p class="wf-body-sm">Preview your site privately, share it for feedback, and publish when you're ready. One click, and you're live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 5. BENEFITS                             -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section--alt">
+    <div class="wf-section" style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-section__header">
+        <div class="wf-eyebrow">Why Remixer</div>
+        <h2 class="wf-h2">Build Professional Websites Without the Complexity</h2>
+        <p class="wf-body">Remixer strips away the complexity so you can focus on what matters: getting your business online and growing it.</p>
+      </div>
+      <div class="wf-feature-grid">
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="wf-h4">Build Through Conversation</h3>
+          <p class="wf-body-sm">Describe what you want and watch it happen. No menus to learn, no drag-and-drop puzzles to solve. Just say it.</p>
+        </div>
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+          <h3 class="wf-h4">Click, Edit, Done</h3>
+          <p class="wf-body-sm">Select any text, image, or section and refine it directly. No switching modes, no code view. What you see is what you change.</p>
+        </div>
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <h3 class="wf-h4">Built to Get You Found</h3>
+          <p class="wf-body-sm">Every site follows modern SEO standards from the start. Clean URLs, proper headings, meta descriptions, and fast load times are built in.</p>
+        </div>
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+          </div>
+          <h3 class="wf-h4">Your Site, Your Files</h3>
+          <p class="wf-body-sm">You own your files and your domain. Export anytime. Never locked into a closed platform or proprietary format.</p>
+        </div>
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="wf-h4">Built for Speed</h3>
+          <p class="wf-body-sm">Lightweight, fast-loading sites with no plugins, no database, no updates to manage. Your visitors get a snappy experience every time.</p>
+        </div>
+        <div class="wf-feature-card">
+          <div class="wf-icon mb-16">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+          </div>
+          <h3 class="wf-h4">Sell Online With Stripe</h3>
+          <p class="wf-body-sm">Built-in e-commerce to sell products and take payments. Connect Stripe, add your products, and start selling without extra tools or monthly fees.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 6. SOCIAL PROOF                         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section--dark">
+    <div class="wf-section" style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-section__header mb-48">
+        <div class="wf-eyebrow mb-12">What People Are Saying</div>
+        <h2 class="wf-h2">Trusted by Thousands of Business Owners</h2>
+      </div>
+
+      <div class="wf-testimonial-split mb-48">
+        <div class="wf-testimonial-split__featured">
+          <div class="wf-testimonial-split__featured-quote">"Without DreamHost, we wouldn't have a website. Remixer turned our vision into a professional online home, no experience required."</div>
+          <div class="wf-testimonial-split__featured-author">
+            <div class="wf-avatar"></div>
+            <div>
+              <div class="wf-testimonial-split__featured-name">Michelle Jamieson</div>
+              <div class="wf-testimonial-split__featured-role">Small Business Owner</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-testimonial-split__grid">
+          <div class="wf-testimonial-split__card">
+            <div class="wf-testimonial-split__card-quote">"I described my photography portfolio and had a working site in under 10 minutes. Genuinely stunned."</div>
+            <div class="wf-testimonial-split__card-name">Priya M.</div>
+            <div class="wf-testimonial-split__card-role">Photographer</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <div class="wf-testimonial-split__card-quote">"My clients always ask who built my site. They don't believe me when I say I did it myself."</div>
+            <div class="wf-testimonial-split__card-name">David K.</div>
+            <div class="wf-testimonial-split__card-role">Consultant</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <div class="wf-testimonial-split__card-quote">"The fact that I own my files and can export anytime sold me. No lock-in, no games."</div>
+            <div class="wf-testimonial-split__card-name">Alex T.</div>
+            <div class="wf-testimonial-split__card-role">Freelance Developer</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <div class="wf-testimonial-split__card-quote">"Set up our bakery site with online ordering in one afternoon. Customers love it."</div>
+            <div class="wf-testimonial-split__card-name">Lisa W.</div>
+            <div class="wf-testimonial-split__card-role">Bakery Owner</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-stats-bar mb-48">
+        <div>
+          <div class="wf-stat__number">2-3 Min</div>
+          <div class="wf-stat__label">Average Build Time</div>
+        </div>
+        <div>
+          <div class="wf-stat__number">25+ Years</div>
+          <div class="wf-stat__label">Hosting Experience</div>
+        </div>
+        <div>
+          <div class="wf-stat__number">$0 Extra</div>
+          <div class="wf-stat__label">Remixer Is Included Free</div>
+        </div>
+      </div>
+
+      <div class="wf-trustpilot">
+        <span class="wf-trustpilot__label">Trustpilot</span>
+        <div class="wf-trustpilot__stars">
+          <div class="wf-trustpilot__star"></div>
+          <div class="wf-trustpilot__star"></div>
+          <div class="wf-trustpilot__star"></div>
+          <div class="wf-trustpilot__star"></div>
+          <div class="wf-trustpilot__star"></div>
+        </div>
+        <span class="wf-trustpilot__rating">4.7</span>
+        <span class="wf-trustpilot__meta">Based on <a href="#">3,700+ reviews</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 7. PRO SERVICES                         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section">
+    <div class="wf-split">
+      <div>
+        <div class="wf-eyebrow mb-12">Pro Services</div>
+        <h2 class="wf-h3 mb-12">Need a Hand? We'll Build It for You</h2>
+        <p class="wf-body mb-28">Our web pros have 20+ years of experience. From custom design to site management to marketing, we handle the heavy lifting so you can focus on your business.</p>
+        <ul class="wf-why-choose__list" style="margin-bottom: 28px;">
+          <li style="color: var(--wf-text-body);">
+            <span class="wf-why-choose__check" style="background: var(--wf-surface-2); color: var(--wf-text);">&#10003;</span>
+            Web Design &amp; Branding
+          </li>
+          <li style="color: var(--wf-text-body);">
+            <span class="wf-why-choose__check" style="background: var(--wf-surface-2); color: var(--wf-text);">&#10003;</span>
+            Site Management
+          </li>
+          <li style="color: var(--wf-text-body);">
+            <span class="wf-why-choose__check" style="background: var(--wf-surface-2); color: var(--wf-text);">&#10003;</span>
+            Web Development
+          </li>
+          <li style="color: var(--wf-text-body);">
+            <span class="wf-why-choose__check" style="background: var(--wf-surface-2); color: var(--wf-text);">&#10003;</span>
+            Web Marketing
+          </li>
+        </ul>
+        <a href="#" class="wf-btn wf-btn--secondary">Explore Pro Services</a>
+      </div>
+      <div class="wf-img" style="aspect-ratio: 4/3; width: 100%;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 8. PRICING                              -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="pricing">
+    <div class="wf-section" style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-section__header">
+        <div class="wf-eyebrow mb-12">Pricing</div>
+        <h2 class="wf-h2">Every Plan Includes Remixer</h2>
+        <p class="wf-body">Every plan includes Remixer, fast hosting, SSL, and a free domain.</p>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 32px;">
+        <div class="wf-term-label">Length of Subscription</div>
+        <div class="wf-term-dropdown" style="margin: 0 auto;">
+          <div class="wf-term-dropdown__selected">
+            <span>4 Years</span>
+            <span class="wf-term-dropdown__badge">On Sale</span>
+            <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-pricing-grid">
+        <!-- Card 1: Launch -->
+        <div class="wf-pricing-card">
+          <div class="wf-pricing-card__name">Web Hosting Launch</div>
+          <div class="wf-pricing-card__desc">For personal sites and small projects</div>
+          <div class="wf-pricing-card__sale-badge">ON SALE</div>
+          <div class="wf-pricing-card__first-year">First 4 years at</div>
+          <div class="wf-pricing-card__price">
+            <span class="wf-pricing-card__amount">$1.99</span>
+            <span class="wf-pricing-card__period">/mo</span>
+            <span class="wf-pricing-card__save">SAVE 83% <span class="info-icon">i</span></span>
+          </div>
+          <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Get Started</button>
+          <div class="wf-pricing-card__renewal">Auto-renews at $7.99/mo after 4 years.</div>
+          <ul class="wf-pricing-card__features">
+            <li>25 Websites</li>
+            <li>40k Monthly Visits</li>
+            <li>25 GB NVMe SSD</li>
+            <li>Remixer AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+            <li>Free Domain for 1 Year</li>
+            <li>Daily Automated Backups</li>
+          </ul>
+          <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+        </div>
+
+        <!-- Card 2: Growth (Featured) -->
+        <div style="display: flex; flex-direction: column;">
+          <div class="wf-pricing-card__badge-wrap">Most Popular</div>
+          <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
+            <div class="wf-pricing-card__name">Web Hosting Growth</div>
+            <div class="wf-pricing-card__desc">For growing businesses</div>
+            <div class="wf-pricing-card__sale-badge">ON SALE</div>
+            <div class="wf-pricing-card__first-year">First 4 years at</div>
+            <div class="wf-pricing-card__price">
+              <span class="wf-pricing-card__amount">$3.49</span>
+              <span class="wf-pricing-card__period">/mo</span>
+              <span class="wf-pricing-card__save">SAVE 75% <span class="info-icon">i</span></span>
+            </div>
+            <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Get Started</button>
+            <div class="wf-pricing-card__renewal">Auto-renews at $8.99/mo after 4 years.</div>
+            <ul class="wf-pricing-card__features">
+              <li>50 Websites</li>
+              <li>200k Monthly Visits</li>
+              <li>50 GB NVMe SSD</li>
+              <li>Remixer AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+              <li>Free Domain for 1 Year</li>
+              <li>Daily Automated Backups</li>
+            </ul>
+            <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Card 3: Scale -->
+        <div class="wf-pricing-card">
+          <div class="wf-pricing-card__name">Web Hosting Scale</div>
+          <div class="wf-pricing-card__desc">For high-traffic sites</div>
+          <div class="wf-pricing-card__sale-badge">ON SALE</div>
+          <div class="wf-pricing-card__first-year">First 4 years at</div>
+          <div class="wf-pricing-card__price">
+            <span class="wf-pricing-card__amount">$7.99</span>
+            <span class="wf-pricing-card__period">/mo</span>
+            <span class="wf-pricing-card__save">SAVE 71% <span class="info-icon">i</span></span>
+          </div>
+          <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Get Started</button>
+          <div class="wf-pricing-card__renewal">Auto-renews at $19.99/mo after 4 years.</div>
+          <ul class="wf-pricing-card__features">
+            <li>100 Websites</li>
+            <li>400k Monthly Visits</li>
+            <li>100 GB NVMe SSD</li>
+            <li>Remixer AI Website Builder <span class="wf-pricing-card__new-badge">NEW</span></li>
+            <li>Free Domain for 1 Year</li>
+            <li>Daily Automated Backups</li>
+          </ul>
+          <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 9. FAQ                                  -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-section--dark">
+    <div class="wf-section">
+    <div class="wf-faq-split">
+      <div class="wf-faq-split__left">
+        <h2 class="wf-h2">Frequently Asked Questions</h2>
+      </div>
+      <div class="wf-faq">
+        <div class="wf-faq-item wf-faq-item--open">
+          <button class="wf-faq-trigger">
+            <span>I'm not technical. Can I really build a website with Remixer?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">
+            Absolutely. Remixer was designed for people who have never built a website before. You describe what you need in plain English, and Remixer handles the design, layout, and code. If you can write a text message, you can build a website.
+          </div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>How is Remixer different from Wix or Squarespace?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">
+            Most website builders give you a blank template and a complicated editor. Remixer builds your site for you based on a conversation. You also own your files completely and host on DreamHost's proven infrastructure, so you're never locked into a proprietary platform.
+          </div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Can I sell products or take payments?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">
+            Yes. Remixer includes built-in e-commerce powered by Stripe. Add products, set prices, and start accepting payments. No extra plugins or monthly e-commerce fees required.
+          </div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Do I own my website?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">
+            100%. You own your domain, your content, and your files. You can export everything anytime. DreamHost has never believed in vendor lock-in, and that philosophy is baked into Remixer.
+          </div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Is there a money-back guarantee?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">
+            Yes. Every DreamHost plan comes with a 30-day money-back guarantee. Try Remixer risk-free. If it's not for you, we'll refund your hosting fee. No questions asked.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 10. SUPPORT                             -->
+  <!-- ═══════════════════════════════════════ -->
+  <div class="wf-support">
+    <div class="wf-support__inner">
+      <div class="wf-support__heading">Need Some Help?</div>
+      <div class="wf-support__desc">Whether you're stuck or just want some tips on where to start, hit up our experts anytime. We're here to help!</div>
+      <div class="wf-support-grid">
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="wf-support-card__title">DreamHost Sales Help</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Chat Widget</div>
+          <a class="wf-support-card__link" href="#">Chat Now &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="wf-support-card__title">Customer Support Chat</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+          <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="wf-support-card__title">Customer Support Email</div>
+          <div class="wf-support-card__desc">24/7/365 Through the Panel</div>
+          <a class="wf-support-card__link" href="#">Go to Panel &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 11. FOOTER                              -->
+  <!-- ═══════════════════════════════════════ -->
+  <footer class="wf-footer">
+    <div class="wf-footer__grid">
+      <div>
+        <img src="logo-mono-dark.svg" alt="DreamHost" class="wf-logo wf-logo--lg mb-20">
+        <div style="font-size: 13px; line-height: 1.6; max-width: 240px;">Employee-owned since 1997. We build hosting for people who build things.</div>
+        <div class="wf-footer__socials mt-24">
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+          <div class="wf-footer__social"></div>
+        </div>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Products</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Remixer</a></li>
+          <li><a href="#">Managed WordPress</a></li>
+          <li><a href="#">WordPress Hosting</a></li>
+          <li><a href="#">Web Hosting</a></li>
+          <li><a href="#">VPS</a></li>
+          <li><a href="#">Dedicated Servers</a></li>
+          <li><a href="#">Domain Names</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Company</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Green Hosting</a></li>
+          <li><a href="#">Reviews</a></li>
+          <li><a href="#">Awards</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Legal</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Report Abuse</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">WHOIS Lookup</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Resources</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Knowledge Base</a></li>
+          <li><a href="#">System Status</a></li>
+          <li><a href="#">Glossary</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Login</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Web Hosting</a></li>
+          <li><a href="#">DreamCompute</a></li>
+          <li><a href="#">Webmail</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wf-footer__bottom">
+      <span>&copy; 2026 DreamHost, LLC</span>
+      <div class="wf-footer__socials">
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SCRIPTS                                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <script>
+    // FAQ Toggle
+    document.querySelectorAll('.wf-faq-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.wf-faq-item');
+        const isOpen = item.classList.contains('wf-faq-item--open');
+        // Close all
+        document.querySelectorAll('.wf-faq-item').forEach(i => i.classList.remove('wf-faq-item--open'));
+        // Open clicked (if it wasn't already open)
+        if (!isOpen) item.classList.add('wf-faq-item--open');
+      });
+    });
+  </script>
+
+  <script>
+    const productNav = document.querySelector('.product-nav');
+    if (productNav) {
+      window.addEventListener('scroll', function() {
+        productNav.classList.toggle('scrolled', window.scrollY > 0);
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamPress Managed WordPress Hosting — DreamHost</title>
+  <style>
+    @font-face { font-family: 'Gilroy'; src: url('../fonts/Gilroy-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('../fonts/Gilroy-Medium.ttf') format('truetype'); font-weight: 500; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('../fonts/Gilroy-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'Gilroy'; src: url('../fonts/Gilroy-ExtraBold.otf') format('opentype'); font-weight: 800; font-style: normal; font-display: swap; }
+
+    :root {
+      --wf-font: 'Gilroy', system-ui, sans-serif;
+      --wf-white: #FFFFFF;
+      --wf-page: #FAFAFA;
+      --wf-surface: #F2F2F4;
+      --wf-surface-2: #E8E8EC;
+      --wf-placeholder: #D4D4DA;
+      --wf-placeholder-dark: #B8B8C0;
+      --wf-border: #DCDCE0;
+      --wf-text: #1C1C22;
+      --wf-text-body: #52525E;
+      --wf-text-muted: #8C8C98;
+      --wf-text-faint: #ABABB4;
+      --wf-dark: #28282E;
+      --wf-dark-surface: #36363C;
+      --wf-radius: 10px;
+      --wf-radius-sm: 6px;
+      --wf-radius-lg: 16px;
+      --wf-radius-pill: 999px;
+      --wf-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+      --wf-shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      --wf-max-w: 1600px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 140px; }
+
+    body {
+      font-family: var(--wf-font);
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--wf-text-body);
+      background: var(--wf-white);
+    }
+
+    /* ── Project Nav ── */
+    .project-nav {
+      background: #000000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+    }
+    .project-nav__brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .project-nav__logo { height: 36px; width: auto; }
+    .project-nav__divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.15);
+    }
+    .project-nav__label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .project-nav__links {
+      display: flex;
+      gap: 4px;
+    }
+    .project-nav__links a {
+      padding: 6px 16px;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .project-nav__links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .project-nav__links a.active { color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── Placeholder Shapes ── */
+    .wf-img {
+      background: var(--wf-placeholder);
+      border-radius: var(--wf-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-img svg { opacity: 0.35; }
+    .wf-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--wf-placeholder);
+      flex-shrink: 0;
+    }
+    .wf-avatar--lg { width: 56px; height: 56px; }
+    .wf-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--wf-radius-sm);
+      background: var(--wf-surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-icon--circle { border-radius: 50%; }
+    .wf-icon--lg { width: 52px; height: 52px; }
+    .wf-logo {
+      width: 194px;
+      height: auto;
+      display: block;
+    }
+    .wf-logo--lg { width: 220px; }
+
+    /* ── Typography ── */
+    .wf-h1 { font-size: clamp(40px, 7vw, 7rem); font-weight: 700; line-height: 1.05; color: var(--wf-text); letter-spacing: -0.03em; }
+    .wf-h2 { font-size: clamp(32px, 5.5vw, 5.5rem); font-weight: 700; line-height: 1.08; color: var(--wf-text); letter-spacing: -0.025em; }
+    .wf-h3 { font-size: 22px; font-weight: 700; line-height: 1.25; color: var(--wf-text); }
+    .wf-h4 { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--wf-text); }
+    .wf-body { font-size: 16px; line-height: 1.65; color: var(--wf-text-body); }
+    .wf-body-sm { font-size: 14px; line-height: 1.6; color: var(--wf-text-body); }
+    .wf-caption { font-size: 13px; line-height: 1.5; color: var(--wf-text-muted); }
+    .wf-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--wf-text-muted);
+    }
+
+    /* ── Buttons ── */
+    .wf-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--wf-font);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .wf-btn--primary {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+    }
+    .wf-btn--primary:hover { background: #1a1a1e; }
+    .wf-btn--secondary {
+      background: transparent;
+      color: var(--wf-text);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid var(--wf-border);
+    }
+    .wf-btn--secondary:hover { border-color: var(--wf-text); }
+    .wf-btn--pill {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      padding: 12px 32px;
+      border-radius: var(--wf-radius-pill);
+      font-size: 15px;
+    }
+    .wf-btn--lg { padding: 16px 36px; font-size: 17px; }
+    .wf-btn--wide { width: 100%; justify-content: center; }
+    .wf-btn--dark-secondary {
+      background: transparent;
+      color: var(--wf-white);
+      padding: 12px 28px;
+      border-radius: var(--wf-radius);
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+
+    /* ── Badge / Pill ── */
+    .wf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--wf-radius-pill);
+      background: var(--wf-surface-2);
+      color: var(--wf-text-body);
+    }
+    .wf-badge--dark {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+    }
+
+    /* ── Card ── */
+    .wf-card {
+      background: var(--wf-white);
+      border: 1px solid var(--wf-border);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+    }
+
+    /* ── Main Nav ── */
+    .wf-nav {
+      background: var(--wf-white);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .wf-nav__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 24px;
+    }
+    .wf-nav__left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .wf-nav__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+    }
+    .wf-nav__logo-link { display: flex; align-items: center; text-decoration: none; }
+
+    /* ── Hero ── */
+    .wf-hero {
+      padding: 150px 48px 120px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-hero--centered { text-align: center; }
+    .wf-hero--centered .wf-body { margin: 0 auto; max-width: 640px; }
+    .wf-hero__actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .wf-hero--centered .wf-hero__actions { justify-content: center; }
+    .wf-hero__trust {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--wf-text-muted);
+    }
+    .wf-hero--centered .wf-hero__trust { justify-content: center; flex-wrap: wrap; }
+
+    /* ── Hero Dark ── */
+    .wf-hero--dark {
+      background: var(--wf-dark);
+      max-width: none;
+    }
+    .wf-hero--dark .wf-h1 { color: var(--wf-white); }
+    .wf-hero--dark .wf-body { color: rgba(255,255,255,0.7); }
+    .wf-hero--dark .wf-eyebrow { color: rgba(255,255,255,0.5); }
+    .wf-hero--dark .wf-hero__trust { color: rgba(255,255,255,0.5); }
+    .wf-hero--dark .wf-btn--primary {
+      background: var(--wf-white);
+      color: var(--wf-dark);
+    }
+    .wf-hero--dark .wf-btn--primary:hover { background: var(--wf-surface); }
+    .wf-hero--dark .wf-btn--secondary {
+      background: transparent;
+      color: var(--wf-white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .wf-hero--dark .wf-btn--secondary:hover { border-color: rgba(255,255,255,0.6); }
+
+    /* ── Trust Stars ── */
+    .wf-stars {
+      display: inline-flex;
+      gap: 2px;
+    }
+    .wf-star {
+      width: 18px;
+      height: 18px;
+      background: var(--wf-placeholder-dark);
+      border-radius: 2px;
+    }
+
+    /* ── Section ── */
+    .wf-section {
+      padding: 150px 48px;
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-section--dark {
+      background: var(--wf-dark);
+      max-width: none;
+      color: rgba(255,255,255,0.7);
+    }
+    .wf-section--dark .wf-h1,
+    .wf-section--dark .wf-h2,
+    .wf-section--dark .wf-h3,
+    .wf-section--dark .wf-h4 { color: var(--wf-white); }
+    .wf-section--dark .wf-body,
+    .wf-section--dark .wf-body-sm { color: rgba(255,255,255,0.65); }
+    .wf-section--dark .wf-caption { color: rgba(255,255,255,0.5); }
+    .wf-section--dark .wf-eyebrow { color: rgba(255,255,255,0.5); }
+    .wf-section--alt {
+      background: var(--wf-surface);
+      max-width: none;
+    }
+    .wf-section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .wf-section__header .wf-eyebrow { margin-bottom: 12px; }
+    .wf-section__header .wf-body { max-width: 560px; margin: 12px auto 0; }
+
+    /* ── Stats Bar ── */
+    .wf-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .wf-stat__number {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--wf-text);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    .wf-stat__label {
+      font-size: 14px;
+      color: var(--wf-text-muted);
+      margin-top: 4px;
+    }
+
+    /* ── Feature Card Grid ── */
+    .wf-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-feature-grid--2col { grid-template-columns: 1fr 1fr; }
+    .wf-feature-card {
+      padding: 28px;
+    }
+    .wf-feature-card .wf-icon { margin-bottom: 16px; }
+    .wf-feature-card .wf-h4 { margin-bottom: 8px; }
+
+    /* ── Split Section ── */
+    .wf-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .wf-split--reverse { direction: rtl; }
+    .wf-split--reverse > * { direction: ltr; }
+
+    /* ── Tab Showcase ── */
+    .wf-tab-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 0;
+      background: var(--wf-dark);
+      border-radius: var(--wf-radius-lg);
+      overflow: hidden;
+      min-height: 520px;
+    }
+    .wf-tab-showcase__tabs {
+      padding: 48px 0 48px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+    .wf-tab-showcase__eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+      padding-left: 2px;
+    }
+    .wf-tab-showcase__heading {
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-tab-showcase__subheading {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+    .wf-tab-showcase__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .wf-tab-showcase__item {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wf-tab-showcase__item:last-child {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .wf-tab-showcase__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px 20px 2px;
+      font-family: var(--wf-font);
+      font-size: 20px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .wf-tab-showcase__trigger:hover {
+      color: rgba(255,255,255,0.8);
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__trigger {
+      color: var(--wf-white);
+    }
+    .wf-tab-showcase__chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      opacity: 0.4;
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__chevron {
+      opacity: 0.7;
+    }
+    .wf-tab-showcase__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px 0 2px;
+    }
+    .wf-tab-showcase__item--active .wf-tab-showcase__body {
+      max-height: 200px;
+      padding: 0 24px 20px 2px;
+    }
+    .wf-tab-showcase__body p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-tab-showcase__media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .wf-tab-showcase__media-inner {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      background: var(--wf-dark-surface);
+      border-radius: var(--wf-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .wf-tab-showcase__media-inner svg { opacity: 0.25; }
+    .wf-tab-showcase__media-label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      background: rgba(0,0,0,0.3);
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-sm);
+    }
+
+    /* ── Testimonial Split ── */
+    .wf-testimonial-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .wf-testimonial-split__featured {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .wf-testimonial-split__featured-quote {
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.4;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .wf-testimonial-split__featured-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__featured-role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-testimonial-split__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .wf-testimonial-split__card {
+      background: var(--wf-dark-surface);
+      border-radius: var(--wf-radius);
+      padding: 20px;
+    }
+    .wf-testimonial-split__card-quote {
+      font-size: 14px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .wf-testimonial-split__card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-white);
+    }
+    .wf-testimonial-split__card-role {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── Trustpilot ── */
+    .wf-trustpilot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      font-size: 14px;
+      color: var(--wf-text-body);
+    }
+    .wf-trustpilot__label { font-weight: 400; }
+    .wf-trustpilot__rating { font-weight: 700; }
+    .wf-trustpilot__stars {
+      display: flex;
+      gap: 2px;
+    }
+    .wf-trustpilot__star {
+      width: 24px;
+      height: 24px;
+      background: var(--wf-text);
+      border-radius: 3px;
+      position: relative;
+    }
+    .wf-trustpilot__star::after {
+      content: '\2605';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wf-white);
+      font-size: 14px;
+    }
+    .wf-trustpilot__meta { color: var(--wf-text-muted); }
+    .wf-trustpilot__meta a { color: var(--wf-text-body); font-weight: 600; text-decoration: underline; }
+
+    /* ── Term Dropdown ── */
+    .wf-term-label {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--wf-text);
+      margin-bottom: 6px;
+    }
+    .wf-term-dropdown {
+      position: relative;
+      width: 320px;
+    }
+    .wf-term-dropdown__selected {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border: 1.5px solid var(--wf-border);
+      border-radius: var(--wf-radius);
+      background: var(--wf-white);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--wf-text);
+      cursor: pointer;
+    }
+    .wf-term-dropdown__chevron {
+      margin-left: auto;
+      color: var(--wf-text-muted);
+      font-size: 14px;
+    }
+    .wf-term-dropdown__badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--wf-radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--wf-surface-2);
+      color: var(--wf-text);
+    }
+
+    /* ── Pricing Card ── */
+    .wf-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: end;
+    }
+    .wf-pricing-card {
+      background: var(--wf-white);
+      border: 1.5px solid var(--wf-border);
+      border-radius: 24px;
+      padding: 36px 32px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .wf-pricing-card--featured {
+      border-color: var(--wf-text);
+      border-width: 2px;
+    }
+    .wf-pricing-card__badge-wrap {
+      background: var(--wf-surface);
+      border-radius: 24px 24px 0 0;
+      text-align: center;
+      padding: 14px 20px 40px;
+      margin-bottom: -24px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--wf-text);
+    }
+    .wf-pricing-card__name {
+      font-size: clamp(22px, 2vw, 28px);
+      font-weight: 700;
+      color: var(--wf-text);
+      margin-bottom: 6px;
+    }
+    .wf-pricing-card__desc {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      margin-bottom: 20px;
+    }
+    .wf-pricing-card__sale-badge {
+      display: inline-block;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: var(--wf-radius-pill);
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+    .wf-pricing-card__first-year {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-bottom: 4px;
+    }
+    .wf-pricing-card__price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .wf-pricing-card__amount {
+      font-size: clamp(36px, 3.5vw, 48px);
+      font-weight: 700;
+      color: var(--wf-text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .wf-pricing-card__period {
+      font-size: 18px;
+      color: var(--wf-text-muted);
+    }
+    .wf-pricing-card__save {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wf-text);
+      background: var(--wf-surface);
+      padding: 4px 10px;
+      border-radius: var(--wf-radius-sm);
+    }
+    .wf-pricing-card__save .info-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--wf-text);
+      color: var(--wf-white);
+      font-size: 10px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-pricing-card__cta {
+      width: 100%;
+      padding: 14px 24px;
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: var(--wf-radius-pill);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .wf-pricing-card__cta--outline {
+      background: var(--wf-white);
+      color: var(--wf-text);
+      border: 2px solid var(--wf-text);
+    }
+    .wf-pricing-card__cta--outline:hover { background: var(--wf-surface); }
+    .wf-pricing-card__cta--filled {
+      background: var(--wf-text);
+      color: var(--wf-white);
+      border: 2px solid var(--wf-text);
+    }
+    .wf-pricing-card__cta--filled:hover { background: var(--wf-dark-surface); border-color: var(--wf-dark-surface); }
+    .wf-pricing-card__renewal {
+      font-size: 14px;
+      color: var(--wf-text-body);
+      margin-top: 16px;
+      text-align: center;
+    }
+    .wf-pricing-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--wf-border);
+      flex: 1;
+    }
+    .wf-pricing-card__features li {
+      font-size: 15px;
+      color: var(--wf-text-body);
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .wf-pricing-card__features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--wf-text);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .wf-pricing-card__new-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--wf-text);
+      border: 1.5px solid var(--wf-text);
+      border-radius: var(--wf-radius-sm);
+      padding: 1px 8px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .wf-pricing-card__view-more {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-text);
+      cursor: pointer;
+    }
+    .wf-pricing-card__more {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--wf-text-muted);
+      text-decoration: none;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--wf-border);
+    }
+    .wf-pricing-card__more:hover {
+      color: var(--wf-text);
+    }
+    .wf-chevron { width: 10px; height: 10px; }
+
+    /* ── FAQ ── */
+    .wf-faq-split {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .wf-faq-split__left {
+      position: sticky;
+      top: 160px;
+    }
+    .wf-faq-split__left .wf-h2 { margin-bottom: 16px; }
+    .wf-section--dark .wf-faq-split__left .wf-h2 { color: var(--wf-white); }
+    .wf-section--dark .wf-faq-trigger { color: var(--wf-white); }
+    .wf-section--dark .wf-faq-trigger__icon { color: rgba(255,255,255,0.5); }
+    .wf-section--dark .wf-faq-body { color: rgba(255,255,255,0.6); }
+    .wf-section--dark .wf-faq-item { border-bottom-color: rgba(255,255,255,0.1); }
+    .wf-faq { max-width: none; }
+    .wf-faq-item {
+      border-bottom: 1px solid var(--wf-border);
+    }
+    .wf-faq-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      font-family: var(--wf-font);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--wf-text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    .wf-faq-trigger__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--wf-text-muted);
+      font-weight: 300;
+      transition: transform 0.2s;
+    }
+    .wf-faq-item--open .wf-faq-trigger__icon { transform: rotate(45deg); }
+    .wf-faq-body {
+      display: none;
+      padding: 0 0 20px;
+      font-size: 15px;
+      color: var(--wf-text-body);
+      line-height: 1.65;
+    }
+    .wf-faq-item--open .wf-faq-body { display: block; }
+
+    /* ── Support Cards ── */
+    .wf-support {
+      background: var(--wf-dark);
+      padding: 150px 48px;
+    }
+    .wf-support__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+    .wf-support__heading {
+      font-size: clamp(32px, 5.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--wf-white);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .wf-support__desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 48px;
+      max-width: 640px;
+    }
+    .wf-support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .wf-support-card {
+      background: var(--wf-dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--wf-radius-lg);
+      padding: 36px 32px;
+    }
+    .wf-support-card__icon {
+      width: 48px;
+      height: 56px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .wf-support-card__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wf-white);
+      margin-bottom: 8px;
+    }
+    .wf-support-card__desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 24px;
+    }
+    .wf-support-card__link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--wf-white);
+      text-decoration: none;
+    }
+    .wf-support-card__link:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    .wf-footer {
+      background: var(--wf-dark);
+      color: rgba(255,255,255,0.5);
+      padding: 56px 48px 32px;
+    }
+    .wf-footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1710px;
+      margin: 0 auto 40px;
+    }
+    .wf-footer__heading {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--wf-white);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .wf-footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .wf-footer__links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .wf-footer__links a:hover { color: rgba(255,255,255,0.8); }
+    .wf-footer__bottom {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .wf-footer__socials {
+      display: flex;
+      gap: 12px;
+    }
+    .wf-footer__social {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── Helpers ── */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-24 { gap: 24px; }
+    .gap-32 { gap: 32px; }
+    .gap-48 { gap: 48px; }
+    .mb-8 { margin-bottom: 8px; }
+    .mb-12 { margin-bottom: 12px; }
+    .mb-16 { margin-bottom: 16px; }
+    .mb-20 { margin-bottom: 20px; }
+    .mb-24 { margin-bottom: 24px; }
+    .mb-28 { margin-bottom: 28px; }
+    .mb-32 { margin-bottom: 32px; }
+    .mb-48 { margin-bottom: 48px; }
+    .mt-12 { margin-top: 12px; }
+    .mt-24 { margin-top: 24px; }
+    .w-full { width: 100%; }
+    .max-w-480 { max-width: 480px; }
+    .max-w-560 { max-width: 560px; }
+    .text-center { text-align: center; }
+
+    /* ── Product Nav (sticky below project nav) ── */
+    .product-nav {
+      position: sticky;
+      top: 56px;
+      z-index: 200;
+      background: var(--wf-dark);
+      border-bottom: none;
+      transition: none;
+      margin-bottom: -82px;
+    }
+    .product-nav.scrolled {
+      background: var(--wf-white);
+      border-bottom: 1px solid var(--wf-border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .product-nav__inner {
+      max-width: 1710px;
+      margin: 0 auto;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    /* Logo toggling */
+    .product-nav .logo-light { display: none; }
+    .product-nav .logo-dark { display: block; }
+    .product-nav.scrolled .logo-light { display: block; }
+    .product-nav.scrolled .logo-dark { display: none; }
+    /* CTA toggling */
+    .product-nav__cta {
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    .product-nav:not(.scrolled) .product-nav__cta {
+      background: transparent;
+      color: var(--wf-white);
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+    .product-nav:not(.scrolled) .product-nav__cta:hover {
+      border-color: rgba(255,255,255,0.6);
+    }
+    .product-nav.scrolled .product-nav__cta {
+      background: var(--wf-dark);
+      color: var(--wf-white);
+      border: 1.5px solid var(--wf-dark);
+    }
+    .product-nav.scrolled .product-nav__cta:hover {
+      background: #1a1a1e;
+      border-color: #1a1a1e;
+    }
+
+    /* ── Checklist (for split sections) ── */
+    .wf-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .wf-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--wf-text-body);
+    }
+    .wf-checklist__check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--wf-surface-2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--wf-text);
+      margin-top: 1px;
+    }
+
+    /* ── Dark section inner constraint ── */
+    .wf-section--dark .wf-section__inner,
+    .wf-section--alt .wf-section__inner {
+      max-width: var(--wf-max-w);
+      margin: 0 auto;
+    }
+
+    /* ── Stats inside dark testimonial section ── */
+    .wf-social-proof-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .wf-social-proof-stats__item {
+      text-align: center;
+    }
+    .wf-social-proof-stats__number {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--wf-white);
+      line-height: 1.1;
+    }
+    .wf-social-proof-stats__label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    /* ── Trustpilot dark variant ── */
+    .wf-trustpilot--dark {
+      color: rgba(255,255,255,0.7);
+      justify-content: flex-start;
+      margin-bottom: 32px;
+    }
+    .wf-trustpilot--dark .wf-trustpilot__star {
+      background: var(--wf-white);
+    }
+    .wf-trustpilot--dark .wf-trustpilot__star::after {
+      color: var(--wf-dark);
+    }
+    .wf-trustpilot--dark .wf-trustpilot__rating {
+      color: var(--wf-white);
+    }
+    .wf-trustpilot--dark .wf-trustpilot__meta {
+      color: rgba(255,255,255,0.5);
+    }
+    .wf-trustpilot--dark .wf-trustpilot__meta a {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ── Guarantee note ── */
+    .wf-guarantee-note {
+      font-size: 13px;
+      color: var(--wf-text-muted);
+      text-align: center;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .wf-stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .wf-feature-grid--2col { grid-template-columns: 1fr; }
+      .wf-split, .wf-split--reverse { grid-template-columns: 1fr; gap: 40px; }
+      .wf-split--reverse { direction: ltr; }
+      .wf-tab-showcase { grid-template-columns: 1fr; min-height: auto; }
+      .wf-tab-showcase__media { display: none; }
+      .wf-testimonial-split { grid-template-columns: 1fr; }
+      .wf-pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .wf-term-dropdown { width: 100%; }
+      .wf-support-grid { grid-template-columns: 1fr; }
+      .wf-footer__grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .project-nav { padding: 0 16px; }
+      .project-nav__links { display: none; }
+      .wf-hero { padding: 48px 24px 40px; }
+      .wf-section { padding: 80px 24px; }
+      .wf-section--alt .wf-section__inner,
+      .wf-section--dark .wf-section__inner { padding: 0; }
+      .wf-support { padding: 80px 24px; }
+      .wf-footer { padding: 40px 24px 24px; }
+      .wf-hero__trust { flex-direction: column; gap: 8px; }
+      .wf-hero__trust .wf-trust-pipe { display: none; }
+      .wf-stats-bar { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .wf-social-proof-stats { flex-direction: column; gap: 20px; align-items: flex-start; }
+      .wf-testimonial-split__grid { grid-template-columns: 1fr; }
+      .product-nav__inner { padding: 12px 16px; }
+      .wf-faq-split { grid-template-columns: 1fr; gap: 32px; }
+      .wf-faq-split__left { position: static; }
+    }
+    @media (max-width: 480px) {
+      .wf-hero__actions { flex-direction: column; }
+      .wf-hero__actions .wf-btn { width: 100%; justify-content: center; }
+      .wf-stats-bar { grid-template-columns: 1fr; }
+      .wf-footer__grid { grid-template-columns: 1fr; }
+      .wf-footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 1. PROJECT NAV                           -->
+  <!-- ════════════════════════════════════════ -->
+  <nav class="project-nav">
+    <div class="project-nav__brand">
+      <img src="logo-dark.svg" alt="DreamHost" class="project-nav__logo" />
+      <div class="project-nav__divider"></div>
+      <span class="project-nav__label">Homepage Redesign</span>
+    </div>
+    <div class="project-nav__links">
+      <a href="index.html">Research</a>
+      <a href="wireframe-components.html">Component Library</a>
+      <a href="concepts.html" class="active">Concepts</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 2. PRODUCT NAV                           -->
+  <!-- ════════════════════════════════════════ -->
+  <nav class="product-nav">
+    <div class="product-nav__inner">
+      <a href="https://www.dreamhost.com" target="_blank" rel="noopener" class="wf-nav__logo-link">
+        <img src="logo-mono-dark.svg" alt="DreamHost" class="logo-dark" style="height: 42px; width: auto;" />
+        <img src="logo-mono-light.svg" alt="DreamHost" class="logo-light" style="height: 42px; width: auto;" />
+      </a>
+      <a href="#pricing" class="wf-btn wf-btn--pill product-nav__cta">See Plans &amp; Pricing</a>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 3. HERO                                  -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-hero wf-hero--centered wf-hero--dark">
+    <div class="wf-eyebrow mb-12">DreamPress Managed WordPress</div>
+    <h1 class="wf-h1 mb-16">WordPress, Without the Headaches</h1>
+    <p class="wf-body">Start fast and scale confidently. DreamPress gives you a WordPress platform built for peak performance, with expert support and 20+ years of experience powering the web.</p>
+    <div class="wf-hero__actions">
+      <a href="#pricing" class="wf-btn wf-btn--primary wf-btn--lg">See Plans &amp; Pricing</a>
+      <a href="#why-dreampress" class="wf-btn wf-btn--secondary wf-btn--lg">Why DreamPress</a>
+    </div>
+    <div class="flex items-center justify-center gap-24" style="margin-top: 32px; flex-wrap: wrap;">
+      <span class="wf-caption" style="color: rgba(255,255,255,0.5);">Our customers say</span>
+      <span class="wf-badge" style="background: rgba(255,255,255,0.1); color: var(--wf-white);">Excellent</span>
+      <div class="wf-stars">
+        <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+        <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+        <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+        <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+        <div class="wf-star" style="background: rgba(255,255,255,0.8);"></div>
+      </div>
+      <span class="wf-caption" style="color: rgba(255,255,255,0.4);">4.7 out of 5 based on 2,842 reviews</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 4. PERFORMANCE STATS                     -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section">
+    <div class="wf-section__header">
+      <h2 class="wf-h2">Performance You Can Feel Instantly</h2>
+    </div>
+    <div class="wf-stats-bar">
+      <div>
+        <div class="wf-stat__number">Up to 6x</div>
+        <div class="wf-stat__label">Faster Response Time</div>
+      </div>
+      <div>
+        <div class="wf-stat__number">20-30%</div>
+        <div class="wf-stat__label">Faster Content Display</div>
+      </div>
+      <div>
+        <div class="wf-stat__number">Under 1s</div>
+        <div class="wf-stat__label">Fully Loaded</div>
+      </div>
+      <div>
+        <div class="wf-stat__number">99.9%</div>
+        <div class="wf-stat__label">Uptime Reliability</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 5. WHY DREAMPRESS                        -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section--alt" id="why-dreampress">
+    <div class="wf-section__inner" style="max-width: var(--wf-max-w); margin: 0 auto; padding: 72px 48px;">
+      <div class="wf-section__header">
+        <div class="wf-eyebrow mb-12">Why DreamPress</div>
+        <h2 class="wf-h2">Why Businesses Choose DreamPress</h2>
+      </div>
+      <div class="wf-feature-grid wf-feature-grid--2col">
+        <div class="wf-feature-card wf-card" >
+          <div class="wf-icon wf-icon--lg mb-16">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-h4 mb-8">Enterprise-Grade Reliability</h3>
+          <p class="wf-body-sm">Your site stays online. Period. High-availability architecture with intelligent failover protection and offsite Amazon S3 backups.</p>
+        </div>
+        <div class="wf-feature-card wf-card" >
+          <div class="wf-icon wf-icon--lg mb-16">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-h4 mb-8">A Proven Performance Stack</h3>
+          <p class="wf-body-sm">NGINX FastCGI caching, Redis object cache, and PHP OPcache work together for sub-second TTFB. Global CDN included.</p>
+        </div>
+        <div class="wf-feature-card wf-card" >
+          <div class="wf-icon wf-icon--lg mb-16">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-h4 mb-8">Built-In Observability</h3>
+          <p class="wf-body-sm">AI-powered error log analysis, traffic dashboard, and diagnostic tools at no extra cost. Stop flying blind.</p>
+        </div>
+        <div class="wf-feature-card wf-card" >
+          <div class="wf-icon wf-icon--lg mb-16">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-h4 mb-8">Expert Support You Can Count On</h3>
+          <p class="wf-body-sm">Gold Award-winning team with 73% first contact resolution rate. 24/7 access to WordPress specialists who actually know WordPress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 6. AI TOOLS                              -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section">
+    <div class="wf-tab-showcase">
+      <div class="wf-tab-showcase__tabs">
+        <div class="wf-tab-showcase__eyebrow">AI-Powered Toolkit</div>
+        <div class="wf-tab-showcase__heading">Launch Faster, Work Smarter</div>
+        <div class="wf-tab-showcase__subheading">A complete AI-powered toolkit to accelerate every step of your workflow.</div>
+        <ul class="wf-tab-showcase__list">
+          <li class="wf-tab-showcase__item wf-tab-showcase__item--active" onclick="activateTab(this)">
+            <button class="wf-tab-showcase__trigger">
+              Content Builder
+              <svg class="wf-tab-showcase__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="wf-tab-showcase__body">
+              <p>Generate posts, service pages, and ad copy directly in your control panel. Write faster and publish more often without sacrificing quality.</p>
+            </div>
+          </li>
+          <li class="wf-tab-showcase__item" onclick="activateTab(this)">
+            <button class="wf-tab-showcase__trigger">
+              Business Planner
+              <svg class="wf-tab-showcase__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="wf-tab-showcase__body">
+              <p>Build a professional roadmap with guided strategy, goals, and projections. Turn your ideas into an actionable plan in minutes.</p>
+            </div>
+          </li>
+          <li class="wf-tab-showcase__item" onclick="activateTab(this)">
+            <button class="wf-tab-showcase__trigger">
+              Liftoff AI Builder
+              <svg class="wf-tab-showcase__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="wf-tab-showcase__body">
+              <p>Launch a complete WordPress site in minutes with AI-generated content and design. Just answer a few questions and your site is ready to go.</p>
+            </div>
+          </li>
+          <li class="wf-tab-showcase__item" onclick="activateTab(this)">
+            <button class="wf-tab-showcase__trigger">
+              Business Advisor
+              <svg class="wf-tab-showcase__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="wf-tab-showcase__body">
+              <p>AI-driven guidance for marketing strategy, SEO, and growth planning. Like having a consultant on call, without the hourly rate.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="wf-tab-showcase__media">
+        <div class="wf-tab-showcase__media-inner">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          <span class="wf-tab-showcase__media-label">Product Screenshot</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 7. SOCIAL PROOF                          -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section--dark">
+    <div class="wf-section__inner" style="max-width: var(--wf-max-w); margin: 0 auto; padding: 72px 48px;">
+      <div class="wf-section__header" style="margin-bottom: 48px;">
+        <div class="wf-eyebrow mb-12">What Our Customers Say</div>
+        <h2 class="wf-h2">Trusted by Thousands of WordPress Sites</h2>
+      </div>
+
+      <div class="wf-trustpilot wf-trustpilot--dark">
+        <div class="wf-trustpilot__stars">
+          <span class="wf-trustpilot__star"></span>
+          <span class="wf-trustpilot__star"></span>
+          <span class="wf-trustpilot__star"></span>
+          <span class="wf-trustpilot__star"></span>
+          <span class="wf-trustpilot__star"></span>
+        </div>
+        <span class="wf-trustpilot__rating">4.7 / 5</span>
+        <span class="wf-trustpilot__meta">Based on <a href="#">4,000+ reviews</a></span>
+      </div>
+
+      <div class="wf-testimonial-split">
+        <div class="wf-testimonial-split__featured">
+          <div class="wf-stars mb-8">
+            <span class="wf-star" style="background: var(--wf-white);"></span>
+            <span class="wf-star" style="background: var(--wf-white);"></span>
+            <span class="wf-star" style="background: var(--wf-white);"></span>
+            <span class="wf-star" style="background: var(--wf-white);"></span>
+            <span class="wf-star" style="background: var(--wf-white);"></span>
+          </div>
+          <blockquote class="wf-testimonial-split__featured-quote">
+            "Always a quick, helpful response. I've been a DreamHost customer for 12 years. When I upgraded to DreamPress, the speed blew me away."
+          </blockquote>
+          <div class="wf-testimonial-split__featured-author">
+            <div class="wf-avatar" style="background: var(--wf-dark-surface);"></div>
+            <div>
+              <div class="wf-testimonial-split__featured-name">Lee Ann Walling</div>
+              <div class="wf-testimonial-split__featured-role">12-year DreamHost customer</div>
+            </div>
+          </div>
+        </div>
+        <div class="wf-testimonial-split__grid">
+          <div class="wf-testimonial-split__card">
+            <p class="wf-testimonial-split__card-quote">"I've been hosting my 4 WordPress sites with DreamHost for 15 years now. The reliability and support keep me coming back."</p>
+            <div class="wf-testimonial-split__card-name">Seth S.</div>
+            <div class="wf-testimonial-split__card-role">15-year customer, 4 WordPress sites</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <p class="wf-testimonial-split__card-quote">"Support goes above and beyond. Every time I've needed help, they've gone the extra mile to make sure everything was resolved."</p>
+            <div class="wf-testimonial-split__card-name">John Trimble</div>
+            <div class="wf-testimonial-split__card-role">DreamPress customer</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <p class="wf-testimonial-split__card-quote">"Very easy-to-manage hosting and very trustworthy. I sleep well knowing my sites are in good hands."</p>
+            <div class="wf-testimonial-split__card-name">Deval Patel</div>
+            <div class="wf-testimonial-split__card-role">DreamPress customer</div>
+          </div>
+          <div class="wf-testimonial-split__card">
+            <div class="wf-social-proof-stats" style="border: none; padding: 0; margin: 0; flex-direction: column; gap: 16px;">
+              <div class="wf-social-proof-stats__item" style="text-align: left;">
+                <div class="wf-social-proof-stats__number">750,000+</div>
+                <div class="wf-social-proof-stats__label">Sites Hosted</div>
+              </div>
+              <div class="wf-social-proof-stats__item" style="text-align: left;">
+                <div class="wf-social-proof-stats__number">20+</div>
+                <div class="wf-social-proof-stats__label">Years Experience</div>
+              </div>
+              <div class="wf-social-proof-stats__item" style="text-align: left;">
+                <div class="wf-social-proof-stats__number">73%</div>
+                <div class="wf-social-proof-stats__label">First Contact Resolution</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 8. MIGRATION                             -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section">
+    <div class="wf-split">
+      <div>
+        <div class="wf-eyebrow mb-12">Free Migrations</div>
+        <h2 class="wf-h2" style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 16px;">Move to DreamPress Without Missing a Step</h2>
+        <p class="wf-body mb-24">Our WordPress experts migrate your sites by hand — fast, seamless, and downtime-free. Every plan includes free professional migrations equal to the number of sites your plan supports.</p>
+        <p class="wf-body-sm mb-24" style="display: flex; align-items: flex-start; gap: 10px;">
+          <span style="color: var(--wf-text); font-weight: 700;">&#8226;</span>
+          Prefer DIY? Use our free automated migration plugin.
+        </p>
+        <a href="#" class="wf-btn wf-btn--secondary">Learn About Migrations</a>
+      </div>
+      <div class="wf-img" style="height: 360px; border-radius: var(--wf-radius-lg);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"><path d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 9. PRO SERVICES                          -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-section--alt">
+    <div class="wf-section__inner" style="max-width: var(--wf-max-w); margin: 0 auto; padding: 72px 48px;">
+      <div class="wf-split wf-split--reverse">
+        <div class="wf-img" style="height: 360px; border-radius: var(--wf-radius-lg);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.35"><path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="wf-eyebrow mb-12">Pro Services</div>
+          <h2 class="wf-h2" style="font-size: clamp(28px, 4vw, 40px); margin-bottom: 16px;">Need a Hand? Our Web Pros Are Standing By</h2>
+          <p class="wf-body mb-24">From custom design to SEO to site management — our team has 20+ years of experience helping businesses like yours succeed online.</p>
+          <ul class="wf-checklist mb-24">
+            <li><span class="wf-checklist__check">&#10003;</span> Web Design &amp; Branding</li>
+            <li><span class="wf-checklist__check">&#10003;</span> Site Management</li>
+            <li><span class="wf-checklist__check">&#10003;</span> Web Development</li>
+            <li><span class="wf-checklist__check">&#10003;</span> Web Marketing</li>
+          </ul>
+          <p class="wf-caption mb-24">Starting at $24.50/mo with DreamCare</p>
+          <a href="#" class="wf-btn wf-btn--secondary">Explore Pro Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 10. PRICING                              -->
+  <!-- ════════════════════════════════════════ -->
+  <section id="pricing">
+    <div class="wf-section" style="max-width: var(--wf-max-w); margin: 0 auto;">
+      <div class="wf-section__header">
+        <div class="wf-eyebrow mb-12">Pricing</div>
+        <h2 class="wf-h2 mb-12">Pick the Plan That Fits Your Business</h2>
+        <p class="wf-body">Every plan includes managed WordPress, expert support, free migrations, and AI tools.</p>
+      </div>
+      <div style="text-align: center; margin-bottom: 32px;">
+        <div class="wf-term-label">Length of Subscription</div>
+        <div class="wf-term-dropdown" style="margin: 0 auto;">
+          <div class="wf-term-dropdown__selected">
+            <span>Yearly</span>
+            <span class="wf-term-dropdown__badge">On Sale</span>
+            <svg class="wf-chevron" style="margin-left:auto;" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-pricing-grid">
+        <!-- Card 1: DreamPress 1 -->
+        <div class="wf-pricing-card">
+          <div class="wf-pricing-card__name">DreamPress 1</div>
+          <div class="wf-pricing-card__desc">For single WordPress sites</div>
+          <div class="wf-pricing-card__sale-badge">ON SALE</div>
+          <div class="wf-pricing-card__first-year">First year at</div>
+          <div class="wf-pricing-card__price">
+            <span class="wf-pricing-card__amount">$14.99</span>
+            <span class="wf-pricing-card__period">/mo</span>
+            <span class="wf-pricing-card__save">SAVE 40% <span class="info-icon">i</span></span>
+          </div>
+          <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Get Started</button>
+          <div class="wf-pricing-card__renewal">Auto-renews at $19.99/mo after 1 year.</div>
+          <ul class="wf-pricing-card__features">
+            <li>1 Website</li>
+            <li>40k Monthly Visits</li>
+            <li>15 GB NVMe SSD</li>
+            <li>1 Free Migration</li>
+            <li>14 Days Backup Retention</li>
+            <li>Free Domain for 1 Year</li>
+          </ul>
+          <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+        </div>
+
+        <!-- Card 2: DreamPress 3 (Featured) -->
+        <div style="display: flex; flex-direction: column;">
+          <div class="wf-pricing-card__badge-wrap">Most Popular</div>
+          <div class="wf-pricing-card wf-pricing-card--featured" style="flex: 1;">
+            <div class="wf-pricing-card__name">DreamPress 3</div>
+            <div class="wf-pricing-card__desc">For multiple WordPress sites</div>
+            <div class="wf-pricing-card__sale-badge">ON SALE</div>
+            <div class="wf-pricing-card__first-year">First year at</div>
+            <div class="wf-pricing-card__price">
+              <span class="wf-pricing-card__amount">$20.99</span>
+              <span class="wf-pricing-card__period">/mo</span>
+              <span class="wf-pricing-card__save">SAVE 40% <span class="info-icon">i</span></span>
+            </div>
+            <button class="wf-pricing-card__cta wf-pricing-card__cta--filled">Get Started</button>
+            <div class="wf-pricing-card__renewal">Auto-renews at $28.99/mo after 1 year.</div>
+            <ul class="wf-pricing-card__features">
+              <li>3 Websites</li>
+              <li>125k Monthly Visits</li>
+              <li>30 GB NVMe SSD</li>
+              <li>3 Free Migrations</li>
+              <li>14 Days Backup Retention</li>
+              <li>Free Domain for 1 Year</li>
+            </ul>
+            <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+          </div>
+        </div>
+
+        <!-- Card 3: DreamPress 5 -->
+        <div class="wf-pricing-card">
+          <div class="wf-pricing-card__name">DreamPress 5</div>
+          <div class="wf-pricing-card__desc">For agencies and growing portfolios</div>
+          <div class="wf-pricing-card__sale-badge">ON SALE</div>
+          <div class="wf-pricing-card__first-year">First year at</div>
+          <div class="wf-pricing-card__price">
+            <span class="wf-pricing-card__amount">$34.99</span>
+            <span class="wf-pricing-card__period">/mo</span>
+            <span class="wf-pricing-card__save">SAVE 15% <span class="info-icon">i</span></span>
+          </div>
+          <button class="wf-pricing-card__cta wf-pricing-card__cta--outline">Get Started</button>
+          <div class="wf-pricing-card__renewal">Auto-renews at $40.99/mo after 1 year.</div>
+          <ul class="wf-pricing-card__features">
+            <li>5 Websites</li>
+            <li>175k Monthly Visits</li>
+            <li>50 GB NVMe SSD</li>
+            <li>5 Free Migrations</li>
+            <li>30 Days Backup Retention</li>
+            <li>Free Domain for 1 Year</li>
+          </ul>
+          <div class="wf-pricing-card__view-more">View More <svg class="wf-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l4 4 4-4"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 12. FAQ                                  -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="wf-section--dark">
+  <section class="wf-section">
+    <div class="wf-faq-split">
+      <div class="wf-faq-split__left">
+        <h2 class="wf-h2">Frequently Asked Questions</h2>
+      </div>
+      <div class="wf-faq">
+        <div class="wf-faq-item wf-faq-item--open">
+          <button class="wf-faq-trigger">
+            <span>What Is Managed WordPress Hosting — and Do I Need It?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">Managed WordPress hosting is a hosting environment specifically optimized for WordPress. Unlike standard shared hosting, DreamPress handles server-level caching, automatic updates, daily backups, and security hardening — so you can focus on running your business instead of managing infrastructure. If your site is important to your business, managed hosting is worth it.</div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>How Is DreamPress Different From Standard Hosting?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">Standard hosting puts your site on a shared server with hundreds of other sites. DreamPress gives you isolated resources, a purpose-built caching stack (NGINX + Redis + OPcache), a built-in CDN, AI-powered monitoring tools, and access to WordPress-specialist support. The result is faster load times, better uptime, and fewer headaches.</div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Do You Migrate My Existing Site for Free?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">Yes. Every DreamPress plan includes free professional migrations — our team moves your site by hand so nothing breaks in transit. The number of free migrations matches the number of sites your plan supports (1, 3, or 5). You can also use our free automated migration plugin if you prefer to do it yourself.</div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Can I Host Multiple WordPress Sites?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">Absolutely. DreamPress 3 supports up to 3 WordPress sites and DreamPress 5 supports up to 5 — all managed from a single control panel. Each site gets its own isolated resources, so one site's traffic spike won't affect the others.</div>
+        </div>
+        <div class="wf-faq-item">
+          <button class="wf-faq-trigger">
+            <span>Is There a Money-Back Guarantee?</span>
+            <span class="wf-faq-trigger__icon">+</span>
+          </button>
+          <div class="wf-faq-body">Yes. Every DreamPress plan comes with a 30-day money-back guarantee. If you're not happy for any reason within the first 30 days, we'll give you a full refund — no questions asked.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 13. SUPPORT                              -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="wf-support">
+    <div class="wf-support__inner">
+      <h2 class="wf-support__heading">Need Some Help?</h2>
+      <p class="wf-support__desc">We're here whenever you need us. Our award-winning support team is available 24/7 to help with anything from setup to scaling.</p>
+      <div class="wf-support-grid">
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><path d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-support-card__title">Sales Chat</h3>
+          <p class="wf-support-card__desc">Questions about plans, pricing, or which product is right for your business? Our sales team is here to help.</p>
+          <a href="#" class="wf-support-card__link">Start a Chat &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><path d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-support-card__title">Support Chat</h3>
+          <p class="wf-support-card__desc">Already a customer? Get technical help from our WordPress experts any time, day or night.</p>
+          <a href="#" class="wf-support-card__link">Get Support &rarr;</a>
+        </div>
+        <div class="wf-support-card">
+          <div class="wf-support-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="wf-support-card__title">Support Email</h3>
+          <p class="wf-support-card__desc">Prefer to write it out? Send us a ticket and we'll get back to you with a thorough response.</p>
+          <a href="#" class="wf-support-card__link">Submit a Ticket &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- 14. FOOTER                               -->
+  <!-- ════════════════════════════════════════ -->
+  <footer class="wf-footer">
+    <div class="wf-footer__grid">
+      <div>
+        <img src="logo-mono-dark.svg" alt="DreamHost" class="wf-logo mb-16" />
+        <p style="font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6;">Employee-owned since 1997. We believe everyone deserves a place on the web.</p>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Products</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Web Hosting</a></li>
+          <li><a href="#">DreamPress</a></li>
+          <li><a href="#">VPS Hosting</a></li>
+          <li><a href="#">Cloud Hosting</a></li>
+          <li><a href="#">Domain Names</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Company</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Legal</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Anti-Spam Policy</a></li>
+          <li><a href="#">Abuse</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="wf-footer__heading">Resources</div>
+        <ul class="wf-footer__links">
+          <li><a href="#">Knowledge Base</a></li>
+          <li><a href="#">System Status</a></li>
+          <li><a href="#">Contact Support</a></li>
+          <li><a href="#">Community</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wf-footer__bottom">
+      <span>&copy; 2026 DreamHost, LLC. All rights reserved.</span>
+      <div class="wf-footer__socials">
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+        <div class="wf-footer__social"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- SCRIPTS                                  -->
+  <!-- ════════════════════════════════════════ -->
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.wf-faq-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.wf-faq-item');
+        const isOpen = item.classList.contains('wf-faq-item--open');
+        document.querySelectorAll('.wf-faq-item').forEach(i => i.classList.remove('wf-faq-item--open'));
+        if (!isOpen) item.classList.add('wf-faq-item--open');
+      });
+    });
+
+    // Tab showcase accordion
+    function activateTab(li) {
+      const list = li.closest('.wf-tab-showcase__list');
+      list.querySelectorAll('.wf-tab-showcase__item').forEach(i => i.classList.remove('wf-tab-showcase__item--active'));
+      li.classList.add('wf-tab-showcase__item--active');
+    }
+
+    // Product nav: transparent → white on scroll
+    const productNav = document.querySelector('.product-nav');
+    if (productNav) {
+      window.addEventListener('scroll', function() {
+        productNav.classList.toggle('scrolled', window.scrollY > 0);
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
